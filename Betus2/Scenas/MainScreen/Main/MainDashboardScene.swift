@@ -58,6 +58,7 @@ class MainDashboardScene: UIViewController {
         let view = BottomView()
         view.backgroundColor = UIColor.topBottomViewColorGray
         view.makeRoundCorners(32)
+        view.delegate = self
         return view
     }()
 
@@ -113,11 +114,11 @@ class MainDashboardScene: UIViewController {
     }
 
     private func updateBottomView(for sport: String) {
-        let bottomViewInfo: BottomViewInfo
+        let bottomViewInfo: ViewInfo
 
         switch sport.lowercased() {
         case "tennis":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily tennis workout",
                 description: """
                 Daily tennis training: improve your coordination, form and skill on the court. Increase your reaction, strength and flexibility with every training session.
@@ -125,7 +126,7 @@ class MainDashboardScene: UIViewController {
                 timer: "25"
             )
         case "basketball":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily basketball workout",
                 description: """
                 Daily basketball training: improve your coordination, endurance and skill in the game. Develop reaction, speed and flexibility on the court with every exercise.
@@ -133,7 +134,7 @@ class MainDashboardScene: UIViewController {
                 timer: "30"
             )
         case "volleyball":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily volleyball workout",
                 description: """
                 Daily volleyball training: improve your technique, endurance and sense of play. Improve your reaction, speed and flexibility on the court with every exercise.
@@ -141,14 +142,14 @@ class MainDashboardScene: UIViewController {
                 timer: "25"
             )
         case "soccer":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily soccer workout",
                 description: "Daily soccer training: develop coordination, endurance and technique. Improve your reaction, speed and flexibility on the pitch with every exercise",
                 timer: "30"
             )
 
         default:
-            bottomViewInfo = BottomViewInfo(title: "", description: "", timer: "0")
+            bottomViewInfo = ViewInfo(title: "", description: "", timer: "0")
         }
 
         bottomView.configure(data: bottomViewInfo)
@@ -216,5 +217,12 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             }
         }
+    }
+}
+
+extension MainDashboardScene: BottomViewDelegate {
+    func didTapStartButton() {
+        let workoutTimeView = WorkoutTimeView()
+        navigationController?.pushViewController(workoutTimeView, animated: false)
     }
 }

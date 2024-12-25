@@ -8,7 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol BottomViewDelegate: AnyObject {
+    func didTapStartButton()
+}
+
 class BottomView: UIView {
+
+    weak var delegate: BottomViewDelegate?
+
     private lazy var sportViewTitle: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = ""
@@ -122,10 +129,10 @@ class BottomView: UIView {
     }
 
     @objc private func clickStartButton() {
-
+        delegate?.didTapStartButton()
     }
 
-    func configure(data: BottomViewInfo) {
+    func configure(data: ViewInfo) {
         sportViewTitle.text = data.title
         sportWorkoutDescription.text = data.description
         sportTimeLabel.attributedText = makeSportTimeAttributedText(timer: data.timer)
