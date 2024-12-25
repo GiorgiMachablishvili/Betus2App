@@ -100,8 +100,15 @@ class WorkoutTimeView: UIViewController {
 
     private func setupWorkoutSteps() {
         workoutSteps = [
-            ViewInfo(title: "Warm-up", description: "Jog around the court.", timer: "3"),
-            ViewInfo(title: "Warm-up", description: "Stretching for legs, back, arms and shoulders.", timer: "2")
+            ViewInfo(title: "Warm-up:", description: "Jog around the court.", timer: "3"),
+            ViewInfo(title: "Warm-up:", description: "Stretching for legs, back, arms and shoulders.", timer: "2"),
+            ViewInfo(title: "Technique exercises:", description: "Serving exercise.", timer: "3"),
+            ViewInfo(title: "Technique exercises:", description: "Forehand exercise.", timer: "3"),
+            ViewInfo(title: "Technique exercises:", description: "Backhand exercise.", timer: "4"),
+            ViewInfo(title: "Reaction and speed exercises:", description: "\("Quick Reaction") mini-game.", timer: "2"),
+            ViewInfo(title: "Reaction and speed exercises:", description: "\("Running around the court") exercise.", timer: "3"),
+            ViewInfo(title: "Wrap-up:", description: "A series of shots into a mini box.", timer: "2"),
+            ViewInfo(title: "Wrap-up:", description: "Relaxation and stretching.", timer: "3")
         ]
     }
 
