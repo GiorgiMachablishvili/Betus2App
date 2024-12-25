@@ -1,5 +1,5 @@
 //
-//  VolleyballBottomView.swift
+//  BottomView.swift
 //  Betus2
 //
 //  Created by Gio's Mac on 24.12.24.
@@ -8,20 +8,19 @@
 import UIKit
 import SnapKit
 
-class VolleyballBottomView: UIView {
-
-    private lazy var volleyballBottomViewTitle: UILabel = {
+class BottomView: UIView {
+    private lazy var sportViewTitle: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "Daily volleyball workout"
-        view.textColor = UIColor(hexString: "#FFFFFF")
+        view.text = ""
+        view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanBold(size: 14)
         view.textAlignment = .left
         return view
     }()
 
-    private lazy var volleyballWorkoutDescription: UILabel = {
+    private lazy var sportWorkoutDescription: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "Daily volleyball training: improve your technique, endurance and sense of play. Improve your reaction, speed and flexibility on the court with every exercise."
+        view.text = ""
         view.textColor = UIColor(hexString: "#707070")
         view.font = UIFont.goldmanRegular(size: 12)
         view.numberOfLines = 0
@@ -36,34 +35,21 @@ class VolleyballBottomView: UIView {
         return view
     }()
 
-    private lazy var volleyballTimeLabel: UILabel = {
+    private lazy var sportTimeLabel: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "25 min"
-        view.textColor = UIColor(hexString: "#FFFFFF")
-        view.font = UIFont.goldmanBold(size: 14)
+        view.attributedText = makeSportTimeAttributedText(timer: "25")
         view.textAlignment = .left
         return view
     }()
 
     private lazy var startButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Start", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        if let playImage = UIImage(named: "play") {
-            let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 16, height: 16)).image { _ in
-                playImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 16, height: 16)))
-            }
-            view.setImage(resizedImage, for: .normal)
-        }
-        view.backgroundColor = UIColor(hexString: "#F73838")
-        view.layer.cornerRadius = 22
-        view.contentHorizontalAlignment = .center
-        view.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 30)
-        view.imageEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: -10)
+        view.setImage(UIImage(named: "startButton"), for: .normal)
+        view.contentMode = .scaleAspectFit
         view.addTarget(self, action: #selector(clickStartButton), for: .touchUpInside)
         return view
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -76,22 +62,22 @@ class VolleyballBottomView: UIView {
     }
 
     private func setup() {
-        addSubview(volleyballBottomViewTitle)
-        addSubview(volleyballWorkoutDescription)
+        addSubview(sportViewTitle)
+        addSubview(sportWorkoutDescription)
         addSubview(timerImage)
-        addSubview(volleyballTimeLabel)
+        addSubview(sportTimeLabel)
         addSubview(startButton)
     }
 
     private func setupConstraints() {
-        volleyballBottomViewTitle.snp.remakeConstraints { make in
+        sportViewTitle.snp.remakeConstraints { make in
             make.top.equalTo(snp.top).offset(16)
             make.leading.equalTo(snp.leading).offset(16)
             make.height.equalTo(17)
         }
 
-        volleyballWorkoutDescription.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballBottomViewTitle.snp.bottom).offset(8)
+        sportWorkoutDescription.snp.remakeConstraints { make in
+            make.top.equalTo(sportViewTitle.snp.bottom).offset(8)
             make.leading.equalTo(snp.leading).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
         }
@@ -102,7 +88,7 @@ class VolleyballBottomView: UIView {
             make.height.width.equalTo(16)
         }
 
-        volleyballTimeLabel.snp.remakeConstraints { make in
+        sportTimeLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(timerImage.snp.centerY)
             make.leading.equalTo(timerImage.snp.trailing).offset(4)
             make.height.equalTo(17)
@@ -116,8 +102,32 @@ class VolleyballBottomView: UIView {
         }
     }
 
+    private func makeSportTimeAttributedText(timer: String) -> NSAttributedString {
+        let text = "\(timer) min"
+        let attributedString = NSMutableAttributedString(string: text)
+
+        let numberRange = (text as NSString).range(of: timer)
+        attributedString.addAttributes([
+            .foregroundColor: UIColor.white,
+            .font: UIFont.goldmanBold(size: 18)
+        ], range: numberRange)
+
+        let unitRange = (text as NSString).range(of: "min")
+        attributedString.addAttributes([
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.goldmanRegular(size: 14)
+        ], range: unitRange)
+
+        return attributedString
+    }
+
     @objc private func clickStartButton() {
 
     }
-}
 
+    func configure(data: BottomViewInfo) {
+        sportViewTitle.text = data.title
+        sportWorkoutDescription.text = data.description
+        sportTimeLabel.attributedText = makeSportTimeAttributedText(timer: data.timer)
+    }
+}

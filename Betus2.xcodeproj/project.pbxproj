@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E3135D3A2D1BFE480009B0B4 /* BottomViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3135D392D1BFE480009B0B4 /* BottomViewInfo.swift */; };
-		E3135D3D2D1C0B9A0009B0B4 /* WorkoutTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3135D3C2D1C0B9A0009B0B4 /* WorkoutTimeView.swift */; };
-		E3135D3F2D1C0BDC0009B0B4 /* WorkoutDescriptionTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3135D3E2D1C0BDC0009B0B4 /* WorkoutDescriptionTopView.swift */; };
 		E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */; };
 		E3315EA12D19CDB400C635BF /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315EA02D19CDB400C635BF /* TopView.swift */; };
 		E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */; };
 		E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */; };
 		E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4E02D1B329A008BBE5E /* BottomView.swift */; };
+		E38471082D1C172100C92887 /* BottomViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38471072D1C172100C92887 /* BottomViewInfo.swift */; };
+		E384710C2D1C174400C92887 /* WorkoutTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E384710A2D1C174300C92887 /* WorkoutTimeView.swift */; };
+		E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */; };
 		E38D37C12D196F3800A139D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37C02D196F3800A139D6 /* AppDelegate.swift */; };
 		E38D37C32D196F3800A139D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37C22D196F3800A139D6 /* SceneDelegate.swift */; };
 		E38D37C52D196F3800A139D6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37C42D196F3800A139D6 /* SignInView.swift */; };
@@ -37,14 +37,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E3135D392D1BFE480009B0B4 /* BottomViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewInfo.swift; sourceTree = "<group>"; };
-		E3135D3C2D1C0B9A0009B0B4 /* WorkoutTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimeView.swift; sourceTree = "<group>"; };
-		E3135D3E2D1C0BDC0009B0B4 /* WorkoutDescriptionTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDescriptionTopView.swift; sourceTree = "<group>"; };
 		E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboardScene.swift; sourceTree = "<group>"; };
 		E3315EA02D19CDB400C635BF /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICornerRadius.swift; sourceTree = "<group>"; };
 		E33FF4E02D1B329A008BBE5E /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		E38471072D1C172100C92887 /* BottomViewInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewInfo.swift; sourceTree = "<group>"; };
+		E384710A2D1C174300C92887 /* WorkoutTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutTimeView.swift; sourceTree = "<group>"; };
+		E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDescriptionTopView.swift; sourceTree = "<group>"; };
 		E38D37BD2D196F3800A139D6 /* Betus2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Betus2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38D37C02D196F3800A139D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E38D37C22D196F3800A139D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,20 +79,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E3135D3B2D1C0B510009B0B4 /* WoktoutTimeView */ = {
-			isa = PBXGroup;
-			children = (
-				E3135D3C2D1C0B9A0009B0B4 /* WorkoutTimeView.swift */,
-				E3135D3E2D1C0BDC0009B0B4 /* WorkoutDescriptionTopView.swift */,
-			);
-			path = WoktoutTimeView;
-			sourceTree = "<group>";
-		};
 		E3315E9B2D19CAEE00C635BF /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E38471092D1C172E00C92887 /* WorkoutTimeView */,
 				E3315E9E2D19CD6D00C635BF /* Main */,
-				E3135D3B2D1C0B510009B0B4 /* WoktoutTimeView */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -106,6 +97,23 @@
 				E33FF4E02D1B329A008BBE5E /* BottomView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		E38471062D1C171000C92887 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E38471072D1C172100C92887 /* BottomViewInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E38471092D1C172E00C92887 /* WorkoutTimeView */ = {
+			isa = PBXGroup;
+			children = (
+				E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */,
+				E384710A2D1C174300C92887 /* WorkoutTimeView.swift */,
+			);
+			path = WorkoutTimeView;
 			sourceTree = "<group>";
 		};
 		E38D37B42D196F3800A139D6 = {
@@ -127,10 +135,10 @@
 		E38D37BF2D196F3800A139D6 /* Betus2 */ = {
 			isa = PBXGroup;
 			children = (
+				E38471062D1C171000C92887 /* Models */,
 				E38D37D42D196F8300A139D6 /* App */,
 				E38D37D52D196F8F00A139D6 /* Scenas */,
 				E38D37D72D196FB700A139D6 /* NetworkManager */,
-				E38D37D82D196FC600A139D6 /* Models */,
 				E38D37D92D196FCF00A139D6 /* Constraints */,
 				E38D37DA2D196FDA00A139D6 /* Extention */,
 				E38D37DB2D196FED00A139D6 /* Fonts */,
@@ -173,14 +181,6 @@
 				E38D37DE2D19732300A139D6 /* NetwokrManager.swift */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		E38D37D82D196FC600A139D6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E3135D392D1BFE480009B0B4 /* BottomViewInfo.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		E38D37D92D196FCF00A139D6 /* Constraints */ = {
@@ -302,11 +302,11 @@
 				E38D37F12D19739B00A139D6 /* UIColor+Extention.swift in Sources */,
 				E38D37DD2D1970C000A139D6 /* Constraints.swift in Sources */,
 				E3D2370D2D1AACA500940F48 /* SportImagesCell.swift in Sources */,
-				E3135D3A2D1BFE480009B0B4 /* BottomViewInfo.swift in Sources */,
+				E38471082D1C172100C92887 /* BottomViewInfo.swift in Sources */,
 				E38D37C52D196F3800A139D6 /* SignInView.swift in Sources */,
 				E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */,
 				E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */,
-				E3135D3F2D1C0BDC0009B0B4 /* WorkoutDescriptionTopView.swift in Sources */,
+				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,
 				E38D37F72D19747800A139D6 /* UIFont+Extention.swift in Sources */,
 				E38D37C12D196F3800A139D6 /* AppDelegate.swift in Sources */,
 				E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */,
@@ -314,7 +314,7 @@
 				E38D37C32D196F3800A139D6 /* SceneDelegate.swift in Sources */,
 				E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */,
 				E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */,
-				E3135D3D2D1C0B9A0009B0B4 /* WorkoutTimeView.swift in Sources */,
+				E384710C2D1C174400C92887 /* WorkoutTimeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

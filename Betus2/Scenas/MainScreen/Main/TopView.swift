@@ -9,29 +9,11 @@ import UIKit
 import SnapKit
 
 class TopView: UIView {
-    private lazy var topLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "Consecutive days of "
-        view.textColor = UIColor(hexString: "#FFFFFF")
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
 
-    private lazy var sportLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "tennis"
-        view.textColor = UIColor(hexString: "#F73838")
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
-
-    private lazy var trainingLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "training"
-        view.textColor = UIColor(hexString: "#FFFFFF")
-        view.font = UIFont.goldmanRegular(size: 14)
+        view.numberOfLines = 0
+        view.attributedText = makeTopViewAttributedString(for: "Tennis")
         view.textAlignment = .left
         return view
     }()
@@ -47,7 +29,7 @@ class TopView: UIView {
         let view = UIButton(frame: .zero)
         view.setImage(UIImage(named: "history"), for: .normal)
         view.backgroundColor = .clear
-        view.layer.cornerRadius = 22
+        view.layer.masksToBounds = true
         view.addTarget(self, action: #selector(clickHistoryButton), for: .touchUpInside)
         return view
     }()
@@ -56,7 +38,6 @@ class TopView: UIView {
         let view = UIButton(frame: .zero)
         view.setImage(UIImage(named: "profile"), for: .normal)
         view.backgroundColor = .clear
-        view.layer.cornerRadius = 22
         view.addTarget(self, action: #selector(clickProfileButton), for: .touchUpInside)
         return view
     }()
@@ -73,50 +54,61 @@ class TopView: UIView {
     }
 
     private func setup() {
-        addSubview(topLabel)
-        addSubview(sportLabel)
-        addSubview(trainingLabel)
+        addSubview(titleLabel)
         addSubview(rectangleImage)
         addSubview(historyButton)
         addSubview(profileButton)
     }
 
     private func setupConstraints() {
-        topLabel.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.leading.equalTo(snp.leading).offset(16)
-        }
-
-        sportLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(topLabel.snp.centerY)
-            make.leading.equalTo(topLabel.snp.trailing).offset(2)
-        }
-
-        trainingLabel.snp.remakeConstraints { make in
-            make.top.equalTo(topLabel.snp.bottom).offset(2)
-            make.leading.equalTo(snp.leading).offset(16)
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
         }
 
         rectangleImage.snp.remakeConstraints { make in
-            make.top.equalTo(trainingLabel.snp.bottom).offset(12)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.equalTo(25)
-            make.width.equalTo(25)
+            make.top.equalTo(titleLabel.snp.bottom).offset(12 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.equalTo(25 * Constraint.yCoeff)
+            make.width.equalTo(25 * Constraint.xCoeff)
         }
 
         profileButton.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.width.equalTo(32)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.trailing.equalTo(snp.trailing).offset(-16 * Constraint.xCoeff)
+            make.height.width.equalTo(32 * Constraint.yCoeff)
         }
 
         historyButton.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.trailing.equalTo(profileButton.snp.leading).offset(-8)
-            make.height.width.equalTo(32)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.trailing.equalTo(profileButton.snp.leading).offset(-8 * Constraint.xCoeff)
+            make.height.width.equalTo(32 * Constraint.yCoeff)
         }
+    }
 
+    func makeTopViewAttributedString(for sport: String) -> NSAttributedString {
+        let text = "Consecutive days of \(sport.lowercased())\ntraining"
+        let attributedString = NSMutableAttributedString(string: text)
 
+        let prefixRange = (text as NSString).range(of: "Consecutive days of")
+        attributedString.addAttributes([
+            .foregroundColor: UIColor.white,
+            .font: UIFont.goldmanRegular(size: 14)
+        ], range: prefixRange)
+
+        let sportRange = (text as NSString).range(of: sport.lowercased())
+        attributedString.addAttributes([
+            .foregroundColor: UIColor(hexString: "#F73838"),
+            .font: UIFont.goldmanBold(size: 14)
+        ], range: sportRange)
+
+        let trainingRange = (text as NSString).range(of: "training")
+        attributedString.addAttributes([
+            .foregroundColor: UIColor.white,
+            .font: UIFont.goldmanRegular(size: 14)
+        ], range: trainingRange)
+
+        return attributedString
     }
 
 
