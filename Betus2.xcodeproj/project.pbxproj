@@ -82,8 +82,8 @@
 		E3315E9B2D19CAEE00C635BF /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				E38471092D1C172E00C92887 /* WorkoutTimeView */,
 				E3315E9E2D19CD6D00C635BF /* Main */,
+				E38471092D1C172E00C92887 /* WorkoutTimeView */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -135,9 +135,9 @@
 		E38D37BF2D196F3800A139D6 /* Betus2 */ = {
 			isa = PBXGroup;
 			children = (
-				E38471062D1C171000C92887 /* Models */,
 				E38D37D42D196F8300A139D6 /* App */,
 				E38D37D52D196F8F00A139D6 /* Scenas */,
+				E38471062D1C171000C92887 /* Models */,
 				E38D37D72D196FB700A139D6 /* NetworkManager */,
 				E38D37D92D196FCF00A139D6 /* Constraints */,
 				E38D37DA2D196FDA00A139D6 /* Extention */,

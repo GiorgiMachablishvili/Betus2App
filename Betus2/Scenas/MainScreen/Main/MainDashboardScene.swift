@@ -216,7 +216,5 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             }
         }
-
-        
     }
 }

@@ -211,9 +211,8 @@ class SignInController: UIViewController {
     }
 
     @objc private func clickSignInWithAppleButton() {
-        //ეს იპოვე შენით
-        //let mainView = MainSportChoose()
-       // navigationController?.pushViewController(mainView, animated: true)
+        let mainView = MainDashboardScene()
+        navigationController?.pushViewController(mainView, animated: true)
     }
 
     @objc private func clickLogInAsGuestButton() {
