@@ -139,7 +139,7 @@ class MainDashboardScene: UIViewController {
                 description: """
                 Daily volleyball training: improve your technique, endurance and sense of play. Improve your reaction, speed and flexibility on the court with every exercise.
                 """,
-                timer: "25"
+                timer: "27"
             )
         case "soccer":
             bottomViewInfo = ViewInfo(
@@ -223,6 +223,7 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
 extension MainDashboardScene: BottomViewDelegate {
     func didTapStartButton() {
         let workoutTimeView = WorkoutTimeView()
+        workoutTimeView.selectedSport = sportLabel.text
         navigationController?.pushViewController(workoutTimeView, animated: false)
     }
 }

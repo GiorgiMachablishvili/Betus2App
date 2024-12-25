@@ -128,8 +128,6 @@ class WorkoutDescriptionTopView: UIView {
         sportTimeLabel.attributedText = makeSportTimeAttributedText(timer: data.timer)
     }
 
-    //TODO: ad skip function
-
     @objc private func clickSkipButton() {
         if let parentViewController = self.superview?.findViewController() as? WorkoutTimeView {
             parentViewController.skipStep()

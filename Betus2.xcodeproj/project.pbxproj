@@ -12,6 +12,7 @@
 		E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */; };
 		E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */; };
 		E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4E02D1B329A008BBE5E /* BottomView.swift */; };
+		E360C49A2D1C8EC40094977C /* CompletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360C4992D1C8EC40094977C /* CompletView.swift */; };
 		E38471082D1C172100C92887 /* ViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38471072D1C172100C92887 /* ViewInfo.swift */; };
 		E384710C2D1C174400C92887 /* WorkoutTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E384710A2D1C174300C92887 /* WorkoutTimeView.swift */; };
 		E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */; };
@@ -43,6 +44,7 @@
 		E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICornerRadius.swift; sourceTree = "<group>"; };
 		E33FF4E02D1B329A008BBE5E /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		E360C4992D1C8EC40094977C /* CompletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletView.swift; sourceTree = "<group>"; };
 		E38471072D1C172100C92887 /* ViewInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewInfo.swift; sourceTree = "<group>"; };
 		E384710A2D1C174300C92887 /* WorkoutTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutTimeView.swift; sourceTree = "<group>"; };
 		E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutDescriptionTopView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				E384710A2D1C174300C92887 /* WorkoutTimeView.swift */,
 				E384710B2D1C174400C92887 /* WorkoutDescriptionTopView.swift */,
+				E360C4992D1C8EC40094977C /* CompletView.swift */,
 			);
 			path = WorkoutTimeView;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */,
 				E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */,
 				E384710C2D1C174400C92887 /* WorkoutTimeView.swift in Sources */,
+				E360C49A2D1C8EC40094977C /* CompletView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
