@@ -15,7 +15,6 @@ class MainDashboardScene: UIViewController {
 
     private lazy var warningView: WarningView = {
         let view = WarningView()
-//        view.backgroundColor = UIColor.mainBlack
         view.makeRoundCorners(32)
         view.onAcceptButtonTap = { [weak self] in
             self?.hideWarningView()
@@ -81,6 +80,10 @@ class MainDashboardScene: UIViewController {
 
         setup()
         setupConstraints()
+
+        if UserDefaults.standard.bool(forKey: "isGuestUser") {
+            setupForGuestUser()
+        }
 
         DispatchQueue.main.async {
             let indexPath = IndexPath(item: 2, section: 0)
@@ -148,6 +151,11 @@ class MainDashboardScene: UIViewController {
     private func navigateToProfile() {
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
+    }
+
+    private func setupForGuestUser() {
+        topView.historyButton.isHidden = true
+        topView.rectangleImage.image = UIImage(named: "guestRectangle")
     }
 
     private func updateBottomView(for sport: String) {

@@ -229,8 +229,12 @@ class SignInController: UIViewController {
         navigationController?.pushViewController(mainView, animated: true)
     }
 
+    //TODO: make view when signin with login guest button
     @objc private func clickLogInAsGuestButton() {
-
+        UserDefaults.standard.setValue(true, forKey: "isGuestUser")
+        let mainVC = MainDashboardScene()
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.pushViewController(mainVC, animated: true)
     }
 }
 

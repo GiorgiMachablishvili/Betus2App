@@ -26,14 +26,14 @@ class TopView: UIView {
         return view
     }()
 
-    private lazy var rectangleImage: UIImageView = {
+    lazy var rectangleImage: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.image = UIImage(named: "rectangle")
         view.contentMode = .scaleAspectFit
         return view
     }()
 
-    private lazy var historyButton: UIButton = {
+    lazy var historyButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.setImage(UIImage(named: "history"), for: .normal)
         view.backgroundColor = .clear
@@ -127,6 +127,7 @@ class TopView: UIView {
     }
 
 
+    //TOD: make history view
     @objc private func clickHistoryButton() {
 
     }
