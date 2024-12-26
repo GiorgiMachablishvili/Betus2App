@@ -36,6 +36,9 @@
 		E38D37F72D19747800A139D6 /* UIFont+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37F62D19747800A139D6 /* UIFont+Extention.swift */; };
 		E38D37FA2D19757A00A139D6 /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E38D37F92D19757A00A139D6 /* SVProgressHUD */; };
 		E3D2370D2D1AACA500940F48 /* SportImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D2370C2D1AACA500940F48 /* SportImagesCell.swift */; };
+		E3E87A5D2D1D54E7009E9B8C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E87A5C2D1D54E7009E9B8C /* CalendarView.swift */; };
+		E3E87A5F2D1D58C1009E9B8C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E87A5E2D1D58C1009E9B8C /* Calendar.swift */; };
+		E3E87A612D1D5DFA009E9B8C /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E87A602D1D5DFA009E9B8C /* DayCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,9 @@
 		E38D37F32D19743E00A139D6 /* Goldman-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Goldman-Regular.ttf"; sourceTree = "<group>"; };
 		E38D37F62D19747800A139D6 /* UIFont+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extention.swift"; sourceTree = "<group>"; };
 		E3D2370C2D1AACA500940F48 /* SportImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportImagesCell.swift; sourceTree = "<group>"; };
+		E3E87A5C2D1D54E7009E9B8C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E3E87A5E2D1D58C1009E9B8C /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		E3E87A602D1D5DFA009E9B8C /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,8 @@
 				E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */,
 				E3D2370C2D1AACA500940F48 /* SportImagesCell.swift */,
 				E3315EA02D19CDB400C635BF /* TopView.swift */,
+				E3E87A5C2D1D54E7009E9B8C /* CalendarView.swift */,
+				E3E87A602D1D5DFA009E9B8C /* DayCell.swift */,
 				E33FF4E02D1B329A008BBE5E /* BottomView.swift */,
 			);
 			path = Main;
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				E38471072D1C172100C92887 /* ViewInfo.swift */,
+				E3E87A5E2D1D58C1009E9B8C /* Calendar.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -315,14 +324,17 @@
 				E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */,
 				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,
 				E38D37F72D19747800A139D6 /* UIFont+Extention.swift in Sources */,
+				E3E87A612D1D5DFA009E9B8C /* DayCell.swift in Sources */,
 				E38D37C12D196F3800A139D6 /* AppDelegate.swift in Sources */,
 				E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */,
+				E3E87A5D2D1D54E7009E9B8C /* CalendarView.swift in Sources */,
 				E3315EA12D19CDB400C635BF /* TopView.swift in Sources */,
 				E38D37C32D196F3800A139D6 /* SceneDelegate.swift in Sources */,
 				E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */,
 				E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */,
 				E384710C2D1C174400C92887 /* WorkoutTimeView.swift in Sources */,
 				E360C49A2D1C8EC40094977C /* CompletView.swift in Sources */,
+				E3E87A5F2D1D58C1009E9B8C /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

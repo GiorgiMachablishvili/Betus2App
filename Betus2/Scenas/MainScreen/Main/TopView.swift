@@ -18,6 +18,12 @@ class TopView: UIView {
         return view
     }()
 
+    private lazy var calendarView: CalendarView = {
+        let view = CalendarView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
     private lazy var rectangleImage: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.image = UIImage(named: "rectangle")
@@ -55,6 +61,7 @@ class TopView: UIView {
 
     private func setup() {
         addSubview(titleLabel)
+        addSubview(calendarView)
         addSubview(rectangleImage)
         addSubview(historyButton)
         addSubview(profileButton)
@@ -64,6 +71,12 @@ class TopView: UIView {
         titleLabel.snp.remakeConstraints { make in
             make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
             make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+        }
+
+        calendarView.snp.remakeConstraints { make in
+            make.bottom.equalTo(snp.bottom).offset(-16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(40)
         }
 
         rectangleImage.snp.remakeConstraints { make in
@@ -98,7 +111,7 @@ class TopView: UIView {
 
         let sportRange = (text as NSString).range(of: sport.lowercased())
         attributedString.addAttributes([
-            .foregroundColor: UIColor(hexString: "#F73838"),
+            .foregroundColor: UIColor.redColor,
             .font: UIFont.goldmanBold(size: 14)
         ], range: sportRange)
 

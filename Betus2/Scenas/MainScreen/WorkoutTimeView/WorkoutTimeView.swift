@@ -35,14 +35,16 @@ class WorkoutTimeView: UIViewController {
         let label = UILabel(frame: .zero)
         label.text = "00:00"
         label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor(hexString: "#707070")
+        label.textColor = UIColor.grayCalendarDayName
         label.textAlignment = .center
         return label
     }()
 
-    private lazy var timerBackground: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "timerbackground")
+    private lazy var timerBackground: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .redColor.withAlphaComponent(0.2)
+        view.makeRoundCorners(80)
+        view.contentMode = .scaleAspectFit
         return view
     }()
 
@@ -73,7 +75,7 @@ class WorkoutTimeView: UIViewController {
         let label = UILabel(frame: .zero)
         label.text = "00:00"
         label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor(hexString: "#707070")
+        label.textColor = UIColor.grayCalendarDayName
         label.textAlignment = .center
         return label
     }()

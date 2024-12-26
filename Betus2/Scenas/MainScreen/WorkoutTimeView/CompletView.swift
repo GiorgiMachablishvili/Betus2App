@@ -25,9 +25,11 @@ class CompletView: UIView {
         return view
     }()
 
-    private lazy var timerBackground: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "timerbackground")
+    private lazy var timerBackground: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .redColor.withAlphaComponent(0.2)
+        view.makeRoundCorners(80)
+        view.contentMode = .scaleAspectFit
         return view
     }()
 

@@ -65,7 +65,7 @@ class MainDashboardScene: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.main
+        view.backgroundColor = UIColor.mainBlack
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
@@ -222,35 +222,6 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
     }
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
-//        for cell in collectionView.visibleCells {
-//            guard let indexPath = collectionView.indexPath(for: cell),
-//                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { continue }
-//
-//            let cellCenter = layoutAttributes.center.x
-//            let distance = abs(centerX - cellCenter)
-//            let maxDistance = collectionView.bounds.width / 2
-//
-//            let scale = max(1 - (distance / maxDistance), 0.5)
-//            let transformScale = scale
-//
-//            cell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
-//
-//            if distance < 10 {
-//                cell.backgroundColor = UIColor(hexString: "#F73838")
-//                if !images[indexPath.item].isEmpty {
-//                    let sportName = images[indexPath.item].uppercased()
-//                    sportLabel.text = sportName
-//                    topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
-//                    updateBottomView(for: images[indexPath.item])
-//                } else {
-//                    cell.backgroundColor = .clear
-//                }
-//            }
-//        }
-//    }
 }
 
 extension MainDashboardScene: BottomViewDelegate {

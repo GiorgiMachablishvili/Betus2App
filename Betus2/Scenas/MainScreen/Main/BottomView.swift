@@ -28,7 +28,7 @@ class BottomView: UIView {
     private lazy var sportWorkoutDescription: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = ""
-        view.textColor = UIColor(hexString: "#707070")
+        view.textColor = UIColor.grayCalendarDayName
         view.font = UIFont.goldmanRegular(size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
