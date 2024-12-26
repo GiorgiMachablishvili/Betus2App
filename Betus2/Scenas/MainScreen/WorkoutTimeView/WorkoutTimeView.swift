@@ -301,6 +301,7 @@ class WorkoutTimeView: UIViewController {
             nextWorkoutTimeLabel.text = "\(nextStep.timer):00"
         } else {
             nextWorkoutTimeLabel.text = "00:00"
+            nextWorkoutTimeBackground.isHidden = true
         }
     }
 
