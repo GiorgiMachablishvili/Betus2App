@@ -32,12 +32,12 @@ class WorkoutTimeView: UIViewController {
     }()
 
     private lazy var previousTimeLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "00:00"
-        label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor.grayCalendarDayName
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "00:00"
+        view.font = UIFont.goldmanRegular(size: 14)
+        view.textColor = UIColor.grayCalendarDayName
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var timerBackground: UIView = {
@@ -56,12 +56,12 @@ class WorkoutTimeView: UIViewController {
     }()
 
     private lazy var timerLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "03:00"
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = .white
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "03:00"
+        view.font = UIFont.boldSystemFont(ofSize: 32)
+        view.textColor = .white
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var nextWorkoutTimeBackground: UIView = {
@@ -72,19 +72,19 @@ class WorkoutTimeView: UIViewController {
     }()
 
     private lazy var nextWorkoutTimeLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "00:00"
-        label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor.grayCalendarDayName
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "00:00"
+        view.font = UIFont.goldmanRegular(size: 14)
+        view.textColor = UIColor.grayCalendarDayName
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var toggleButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setImage(UIImage(named: "timersStart"), for: .normal)
-        button.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
-        return button
+        let view = UIButton(frame: .zero)
+        view.setImage(UIImage(named: "timersStart"), for: .normal)
+        view.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
+        return view
     }()
 
     private lazy var completView: CompletView = {

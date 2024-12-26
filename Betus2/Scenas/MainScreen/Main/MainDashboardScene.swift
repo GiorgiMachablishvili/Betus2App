@@ -36,6 +36,9 @@ class MainDashboardScene: UIViewController {
         let view = TopView()
         view.backgroundColor = UIColor.topBottomViewColorGray
         view.makeRoundCorners(32)
+        view.onProfileButtonTap = { [weak self] in
+            self?.navigateToProfile()
+        }
         return view
     }()
 
@@ -63,6 +66,7 @@ class MainDashboardScene: UIViewController {
     }()
 
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mainBlack
@@ -72,6 +76,11 @@ class MainDashboardScene: UIViewController {
         setup()
         setupConstraints()
 
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(item: 2, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            self.updateViewForSport(at: indexPath)
+        }
     }
 
     private func setup() {
@@ -111,6 +120,19 @@ class MainDashboardScene: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(159 * Constraint.yCoeff)
         }
+    }
+
+    private func updateViewForSport(at indexPath: IndexPath) {
+        guard !images[indexPath.item].isEmpty else { return }
+        let sportName = images[indexPath.item].uppercased()
+        sportLabel.text = sportName
+        topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
+        updateBottomView(for: images[indexPath.item])
+    }
+
+    private func navigateToProfile() {
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 
     private func updateBottomView(for sport: String) {
@@ -170,24 +192,22 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            // Get the target content offset and calculate the target index
-            let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-            let itemWidth = layout.itemSize.width + layout.minimumLineSpacing
-            let targetX = targetContentOffset.pointee.x
-            let targetIndex = round(targetX / itemWidth)
+        // Get the target content offset and calculate the target index
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let itemWidth = layout.itemSize.width + layout.minimumLineSpacing
+        let targetX = targetContentOffset.pointee.x
+        let targetIndex = round(targetX / itemWidth)
 
-            // Ensure the index is within bounds
-            let clampedIndex = max(0, min(CGFloat(images.count - 1), targetIndex))
+        // Ensure the index is within bounds
+        let clampedIndex = max(0, min(CGFloat(images.count - 1), targetIndex))
 
-            targetContentOffset.pointee = CGPoint(x: clampedIndex * itemWidth, y: 0)
+        targetContentOffset.pointee = CGPoint(x: clampedIndex * itemWidth, y: 0)
 
-            let indexPath = IndexPath(item: Int(clampedIndex), section: 0)
-            if let cell = collectionView.cellForItem(at: indexPath) as? SportImagesCell, !images[indexPath.item].isEmpty {
-                let sportName = images[indexPath.item].uppercased()
-                sportLabel.text = sportName
-                topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
-            }
-        }
+        let indexPath = IndexPath(item: Int(clampedIndex), section: 0)
+        updateViewForSport(at: indexPath)
+
+
+    }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
@@ -208,7 +228,7 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             if distance < 10 {
                 sportCell.backgroundBackView.backgroundColor = UIColor.redColor.withAlphaComponent(0.2)
                 sportCell.imageBackgroundColor.backgroundColor = UIColor.redColor
-//                sportCell.imageDarkBackgroundColor.backgroundColor = .clear
+                //                sportCell.imageDarkBackgroundColor.backgroundColor = .clear
                 if !images[indexPath.item].isEmpty {
                     let sportName = images[indexPath.item].uppercased()
                     sportLabel.text = sportName
@@ -218,7 +238,7 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             } else {
                 sportCell.backgroundBackView.backgroundColor = .clear
                 sportCell.imageBackgroundColor.backgroundColor = .clear
-//                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
+                //                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
             }
         }
     }

@@ -10,6 +10,8 @@ import SnapKit
 
 class TopView: UIView {
 
+    var onProfileButtonTap: (() -> Void)?
+
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.numberOfLines = 0
@@ -130,7 +132,7 @@ class TopView: UIView {
     }
 
     @objc private func clickProfileButton() {
-
+        onProfileButtonTap?()
     }
 
 }

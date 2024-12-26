@@ -63,7 +63,10 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegateFlow
         }
         let dayName = daysOfWeek[indexPath.item]
         let isToday = indexPath.item == today
-        cell.configure(dayName: dayName, isToday: isToday)
+        let calendarInfo = CalendarInfo(dayName: dayName, isToday: isToday)
+
+        cell.configure(with: calendarInfo)
+
         return cell
     }
 }

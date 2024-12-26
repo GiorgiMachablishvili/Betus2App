@@ -30,7 +30,6 @@ class DayCell: UICollectionViewCell {
         view.makeRoundCorners(4)
         view.backgroundColor = .clear
         view.backgroundColor = .redColor
-        view.isHidden
         return view
     }()
 
@@ -70,10 +69,10 @@ class DayCell: UICollectionViewCell {
         }
     }
 
-    func configure(dayName: String, isToday: Bool) {
-        dayLabel.text = dayName
-        dayLabel.textColor = isToday ? .red : .gray
+    func configure(with data: CalendarInfo) {
+        dayLabel.text = data.dayName
+        dayLabel.textColor = data.isToday ? .red : .gray
         pointView.backgroundColor = .grayCalendarPoints
-        redPoint.isHidden = !isToday
+        redPoint.isHidden = !data.isToday
     }
 }
