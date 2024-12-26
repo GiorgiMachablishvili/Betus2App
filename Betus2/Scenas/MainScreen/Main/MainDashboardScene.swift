@@ -6,16 +6,22 @@
 //
 
 
-//TODO: stop scrolling when image will be in middle
-//TODO: when open view in the middle should be basketball image
-
-
 import UIKit
 import SnapKit
 
 class MainDashboardScene: UIViewController {
 
     private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
+
+    private lazy var warningView: WarningView = {
+        let view = WarningView()
+//        view.backgroundColor = UIColor.mainBlack
+        view.makeRoundCorners(32)
+        view.onAcceptButtonTap = { [weak self] in
+            self?.hideWarningView()
+        }
+        return view
+    }()
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -89,9 +95,14 @@ class MainDashboardScene: UIViewController {
         view.addSubview(sportImageBackView)
         view.addSubview(collectionView)
         view.addSubview(bottomView)
+        view.addSubview(warningView)
     }
 
     private func setupConstraints() {
+        warningView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         topView.snp.remakeConstraints { make in
             make.top.equalTo(view.snp.top).offset(44 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
@@ -128,6 +139,10 @@ class MainDashboardScene: UIViewController {
         sportLabel.text = sportName
         topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
         updateBottomView(for: images[indexPath.item])
+    }
+
+    private func hideWarningView() {
+        warningView.isHidden = true
     }
 
     private func navigateToProfile() {
