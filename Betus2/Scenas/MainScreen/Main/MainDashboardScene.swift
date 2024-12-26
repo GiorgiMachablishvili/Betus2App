@@ -7,7 +7,7 @@
 
 
 //TODO: stop scrolling when image will be in middle
-//TODO: change middle image background
+//TODO: when open view in the middle should be basketball image
 
 
 import UIKit
@@ -41,7 +41,7 @@ class MainDashboardScene: UIViewController {
 
     private lazy var sportLabel: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "Tennis"
+        view.text = "TENNIS"
         view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanBold(size: 32)
         return view
@@ -58,13 +58,14 @@ class MainDashboardScene: UIViewController {
         let view = BottomView()
         view.backgroundColor = UIColor.topBottomViewColorGray
         view.makeRoundCorners(32)
+        view.delegate = self
         return view
     }()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.main
+        view.backgroundColor = UIColor.mainBlack
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
@@ -101,7 +102,7 @@ class MainDashboardScene: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(160 * Constraint.yCoeff)
+            make.height.equalTo(165 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(15 * Constraint.xCoeff)
         }
 
@@ -113,11 +114,11 @@ class MainDashboardScene: UIViewController {
     }
 
     private func updateBottomView(for sport: String) {
-        let bottomViewInfo: BottomViewInfo
+        let bottomViewInfo: ViewInfo
 
         switch sport.lowercased() {
         case "tennis":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily tennis workout",
                 description: """
                 Daily tennis training: improve your coordination, form and skill on the court. Increase your reaction, strength and flexibility with every training session.
@@ -125,7 +126,7 @@ class MainDashboardScene: UIViewController {
                 timer: "25"
             )
         case "basketball":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily basketball workout",
                 description: """
                 Daily basketball training: improve your coordination, endurance and skill in the game. Develop reaction, speed and flexibility on the court with every exercise.
@@ -133,22 +134,22 @@ class MainDashboardScene: UIViewController {
                 timer: "30"
             )
         case "volleyball":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily volleyball workout",
                 description: """
                 Daily volleyball training: improve your technique, endurance and sense of play. Improve your reaction, speed and flexibility on the court with every exercise.
                 """,
-                timer: "25"
+                timer: "27"
             )
         case "soccer":
-            bottomViewInfo = BottomViewInfo(
+            bottomViewInfo = ViewInfo(
                 title: "Daily soccer workout",
                 description: "Daily soccer training: develop coordination, endurance and technique. Improve your reaction, speed and flexibility on the pitch with every exercise",
                 timer: "30"
             )
 
         default:
-            bottomViewInfo = BottomViewInfo(title: "", description: "", timer: "0")
+            bottomViewInfo = ViewInfo(title: "", description: "", timer: "0")
         }
 
         bottomView.configure(data: bottomViewInfo)
@@ -188,12 +189,12 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
 
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
         for cell in collectionView.visibleCells {
             guard let indexPath = collectionView.indexPath(for: cell),
-                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { continue }
+                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath),
+                  let sportCell = cell as? SportImagesCell else { continue }
 
             let cellCenter = layoutAttributes.center.x
             let distance = abs(centerX - cellCenter)
@@ -202,19 +203,31 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             let scale = max(1 - (distance / maxDistance), 0.5)
             let transformScale = scale
 
-            cell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
+            sportCell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
 
             if distance < 10 {
-                cell.backgroundColor = UIColor(hexString: "#F73838")
+                sportCell.backgroundBackView.backgroundColor = UIColor.redColor.withAlphaComponent(0.2)
+                sportCell.imageBackgroundColor.backgroundColor = UIColor.redColor
+//                sportCell.imageDarkBackgroundColor.backgroundColor = .clear
                 if !images[indexPath.item].isEmpty {
                     let sportName = images[indexPath.item].uppercased()
                     sportLabel.text = sportName
                     topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
                     updateBottomView(for: images[indexPath.item])
-                } else {
-                    cell.backgroundColor = .clear
                 }
+            } else {
+                sportCell.backgroundBackView.backgroundColor = .clear
+                sportCell.imageBackgroundColor.backgroundColor = .clear
+//                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
             }
         }
+    }
+}
+
+extension MainDashboardScene: BottomViewDelegate {
+    func didTapStartButton() {
+        let workoutTimeView = WorkoutTimeView()
+        workoutTimeView.selectedSport = sportLabel.text
+        navigationController?.pushViewController(workoutTimeView, animated: false)
     }
 }

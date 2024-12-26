@@ -13,7 +13,7 @@ class SignInController: UIViewController {
     private lazy var quickSignLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "Quick sign in with Apple"
-        view.textColor = UIColor.init(hexString: "#FFFFFF")
+        view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanBold(size: 32)
         view.textAlignment = .center
         view.numberOfLines = 2
@@ -23,6 +23,14 @@ class SignInController: UIViewController {
     private lazy var mainImageViewFram: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.image = UIImage(named: "appleLogoFrame")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+
+    private lazy var timerBackground: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .redColor.withAlphaComponent(0.2)
+        view.makeRoundCorners(80)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -37,7 +45,7 @@ class SignInController: UIViewController {
     private lazy var signInInfoLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "Sign in with Apple for secure and easy access. Save your workouts and get personalized recommendations!"
-        view.textColor = UIColor.init(hexString: "#FFFFFF")
+        view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanRegular(size: 14)
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -48,9 +56,9 @@ class SignInController: UIViewController {
         let view = UIButton(frame: .zero)
             view.setTitle("Sign In with Apple", for: .normal)
             view.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
-            view.backgroundColor = UIColor(hexString: "FFFFFF")
+        view.backgroundColor = UIColor.whiteColor
             view.layer.cornerRadius = 16
-            view.layer.borderColor = UIColor(hexString: "FFFFFF").cgColor
+        view.layer.borderColor = UIColor.whiteColor.cgColor
             view.layer.borderWidth = 1
             let image = UIImage(named: "apple")?.withRenderingMode(.alwaysOriginal)
             let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 20, height: 20)).image { _ in
@@ -78,7 +86,7 @@ class SignInController: UIViewController {
     private lazy var termsButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.setTitle("Terms of", for: .normal)
-        view.setTitleColor(UIColor(hexString: "FFFFFF"), for: .normal)
+        view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickTermsButton), for: .touchUpInside)
@@ -87,14 +95,14 @@ class SignInController: UIViewController {
 
     private lazy var termsLine: UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.backgroundColor = UIColor(hexString: "FFFFFF")
+        view.backgroundColor = UIColor.whiteColor
         return view
     }()
 
     private lazy var andLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "use and"
-        view.textColor = UIColor(hexString: "FFFFFF")
+        view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanRegular(size: 12)
         view.textAlignment = .center
         return view
@@ -103,7 +111,7 @@ class SignInController: UIViewController {
     private lazy var privacyPolicyButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.setTitle("Privacy Policy", for: .normal)
-        view.setTitleColor(UIColor(hexString: "FFFFFF"), for: .normal)
+        view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickPrivacyPolicyButton), for: .touchUpInside)
@@ -112,7 +120,7 @@ class SignInController: UIViewController {
 
     private lazy var privacyLine: UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.backgroundColor = UIColor(hexString: "FFFFFF")
+        view.backgroundColor = UIColor.whiteColor
         return view
     }()
 
@@ -120,7 +128,7 @@ class SignInController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(hexString: "#0A0A0A")
+        view.backgroundColor = UIColor.mainBlack
 
         setup()
         setupConstraints()
@@ -129,7 +137,8 @@ class SignInController: UIViewController {
     private func setup() {
         view.addSubview(quickSignLabel)
         view.addSubview(mainImageViewFram)
-        mainImageViewFram.addSubview(mainImageView)
+        mainImageViewFram.addSubview(timerBackground)
+        timerBackground.addSubview(mainImageView)
         view.addSubview(signInInfoLabel)
         view.addSubview(logInAsGuestButton)
         view.addSubview(termsButton)
@@ -154,6 +163,11 @@ class SignInController: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalTo(260)
             make.width.equalTo(260)
+        }
+
+        timerBackground.snp.remakeConstraints { make in
+            make.center.equalTo(mainImageViewFram.snp.center)
+            make.height.width.equalTo(160)
         }
 
         mainImageView.snp.remakeConstraints { make in

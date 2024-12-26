@@ -8,7 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol BottomViewDelegate: AnyObject {
+    func didTapStartButton()
+}
+
 class BottomView: UIView {
+
+    weak var delegate: BottomViewDelegate?
+
     private lazy var sportViewTitle: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = ""
@@ -21,7 +28,7 @@ class BottomView: UIView {
     private lazy var sportWorkoutDescription: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = ""
-        view.textColor = UIColor(hexString: "#707070")
+        view.textColor = UIColor.grayCalendarDayName
         view.font = UIFont.goldmanRegular(size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
@@ -122,10 +129,10 @@ class BottomView: UIView {
     }
 
     @objc private func clickStartButton() {
-
+        delegate?.didTapStartButton()
     }
 
-    func configure(data: BottomViewInfo) {
+    func configure(data: ViewInfo) {
         sportViewTitle.text = data.title
         sportWorkoutDescription.text = data.description
         sportTimeLabel.attributedText = makeSportTimeAttributedText(timer: data.timer)
