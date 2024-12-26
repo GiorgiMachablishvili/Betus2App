@@ -7,7 +7,7 @@
 
 
 //TODO: stop scrolling when image will be in middle
-//TODO: change middle image background
+//TODO: when open view in the middle should be basketball image
 
 
 import UIKit
@@ -41,7 +41,7 @@ class MainDashboardScene: UIViewController {
 
     private lazy var sportLabel: UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "Tennis"
+        view.text = "TENNIS"
         view.textColor = UIColor.whiteColor
         view.font = UIFont.goldmanBold(size: 32)
         return view
@@ -102,7 +102,7 @@ class MainDashboardScene: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(160 * Constraint.yCoeff)
+            make.height.equalTo(165 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(15 * Constraint.xCoeff)
         }
 
@@ -189,12 +189,12 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
 
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
         for cell in collectionView.visibleCells {
             guard let indexPath = collectionView.indexPath(for: cell),
-                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { continue }
+                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath),
+                  let sportCell = cell as? SportImagesCell else { continue }
 
             let cellCenter = layoutAttributes.center.x
             let distance = abs(centerX - cellCenter)
@@ -203,21 +203,54 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             let scale = max(1 - (distance / maxDistance), 0.5)
             let transformScale = scale
 
-            cell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
+            sportCell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
 
             if distance < 10 {
-                cell.backgroundColor = UIColor(hexString: "#F73838")
+                sportCell.backgroundBackView.backgroundColor = UIColor.redColor.withAlphaComponent(0.2)
+                sportCell.imageBackgroundColor.backgroundColor = UIColor.redColor
+//                sportCell.imageDarkBackgroundColor.backgroundColor = .clear
                 if !images[indexPath.item].isEmpty {
                     let sportName = images[indexPath.item].uppercased()
                     sportLabel.text = sportName
                     topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
                     updateBottomView(for: images[indexPath.item])
-                } else {
-                    cell.backgroundColor = .clear
                 }
+            } else {
+                sportCell.backgroundBackView.backgroundColor = .clear
+                sportCell.imageBackgroundColor.backgroundColor = .clear
+//                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
             }
         }
     }
+
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
+//        for cell in collectionView.visibleCells {
+//            guard let indexPath = collectionView.indexPath(for: cell),
+//                  let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath) else { continue }
+//
+//            let cellCenter = layoutAttributes.center.x
+//            let distance = abs(centerX - cellCenter)
+//            let maxDistance = collectionView.bounds.width / 2
+//
+//            let scale = max(1 - (distance / maxDistance), 0.5)
+//            let transformScale = scale
+//
+//            cell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
+//
+//            if distance < 10 {
+//                cell.backgroundColor = UIColor(hexString: "#F73838")
+//                if !images[indexPath.item].isEmpty {
+//                    let sportName = images[indexPath.item].uppercased()
+//                    sportLabel.text = sportName
+//                    topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
+//                    updateBottomView(for: images[indexPath.item])
+//                } else {
+//                    cell.backgroundColor = .clear
+//                }
+//            }
+//        }
+//    }
 }
 
 extension MainDashboardScene: BottomViewDelegate {

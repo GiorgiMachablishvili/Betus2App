@@ -10,6 +10,27 @@ import SnapKit
 
 class SportImagesCell: UICollectionViewCell {
 
+    lazy var backgroundBackView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        view.makeRoundCorners(80)
+        return view
+    }()
+
+    lazy var imageBackgroundColor: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        view.makeRoundCorners(70)
+        return view
+    }()
+
+//    lazy var imageDarkBackgroundColor: UIView = {
+//        let view = UIView(frame: .zero)
+//        view.backgroundColor = .clear
+//        view.makeRoundCorners(50)
+//        return view
+//    }()
+
     lazy var sportImage: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.contentMode = .scaleToFill
@@ -27,12 +48,31 @@ class SportImagesCell: UICollectionViewCell {
     }
 
     private func setup() {
-        addSubview(sportImage)
+//        addSubview(imageDarkBackgroundColor)
+        addSubview(backgroundBackView)
+        backgroundBackView.addSubview(imageBackgroundColor)
+        imageBackgroundColor.addSubview(sportImage)
     }
 
     private func setupConstraints() {
+        backgroundBackView.snp.remakeConstraints { make in
+            make.center.equalTo(snp.center)
+            make.height.width.equalTo(160)
+        }
+
+        imageBackgroundColor.snp.remakeConstraints { make in
+            make.center.equalTo(backgroundBackView.snp.center)
+            make.height.width.equalTo(140)
+        }
+
+//        imageDarkBackgroundColor.snp.remakeConstraints { make in
+//            make.center.equalTo(snp.center)
+//            make.height.width.equalTo(100)
+//        }
+
         sportImage.snp.remakeConstraints { make in
-            make.edges.equalToSuperview()
+            make.center.equalTo(imageBackgroundColor.snp.center)
+            make.height.width.equalTo(60)
         }
     }
 

@@ -14,4 +14,6 @@ extension UIColor {
 
     static let topBottomViewColorGray = UIColor(hexString: "#111111")
 
+    static let redColor = UIColor(hexString: "#F73838")
+
 }
