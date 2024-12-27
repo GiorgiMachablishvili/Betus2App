@@ -156,6 +156,8 @@ class MainDashboardScene: UIViewController {
     private func setupForGuestUser() {
         topView.historyButton.isHidden = true
         topView.rectangleImage.image = UIImage(named: "guestRectangle")
+        warningView.isHidden = true
+        bottomView.startButton.isHidden = true
     }
 
     private func updateBottomView(for sport: String) {

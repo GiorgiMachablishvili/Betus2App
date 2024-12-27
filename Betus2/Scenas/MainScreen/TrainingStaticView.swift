@@ -44,7 +44,7 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var soccerPointLabel: UILabel = {
+    lazy var soccerPointLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "24"
         view.textColor = UIColor.whiteColor
@@ -75,7 +75,7 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var volleyballPointLabel: UILabel = {
+    lazy var volleyballPointLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "24"
         view.textColor = UIColor.whiteColor
@@ -106,7 +106,7 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var basketballPointLabel: UILabel = {
+    lazy var basketballPointLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "24"
         view.textColor = UIColor.whiteColor
@@ -137,7 +137,7 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var tennisPointLabel: UILabel = {
+    lazy var tennisPointLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "24"
         view.textColor = UIColor.whiteColor

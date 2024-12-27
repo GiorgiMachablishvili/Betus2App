@@ -49,7 +49,7 @@ class BottomView: UIView {
         return view
     }()
 
-    private lazy var startButton: UIButton = {
+    lazy var startButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.setImage(UIImage(named: "startButton"), for: .normal)
         view.contentMode = .scaleAspectFit

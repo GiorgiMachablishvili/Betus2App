@@ -61,6 +61,12 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setup()
         setupConstraints()
+
+        if UserDefaults.standard.bool(forKey: "isGuestUser") {
+            setupForGuestUser()
+        }
+
+//        hiddenOrUnhidden()
     }
 
     private func setup() {
@@ -101,6 +107,23 @@ class ProfileViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(32)
             make.height.equalTo(44)
         }
+    }
+
+    private func setupForGuestUser() {
+        staticView.basketballPointLabel.text = "?"
+        staticView.volleyballPointLabel.text = "?"
+        staticView.tennisPointLabel.text = "?"
+        staticView.soccerPointLabel.text = "?"
+        warningImage.isHidden = true
+        deleteButton.isHidden = true
+        signInButton.isHidden = false
+    }
+
+    func hiddenOrUnhidden() {
+        let isGuestUser = UserDefaults.standard.bool(forKey: "isGuestUser")
+        warningImage.isHidden = isGuestUser
+        deleteButton.isHidden = isGuestUser
+        signInButton.isHidden = !isGuestUser
     }
 
     private func navigationMainDashboard() {
