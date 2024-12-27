@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
             setupForGuestUser()
         }
 
-//        hiddenOrUnhidden()
+        //        hiddenOrUnhidden()
     }
 
     private func setup() {
@@ -110,10 +110,15 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupForGuestUser() {
-        staticView.basketballPointLabel.text = "?"
-        staticView.volleyballPointLabel.text = "?"
-        staticView.tennisPointLabel.text = "?"
-        staticView.soccerPointLabel.text = "?"
+        if let soccerLabel = staticView.soccerView.viewWithTag(1001) as? UILabel,
+           let basketballLabel = staticView.basketballView.viewWithTag(1001) as? UILabel,
+           let volleyballLabel = staticView.volleyballView.viewWithTag(1001) as? UILabel,
+           let tennisLabel = staticView.tennisView.viewWithTag(1001) as? UILabel {
+            soccerLabel.text = "?"
+            basketballLabel.text = "?"
+            volleyballLabel.text = "?"
+            tennisLabel.text = "?"
+        }
         warningImage.isHidden = true
         deleteButton.isHidden = true
         signInButton.isHidden = false

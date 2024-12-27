@@ -28,29 +28,15 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var soccerImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "soccer")
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-
-    private lazy var soccerTitle: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "Soccer"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
-
-    lazy var soccerPointLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "24"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .center
-        return view
+    lazy var soccerView: UIView = {
+        UIView.createCustomView(
+            imageName: "soccer",
+            titleText: "Soccer",
+            pointText: "24",
+            titleFont: UIFont.goldmanRegular(size: 14),
+            pointFont: UIFont.goldmanRegular(size: 14),
+            textColor: .white
+        )
     }()
 
     private lazy var soccerBottomLine: UIView = {
@@ -59,29 +45,15 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var volleyballImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "volleyball")
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-
-    private lazy var volleyballTitle: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "Volleyball"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
-
-    lazy var volleyballPointLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "24"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
+    lazy var volleyballView: UIView = {
+        UIView.createCustomView(
+            imageName: "volleyball",
+            titleText: "Volleyball",
+            pointText: "27",
+            titleFont: UIFont.goldmanRegular(size: 14),
+            pointFont: UIFont.goldmanRegular(size: 14),
+            textColor: .white
+        )
     }()
 
     private lazy var volleyballBottomLine: UIView = {
@@ -90,29 +62,15 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var basketballImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "basketball")
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-
-    private lazy var basketballTitle: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "Basketball"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
-
-    lazy var basketballPointLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "24"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .center
-        return view
+    lazy var basketballView: UIView = {
+        UIView.createCustomView(
+            imageName: "basketball",
+            titleText: "Basketball",
+            pointText: "32",
+            titleFont: UIFont.goldmanRegular(size: 14),
+            pointFont: UIFont.goldmanRegular(size: 14),
+            textColor: .white
+        )
     }()
 
     private lazy var basketballBottomLine: UIView = {
@@ -121,29 +79,15 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    private lazy var tennisImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "tennis")
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-
-    private lazy var tennisTitle: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "Tennis"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .left
-        return view
-    }()
-
-    lazy var tennisPointLabel: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.text = "24"
-        view.textColor = UIColor.whiteColor
-        view.font = UIFont.goldmanRegular(size: 14)
-        view.textAlignment = .center
-        return view
+    lazy var tennisView: UIView = {
+        UIView.createCustomView(
+            imageName: "tennis",
+            titleText: "Tennis",
+            pointText: "20",
+            titleFont: UIFont.goldmanRegular(size: 14),
+            pointFont: UIFont.goldmanRegular(size: 14),
+            textColor: .white
+        )
     }()
 
     override init(frame: CGRect) {
@@ -160,21 +104,13 @@ class TrainingStaticView: UIView {
     private func setup() {
         addSubview(backButton)
         addSubview(trainingScoreTitle)
-        addSubview(soccerImage)
-        addSubview(soccerTitle)
-        addSubview(soccerPointLabel)
+        addSubview(soccerView)
         addSubview(soccerBottomLine)
-        addSubview(volleyballImage)
-        addSubview(volleyballTitle)
-        addSubview(volleyballPointLabel)
+        addSubview(volleyballView)
         addSubview(volleyballBottomLine)
-        addSubview(basketballImage)
-        addSubview(basketballTitle)
-        addSubview(basketballPointLabel)
+        addSubview(basketballView)
         addSubview(basketballBottomLine)
-        addSubview(tennisImage)
-        addSubview(tennisTitle)
-        addSubview(tennisPointLabel)
+        addSubview(tennisView)
     }
 
 
@@ -191,101 +127,47 @@ class TrainingStaticView: UIView {
             make.leading.trailing.equalToSuperview().inset(78)
         }
 
-        soccerImage.snp.remakeConstraints { make in
-            make.top.equalTo(trainingScoreTitle.snp.bottom).offset(24)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.width.equalTo(16)
-        }
-
-        soccerTitle.snp.remakeConstraints { make in
-            make.centerY.equalTo(soccerImage.snp.centerY)
-            make.leading.equalTo(soccerImage.snp.trailing).offset(4)
-            make.width.equalTo(100)
-            make.height.equalTo(17)
-        }
-
-        soccerPointLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(soccerImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(17)
+        soccerView.snp.remakeConstraints { make in
+            make.top.equalTo(trainingScoreTitle.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(33)
         }
 
         soccerBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(soccerImage.snp.bottom).offset(12)
+            make.top.equalTo(soccerView.snp.bottom).offset(1)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
         }
 
-        volleyballImage.snp.remakeConstraints { make in
-            make.top.equalTo(soccerImage.snp.bottom).offset(24)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.width.equalTo(16)
-        }
-
-        volleyballTitle.snp.remakeConstraints { make in
-            make.centerY.equalTo(volleyballImage.snp.centerY)
-            make.leading.equalTo(soccerImage.snp.trailing).offset(4)
-            make.width.equalTo(100)
-            make.height.equalTo(17)
-        }
-
-        volleyballPointLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(volleyballImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(17)
+        volleyballView.snp.remakeConstraints { make in
+            make.top.equalTo(soccerView.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(33)
         }
 
         volleyballBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballImage.snp.bottom).offset(12)
+            make.top.equalTo(volleyballView.snp.bottom).offset(1)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
         }
 
-        basketballImage.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballImage.snp.bottom).offset(24)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.width.equalTo(16)
-        }
-
-        basketballTitle.snp.remakeConstraints { make in
-            make.centerY.equalTo(basketballImage.snp.centerY)
-            make.leading.equalTo(soccerImage.snp.trailing).offset(4)
-            make.width.equalTo(100)
-            make.height.equalTo(17)
-        }
-
-        basketballPointLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(basketballImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(17)
+        basketballView.snp.remakeConstraints { make in
+            make.top.equalTo(volleyballView.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(33)
         }
 
         basketballBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(basketballImage.snp.bottom).offset(12)
+            make.top.equalTo(basketballView.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(1)
         }
 
-        tennisImage.snp.remakeConstraints { make in
-            make.top.equalTo(basketballImage.snp.bottom).offset(24)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.width.equalTo(16)
+        tennisView.snp.remakeConstraints { make in
+            make.top.equalTo(basketballView.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(33)
         }
-
-        tennisTitle.snp.remakeConstraints { make in
-            make.centerY.equalTo(tennisImage.snp.centerY)
-            make.leading.equalTo(soccerImage.snp.trailing).offset(4)
-            make.width.equalTo(100)
-            make.height.equalTo(17)
-        }
-
-        tennisPointLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(tennisImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(17)
-        }
-
-
     }
 
     //TODO: press back button

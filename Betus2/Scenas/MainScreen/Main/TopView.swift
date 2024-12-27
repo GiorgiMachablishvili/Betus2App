@@ -11,6 +11,7 @@ import SnapKit
 class TopView: UIView {
 
     var onProfileButtonTap: (() -> Void)?
+    var onHistoryButtonTap: (() -> Void)?
 
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
@@ -129,7 +130,7 @@ class TopView: UIView {
 
     //TOD: make history view
     @objc private func clickHistoryButton() {
-
+        onHistoryButtonTap?()
     }
 
     @objc private func clickProfileButton() {

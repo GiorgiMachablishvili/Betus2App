@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E302D4F22D1EF2F6003C0D2E /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F12D1EF2F6003C0D2E /* HistoryController.swift */; };
+		E302D4F42D1EF30C003C0D2E /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */; };
+		E302D4F62D1EFA48003C0D2E /* CustomView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F52D1EFA48003C0D2E /* CustomView+Extention.swift */; };
 		E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */; };
 		E3315EA12D19CDB400C635BF /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315EA02D19CDB400C635BF /* TopView.swift */; };
 		E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E302D4F12D1EF2F6003C0D2E /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
+		E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		E302D4F52D1EFA48003C0D2E /* CustomView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Extention.swift"; sourceTree = "<group>"; };
 		E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboardScene.swift; sourceTree = "<group>"; };
 		E3315EA02D19CDB400C635BF /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -97,11 +103,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E302D4F02D1EF2D3003C0D2E /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				E302D4F12D1EF2F6003C0D2E /* HistoryController.swift */,
+				E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */,
+			);
+			path = HistoryView;
+			sourceTree = "<group>";
+		};
 		E3315E9B2D19CAEE00C635BF /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
 				E3315E9E2D19CD6D00C635BF /* Main */,
 				E38471092D1C172E00C92887 /* WorkoutTimeView */,
+				E302D4F02D1EF2D3003C0D2E /* HistoryView */,
 				E3E87A642D1D7310009E9B8C /* Profile */,
 			);
 			path = MainScreen;
@@ -223,6 +239,7 @@
 				E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */,
 				E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */,
 				E384710E2D1C2D1900C92887 /* FindViewController.swift */,
+				E302D4F52D1EFA48003C0D2E /* CustomView+Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -346,12 +363,15 @@
 				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,
 				E3E87A6E2D1D9920009E9B8C /* WarningView.swift in Sources */,
 				E38D37F72D19747800A139D6 /* UIFont+Extention.swift in Sources */,
+				E302D4F42D1EF30C003C0D2E /* HistoryCell.swift in Sources */,
 				E3E87A612D1D5DFA009E9B8C /* DayCell.swift in Sources */,
 				E38D37C12D196F3800A139D6 /* AppDelegate.swift in Sources */,
 				E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */,
+				E302D4F62D1EFA48003C0D2E /* CustomView+Extention.swift in Sources */,
 				E3E87A6C2D1D8A4E009E9B8C /* HelperProfileView.swift in Sources */,
 				E3E87A5D2D1D54E7009E9B8C /* CalendarView.swift in Sources */,
 				E3315EA12D19CDB400C635BF /* TopView.swift in Sources */,
+				E302D4F22D1EF2F6003C0D2E /* HistoryController.swift in Sources */,
 				E38D37C32D196F3800A139D6 /* SceneDelegate.swift in Sources */,
 				E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */,
 				E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */,

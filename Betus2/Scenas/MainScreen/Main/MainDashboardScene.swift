@@ -44,6 +44,9 @@ class MainDashboardScene: UIViewController {
         view.onProfileButtonTap = { [weak self] in
             self?.navigateToProfile()
         }
+        view.onHistoryButtonTap = { [weak self] in
+            self?.navigationToHistory()
+        }
         return view
     }()
 
@@ -151,6 +154,11 @@ class MainDashboardScene: UIViewController {
     private func navigateToProfile() {
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
+    }
+
+    private func navigationToHistory() {
+        let historyVC = HistoryController()
+        navigationController?.pushViewController(historyVC, animated: true)
     }
 
     private func setupForGuestUser() {
