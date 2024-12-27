@@ -77,9 +77,9 @@ class TopView: UIView {
         }
 
         calendarView.snp.remakeConstraints { make in
-            make.bottom.equalTo(snp.bottom).offset(-16)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(40)
+            make.bottom.equalTo(snp.bottom).offset(-16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(40 * Constraint.yCoeff)
         }
 
         rectangleImage.snp.remakeConstraints { make in

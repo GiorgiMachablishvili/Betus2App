@@ -116,57 +116,57 @@ class TrainingStaticView: UIView {
 
     private func setupConstraints() {
         backButton.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.width.equalTo(32)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.width.equalTo(32 * Constraint.yCoeff)
         }
 
         trainingScoreTitle.snp.remakeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(4)
-            make.height.width.equalTo(19)
-            make.leading.trailing.equalToSuperview().inset(78)
+            make.top.equalTo(backButton.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.height.width.equalTo(19 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(78 * Constraint.xCoeff)
         }
 
         soccerView.snp.remakeConstraints { make in
-            make.top.equalTo(trainingScoreTitle.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(33)
+            make.top.equalTo(trainingScoreTitle.snp.bottom).offset(16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         soccerBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(soccerView.snp.bottom).offset(1)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(1)
+            make.top.equalTo(soccerView.snp.bottom).offset(1 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(1 * Constraint.yCoeff)
         }
 
         volleyballView.snp.remakeConstraints { make in
-            make.top.equalTo(soccerView.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(33)
+            make.top.equalTo(soccerView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         volleyballBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballView.snp.bottom).offset(1)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(1)
+            make.top.equalTo(volleyballView.snp.bottom).offset(1 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(1 * Constraint.xCoeff)
+            make.height.equalTo(1 * Constraint.yCoeff)
         }
 
         basketballView.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballView.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(33)
+            make.top.equalTo(volleyballView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         basketballBottomLine.snp.remakeConstraints { make in
-            make.top.equalTo(basketballView.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(1)
+            make.top.equalTo(basketballView.snp.bottom).offset(12 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(1 * Constraint.yCoeff)
         }
 
         tennisView.snp.remakeConstraints { make in
-            make.top.equalTo(basketballView.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(33)
+            make.top.equalTo(basketballView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
     }
 

@@ -44,15 +44,15 @@ class HistoryController: UIViewController {
 
     private func setupConstraints() {
         backButton.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(44)
-            make.leading.equalTo(view.snp.leading).offset(16)
-            make.height.width.equalTo(32)
+            make.top.equalTo(view.snp.top).offset(44 * Constraint.yCoeff)
+            make.leading.equalTo(view.snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.width.equalTo(32 * Constraint.yCoeff)
         }
 
         collectionView.snp.remakeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.lessThanOrEqualTo(211)
+            make.top.equalTo(backButton.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.lessThanOrEqualTo(211 * Constraint.yCoeff)
         }
     }
 

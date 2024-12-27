@@ -20,7 +20,7 @@ class DayCell: UICollectionViewCell {
 
     private let pointView: UIView = {
         let view = UIView()
-        view.makeRoundCorners(12)
+        view.makeRoundCorners(12 * Constraint.yCoeff)
         view.backgroundColor = .grayCalendarPoints
         return view
     }()
@@ -53,19 +53,19 @@ class DayCell: UICollectionViewCell {
         dayLabel.snp.makeConstraints { make in
             make.top.equalTo(snp.top)
             make.top.centerX.equalToSuperview()
-            make.height.equalTo(12)
-            make.width.equalTo(24)
+            make.height.equalTo(12 * Constraint.yCoeff)
+            make.width.equalTo(24 * Constraint.xCoeff)
         }
 
         pointView.snp.makeConstraints { make in
-            make.top.equalTo(dayLabel.snp.bottom).offset(4)
+            make.top.equalTo(dayLabel.snp.bottom).offset(4 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(24 * Constraint.yCoeff)
         }
 
         redPoint.snp.remakeConstraints { make in
             make.center.equalTo(pointView.snp.center)
-            make.height.width.equalTo(8)
+            make.height.width.equalTo(8 * Constraint.yCoeff)
         }
     }
 

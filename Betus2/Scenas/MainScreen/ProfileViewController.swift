@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
 
     private lazy var staticView: TrainingStaticView = {
         let view = TrainingStaticView()
-        view.makeRoundCorners(32)
+        view.makeRoundCorners(32 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
         view.onBackButtonTap = { [weak self] in
             self?.navigationMainDashboard()
@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
 
     private lazy var helperView: HelperProfileView = {
         let view = HelperProfileView()
-        view.makeRoundCorners(32)
+        view.makeRoundCorners(32 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
         return view
     }()
@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
         view.setTitle("Delete Account", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
         view.addTarget(self, action: #selector(pressDeleteButton), for: .touchUpInside)
         return view
@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController {
         view.setTitle("Sing In", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .redColor
         view.isHidden = true
         view.addTarget(self, action: #selector(pressSignInButton), for: .touchUpInside)
@@ -79,33 +79,33 @@ class ProfileViewController: UIViewController {
 
     private func setupConstraints() {
         staticView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(48)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(247)
+            make.top.equalTo(view.snp.top).offset(48 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(247 * Constraint.yCoeff)
         }
 
         helperView.snp.remakeConstraints { make in
-            make.top.equalTo(staticView.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(220)
+            make.top.equalTo(staticView.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(220 * Constraint.yCoeff)
         }
 
         warningImage.snp.remakeConstraints { make in
-            make.top.equalTo(helperView.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(81)
+            make.top.equalTo(helperView.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(81 * Constraint.yCoeff)
         }
 
         deleteButton.snp.remakeConstraints { make in
-            make.top.equalTo(warningImage.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.top.equalTo(warningImage.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
 
         signInButton.snp.remakeConstraints { make in
-            make.top.equalTo(helperView.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.height.equalTo(44)
+            make.top.equalTo(helperView.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(32 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
     }
 
@@ -135,10 +135,12 @@ class ProfileViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    //TODO: delete
     @objc func pressDeleteButton() {
 
     }
 
+    //TODO: signin
     @objc func pressSignInButton() {
 
     }

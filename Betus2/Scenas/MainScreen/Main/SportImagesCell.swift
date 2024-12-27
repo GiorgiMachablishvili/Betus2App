@@ -13,14 +13,14 @@ class SportImagesCell: UICollectionViewCell {
     lazy var backgroundBackView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(80)
+        view.makeRoundCorners(80 * Constraint.xCoeff)
         return view
     }()
 
     lazy var imageBackgroundColor: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(70)
+        view.makeRoundCorners(70 * Constraint.xCoeff)
         return view
     }()
 
@@ -57,12 +57,12 @@ class SportImagesCell: UICollectionViewCell {
     private func setupConstraints() {
         backgroundBackView.snp.remakeConstraints { make in
             make.center.equalTo(snp.center)
-            make.height.width.equalTo(160)
+            make.height.width.equalTo(160 * Constraint.yCoeff)
         }
 
         imageBackgroundColor.snp.remakeConstraints { make in
             make.center.equalTo(backgroundBackView.snp.center)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(140 * Constraint.yCoeff)
         }
 
 //        imageDarkBackgroundColor.snp.remakeConstraints { make in
@@ -72,7 +72,7 @@ class SportImagesCell: UICollectionViewCell {
 
         sportImage.snp.remakeConstraints { make in
             make.center.equalTo(imageBackgroundColor.snp.center)
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(60 * Constraint.yCoeff)
         }
     }
 

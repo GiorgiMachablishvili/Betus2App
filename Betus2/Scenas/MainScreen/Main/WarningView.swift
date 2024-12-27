@@ -31,7 +31,7 @@ class WarningView: UIView {
         view.setTitle("Accept", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
         view.addTarget(self, action: #selector(pressAcceptButton), for: .touchUpInside)
         return view
@@ -61,15 +61,15 @@ class WarningView: UIView {
         }
 
         warningImage.snp.remakeConstraints { make in
-            make.bottom.equalTo(acceptButton.snp.top).offset(-8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(81)
+            make.bottom.equalTo(acceptButton.snp.top).offset(-8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(81 * Constraint.yCoeff)
         }
 
         acceptButton.snp.remakeConstraints { make in
-            make.bottom.equalTo(snp.bottom).offset(-40)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.bottom.equalTo(snp.bottom).offset(-40 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
     }
 

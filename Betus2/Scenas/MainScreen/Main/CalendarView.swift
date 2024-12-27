@@ -21,7 +21,7 @@ class CalendarView: UIView {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 24, height: 40)
+        layout.itemSize = CGSize(width: 24 * Constraint.xCoeff, height: 40 * Constraint.yCoeff)
         layout.minimumLineSpacing = 26
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear

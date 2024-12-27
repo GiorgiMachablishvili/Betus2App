@@ -78,34 +78,34 @@ class BottomView: UIView {
 
     private func setupConstraints() {
         sportViewTitle.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.equalTo(17)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         sportWorkoutDescription.snp.remakeConstraints { make in
-            make.top.equalTo(sportViewTitle.snp.bottom).offset(8)
-            make.leading.equalTo(snp.leading).offset(16)
+            make.top.equalTo(sportViewTitle.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
         timerImage.snp.remakeConstraints { make in
-            make.leading.equalTo(snp.leading).offset(16)
-            make.bottom.equalTo(snp.bottom).offset(-29)
-            make.height.width.equalTo(16)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.bottom.equalTo(snp.bottom).offset(-29 * Constraint.yCoeff)
+            make.height.width.equalTo(16 * Constraint.yCoeff)
         }
 
         sportTimeLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(timerImage.snp.centerY)
-            make.leading.equalTo(timerImage.snp.trailing).offset(4)
-            make.height.equalTo(17)
+            make.leading.equalTo(timerImage.snp.trailing).offset(4 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         startButton.snp.remakeConstraints { make in
             make.centerY.equalTo(timerImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(44)
-            make.width.equalTo(87)
+            make.trailing.equalTo(snp.trailing).offset(-16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
+            make.width.equalTo(87 * Constraint.xCoeff)
         }
     }
 
@@ -122,7 +122,7 @@ class BottomView: UIView {
         let unitRange = (text as NSString).range(of: "min")
         attributedString.addAttributes([
             .foregroundColor: UIColor.lightGray,
-            .font: UIFont.goldmanRegular(size: 14)
+            .font: UIFont.goldmanRegular(size: 14 * Constraint.yCoeff)
         ], range: unitRange)
 
         return attributedString

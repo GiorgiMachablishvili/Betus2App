@@ -11,7 +11,7 @@ import SnapKit
 class HistoryCell: UICollectionViewCell {
     private lazy var backgroundHistoryView: UIView = {
         let view = UIView(frame: .zero)
-        view.makeRoundCorners(32)
+        view.makeRoundCorners(32 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
         return view
     }()
@@ -96,32 +96,32 @@ class HistoryCell: UICollectionViewCell {
 
         currentDay.snp.remakeConstraints { make in
             make.centerX.equalTo(backgroundHistoryView.snp.centerX)
-            make.top.equalTo(backgroundHistoryView.snp.top).offset(16)
-            make.height.equalTo(19)
+            make.top.equalTo(backgroundHistoryView.snp.top).offset(16 * Constraint.yCoeff)
+            make.height.equalTo(19 * Constraint.yCoeff)
         }
 
         soccerView.snp.remakeConstraints { make in
-            make.top.equalTo(currentDay.snp.bottom).offset(16)
-            make.leading.trailing.equalTo(16)
-            make.height.equalTo(33)
+            make.top.equalTo(currentDay.snp.bottom).offset(16 * Constraint.yCoeff)
+            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         volleyballView.snp.remakeConstraints { make in
-            make.top.equalTo(soccerView.snp.bottom).offset(4)
-            make.leading.trailing.equalTo(16)
-            make.height.equalTo(33)
+            make.top.equalTo(soccerView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         basketballView.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballView.snp.bottom).offset(4)
-            make.leading.trailing.equalTo(16)
-            make.height.equalTo(33)
+            make.top.equalTo(volleyballView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         tennisView.snp.remakeConstraints { make in
-            make.top.equalTo(basketballView.snp.bottom).offset(4)
-            make.leading.trailing.equalTo(16)
-            make.height.equalTo(33)
+            make.top.equalTo(basketballView.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalTo(16 * Constraint.yCoeff)
+            make.height.equalTo(33 * Constraint.yCoeff)
         }
     }
 

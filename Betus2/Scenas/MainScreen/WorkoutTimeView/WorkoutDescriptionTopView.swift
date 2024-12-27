@@ -92,33 +92,33 @@ class WorkoutDescriptionTopView: UIView {
 
     private func setupConstraints() {
         workoutTitle.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.equalTo(17)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         workoutDescription.snp.remakeConstraints { make in
-            make.top.equalTo(workoutTitle.snp.bottom).offset(8)
+            make.top.equalTo(workoutTitle.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.equalTo(snp.leading).offset(16)
         }
 
         timerImage.snp.remakeConstraints { make in
-            make.leading.equalTo(snp.leading).offset(16)
-            make.bottom.equalTo(snp.bottom).offset(-29)
-            make.height.width.equalTo(16)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.bottom.equalTo(snp.bottom).offset(-29 * Constraint.yCoeff)
+            make.height.width.equalTo(16 * Constraint.yCoeff)
         }
 
         sportTimeLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(timerImage.snp.centerY)
-            make.leading.equalTo(timerImage.snp.trailing).offset(4)
-            make.height.equalTo(17)
+            make.leading.equalTo(timerImage.snp.trailing).offset(4 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         skipButton.snp.remakeConstraints { make in
             make.centerY.equalTo(timerImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-16)
-            make.height.equalTo(44)
-            make.width.equalTo(65)
+            make.trailing.equalTo(snp.trailing).offset(-16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
+            make.width.equalTo(65 * Constraint.xCoeff)
         }
     }
 
