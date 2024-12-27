@@ -331,16 +331,26 @@ class WorkoutTimeView: UIViewController {
     @objc private func updateTimer() {
         guard currentTime > 0 else {
             stopTimer()
-            toggleButton.setImage(UIImage(named: "timersStart"), for: .normal)
+            if currentStepIndex == workoutSteps.count - 1 {
+                timerLabel.text = "00:00"
+                toggleButton.setImage(UIImage(named: "okeyButton"), for: .normal)
+//                if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
+                    toggleButton.snp.remakeConstraints { make in
+                        make.top.equalTo(timerBackgroundView.snp.bottom).offset(24)
+                        make.centerX.equalToSuperview()
+                        make.height.equalTo(44)
+                        make.width.equalTo(69)
+                    }
+//                }
+                completView.isHidden = false
+            } else {
+                currentStepIndex += 1
+                configureWorkoutStep()
+            }
             return
         }
-        if currentTime > 0 {
-            currentTime -= 1
-            timerLabel.text = formatTime(currentTime)
-        } else {
-            currentStepIndex += 1
-            configureWorkoutStep()
-        }
+        currentTime -= 1
+        timerLabel.text = formatTime(currentTime)
     }
 
     private func formatTime(_ totalSeconds: Int) -> String {
@@ -363,6 +373,8 @@ class WorkoutTimeView: UIViewController {
 
     func skipStep() {
         currentStepIndex += 1
+        stopTimer()
+        toggleButton.setImage(UIImage(named: "timersStart"), for: .normal)
         configureWorkoutStep()
     }
 }

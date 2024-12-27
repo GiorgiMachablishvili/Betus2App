@@ -27,7 +27,7 @@ class HistoryController: UIViewController {
         view.showsHorizontalScrollIndicator = false
         view.dataSource = self
         view.delegate = self
-        view.register(SportImagesCell.self, forCellWithReuseIdentifier: "SportImagesCell")
+        view.register(HistoryCell.self, forCellWithReuseIdentifier: "HistoryCell")
         return view
     }()
 
@@ -63,12 +63,12 @@ class HistoryController: UIViewController {
 
 extension HistoryController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as? HistoryCell else { return UICollectionViewCell()
+        }
+        return cell
     }
-    
-
 }
