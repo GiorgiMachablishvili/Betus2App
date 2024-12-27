@@ -124,4 +124,18 @@ class HistoryCell: UICollectionViewCell {
             make.height.equalTo(33)
         }
     }
+
+    private func updatePointLabel(in containerView: UIView, with text: String) {
+        if let pointLabel = containerView.viewWithTag(1001) as? UILabel {
+            pointLabel.text = text
+        }
+    }
+
+    func configure(with data: WorkoutScore) {
+        currentDay.text = data.workoutDate
+        updatePointLabel(in: soccerView, with: data.soccerWorkoutCount)
+        updatePointLabel(in: basketballView, with: data.basketballWorkoutCount)
+        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount)
+        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount)
+    }
 }
