@@ -23,6 +23,13 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
         return view
     }()
 
+    private lazy var successOrWrongView: SuccessOrWrongView = {
+        let view = SuccessOrWrongView()
+        view.backgroundColor = .topBottomViewColorGray
+        view.makeRoundCorners(24)
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -32,6 +39,7 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
     private func setup() {
         view.addSubview(firstBubleBackground)
         view.addSubview(secondBubleBackground)
+        view.addSubview(successOrWrongView)
     }
 
     private func setupConstraints() {
@@ -46,6 +54,12 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
             make.leading.equalTo(view.snp.leading).offset(10)
             make.trailing.equalTo(view.snp.trailing).offset(6)
             make.height.equalTo(432)
+        }
+
+        successOrWrongView.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(295)
         }
     }
 }

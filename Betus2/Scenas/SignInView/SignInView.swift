@@ -85,9 +85,15 @@ class SignInController: UIViewController {
 
     private lazy var termsButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Terms of", for: .normal)
-        view.setTitleColor(UIColor.whiteColor, for: .normal)
-        view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
+        let attributedTitle = NSAttributedString(
+            string: "Terms of",
+            attributes: [
+                .font: UIFont.goldmanRegular(size: 12),
+                .foregroundColor: UIColor.whiteColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        view.setAttributedTitle(attributedTitle, for: .normal)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickTermsButton), for: .touchUpInside)
         return view
@@ -110,9 +116,15 @@ class SignInController: UIViewController {
 
     private lazy var privacyPolicyButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Privacy Policy", for: .normal)
-        view.setTitleColor(UIColor.whiteColor, for: .normal)
-        view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
+        let attributedTitle = NSAttributedString(
+            string: "Privacy Policy",
+            attributes: [
+                .font: UIFont.goldmanRegular(size: 12),
+                .foregroundColor: UIColor.whiteColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        view.setAttributedTitle(attributedTitle, for: .normal)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickPrivacyPolicyButton), for: .touchUpInside)
         return view

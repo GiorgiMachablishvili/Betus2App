@@ -73,8 +73,6 @@ class MainDashboardScene: UIViewController {
         return view
     }()
 
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mainBlack
