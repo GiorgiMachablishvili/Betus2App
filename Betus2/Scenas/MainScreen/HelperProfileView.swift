@@ -15,7 +15,7 @@ class HelperProfileView: UIView {
         view.setTitle("Privacy policy", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressPrivacyPolicyButton), for: .touchUpInside)
         return view
@@ -26,7 +26,7 @@ class HelperProfileView: UIView {
         view.setTitle("Terms of use", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressTermsOfUseButton), for: .touchUpInside)
         return view
@@ -37,7 +37,7 @@ class HelperProfileView: UIView {
         view.setTitle("Terms of use", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressRateUsButton), for: .touchUpInside)
         return view
@@ -48,7 +48,7 @@ class HelperProfileView: UIView {
         view.setTitle("Terms of use", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23)
+        view.makeRoundCorners(23 * Constraint.yCoeff)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressSupportButton), for: .touchUpInside)
         return view
@@ -74,30 +74,31 @@ class HelperProfileView: UIView {
 
     private func setupConstraints() {
         privacyPolicyButton.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(16)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.top.equalTo(snp.top).offset(16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
 
         termsOfUseButton.snp.remakeConstraints { make in
-            make.top.equalTo(privacyPolicyButton.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.top.equalTo(privacyPolicyButton.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
 
         rateUsButton.snp.remakeConstraints { make in
-            make.top.equalTo(termsOfUseButton.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.top.equalTo(termsOfUseButton.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
 
         supportButton.snp.remakeConstraints { make in
-            make.top.equalTo(rateUsButton.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.top.equalTo(rateUsButton.snp.bottom).offset(4 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(44 * Constraint.yCoeff)
         }
     }
 
+    //TODO: add button functions 
     @objc func pressPrivacyPolicyButton() {
 
     }

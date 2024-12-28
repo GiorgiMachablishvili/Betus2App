@@ -102,25 +102,25 @@ class HistoryCell: UICollectionViewCell {
 
         soccerView.snp.remakeConstraints { make in
             make.top.equalTo(currentDay.snp.bottom).offset(16 * Constraint.yCoeff)
-            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         volleyballView.snp.remakeConstraints { make in
             make.top.equalTo(soccerView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         basketballView.snp.remakeConstraints { make in
             make.top.equalTo(volleyballView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalTo(16 * Constraint.xCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(33 * Constraint.yCoeff)
         }
 
         tennisView.snp.remakeConstraints { make in
             make.top.equalTo(basketballView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalTo(16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(33 * Constraint.yCoeff)
         }
     }

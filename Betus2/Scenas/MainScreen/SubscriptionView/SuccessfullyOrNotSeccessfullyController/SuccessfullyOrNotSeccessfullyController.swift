@@ -1,0 +1,51 @@
+//
+//  SuccessfullyOrNotSuccessfullyController.swift
+//  Betus2
+//
+//  Created by Gio's Mac on 28.12.24.
+//
+
+import UIKit
+import SnapKit
+
+class SuccessfullyOrNotSuccessfullyController: UIViewController {
+    private lazy var firstBubleBackground: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.image = UIImage(named: "appleLogoFrame")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+
+    private lazy var secondBubleBackground: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.image = UIImage(named: "appleLogoFrame")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        setupConstraints()
+    }
+
+    private func setup() {
+        view.addSubview(firstBubleBackground)
+        view.addSubview(secondBubleBackground)
+    }
+
+    private func setupConstraints() {
+        firstBubleBackground.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-116)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(432)
+        }
+
+        secondBubleBackground.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-14)
+            make.leading.equalTo(view.snp.leading).offset(10)
+            make.trailing.equalTo(view.snp.trailing).offset(6)
+            make.height.equalTo(432)
+        }
+    }
+}

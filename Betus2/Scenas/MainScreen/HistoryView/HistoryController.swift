@@ -19,8 +19,8 @@ class HistoryController: UIViewController {
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 80 * Constraint.xCoeff, height: 80 * Constraint.yCoeff)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: view.frame.width, height: 360 * Constraint.yCoeff)
         layout.minimumLineSpacing = 4
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
@@ -51,8 +51,9 @@ class HistoryController: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.top.equalTo(backButton.snp.bottom).offset(8 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
-            make.height.lessThanOrEqualTo(211 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview()/*.inset(16 * Constraint.xCoeff)*/
+            make.bottom.equalTo(view.snp.bottom)
+//            make.height.lessThanOrEqualTo(211 * Constraint.yCoeff)
         }
     }
 
