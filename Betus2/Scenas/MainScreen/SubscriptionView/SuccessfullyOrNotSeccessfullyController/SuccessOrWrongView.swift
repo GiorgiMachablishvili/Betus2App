@@ -16,6 +16,7 @@ class SuccessOrWrongView: UIView {
         view.font = UIFont.goldmanBold(size: 36)
         view.numberOfLines = 2
         view.textColor = .whiteColor
+
         return view
     }()
 
@@ -25,6 +26,7 @@ class SuccessOrWrongView: UIView {
         view.font = UIFont.goldmanBold(size: 12)
         view.numberOfLines = 2
         view.textColor = .grayCalendarDayName
+
         return view
     }()
 
@@ -32,7 +34,6 @@ class SuccessOrWrongView: UIView {
         let view = UIImageView(frame: .zero)
         view.image = UIImage(named: "subscrioptionBenefits")
         view.contentMode = .scaleAspectFit
-        view.isHidden = true
         return view
     }()
 
@@ -42,6 +43,7 @@ class SuccessOrWrongView: UIView {
         view.font = UIFont.goldmanBold(size: 36)
         view.numberOfLines = 2
         view.textColor = .whiteColor
+        view.isHidden = true
         return view
     }()
 
@@ -51,6 +53,7 @@ class SuccessOrWrongView: UIView {
         view.font = UIFont.goldmanBold(size: 12)
         view.numberOfLines = 2
         view.textColor = .grayCalendarDayName
+        view.isHidden = true
         return view
     }()
 
@@ -58,6 +61,7 @@ class SuccessOrWrongView: UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .whiteColor
         view.makeRoundCorners(2)
+        view.isHidden = true
         return view
     }()
 
@@ -67,6 +71,7 @@ class SuccessOrWrongView: UIView {
         view.font = UIFont.goldmanBold(size: 12)
         view.numberOfLines = 2
         view.textColor = .whiteColor
+        view.isHidden = true
         return view
     }()
 
@@ -74,6 +79,7 @@ class SuccessOrWrongView: UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .whiteColor
         view.makeRoundCorners(2)
+        view.isHidden = true
         return view
     }()
 
@@ -82,6 +88,7 @@ class SuccessOrWrongView: UIView {
         view.text = "Contact customer"
         view.font = UIFont.goldmanBold(size: 12)
         view.textColor = .whiteColor
+        view.isHidden = true
         return view
     }()
 
@@ -98,6 +105,7 @@ class SuccessOrWrongView: UIView {
         view.setAttributedTitle(attributedTitle, for: .normal)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(didPressSupportButton), for: .touchUpInside)
+        view.isHidden = true
         return view
     }()
 
@@ -127,6 +135,8 @@ class SuccessOrWrongView: UIView {
         addSubview(welcomeLabel)
         addSubview(subscriptionBenefits)
         addSubview(okeyButton)
+        addSubview(wrongTitle)
+        addSubview(wrongInfoLabel)
         addSubview(pointOne)
         addSubview(featuresLabel)
         addSubview(pointTwo)
@@ -141,8 +151,20 @@ class SuccessOrWrongView: UIView {
             make.height.greaterThanOrEqualTo(43)
         }
 
+        wrongTitle.snp.remakeConstraints { make in
+            make.top.equalTo(snp.top).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.greaterThanOrEqualTo(43)
+        }
+
         welcomeLabel.snp.remakeConstraints { make in
             make.top.equalTo(succseeTitle.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.lessThanOrEqualTo(32)
+        }
+
+        wrongInfoLabel.snp.remakeConstraints { make in
+            make.top.equalTo(wrongTitle.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.lessThanOrEqualTo(32)
         }

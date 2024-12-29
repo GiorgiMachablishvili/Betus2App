@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import StoreKit
 
 class ProfileViewController: UIViewController {
 
@@ -24,6 +25,11 @@ class ProfileViewController: UIViewController {
         let view = HelperProfileView()
         view.makeRoundCorners(32 * Constraint.yCoeff)
         view.backgroundColor = .topBottomViewColorGray
+        view.rateButton = { [weak self] in
+            if let windowScene = view.window?.windowScene {
+                SKStoreReviewController.requestReview(in: windowScene)
+            }
+        }
         return view
     }()
 
