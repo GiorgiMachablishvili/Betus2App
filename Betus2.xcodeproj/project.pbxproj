@@ -11,6 +11,8 @@
 		E302D4F42D1EF30C003C0D2E /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */; };
 		E302D4F62D1EFA48003C0D2E /* CustomView+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F52D1EFA48003C0D2E /* CustomView+Extention.swift */; };
 		E302D4F82D1F1179003C0D2E /* WorkutScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E302D4F72D1F1179003C0D2E /* WorkutScore.swift */; };
+		E31405392D23214400AAA19C /* SubscriptionBenefitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31405382D23214400AAA19C /* SubscriptionBenefitsView.swift */; };
+		E314053E2D2327F900AAA19C /* WarningViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314053D2D2327F900AAA19C /* WarningViews.swift */; };
 		E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */; };
 		E3315EA12D19CDB400C635BF /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315EA02D19CDB400C635BF /* TopView.swift */; };
 		E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */; };
@@ -60,6 +62,8 @@
 		E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		E302D4F52D1EFA48003C0D2E /* CustomView+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomView+Extention.swift"; sourceTree = "<group>"; };
 		E302D4F72D1F1179003C0D2E /* WorkutScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkutScore.swift; sourceTree = "<group>"; };
+		E31405382D23214400AAA19C /* SubscriptionBenefitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBenefitsView.swift; sourceTree = "<group>"; };
+		E314053D2D2327F900AAA19C /* WarningViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViews.swift; sourceTree = "<group>"; };
 		E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboardScene.swift; sourceTree = "<group>"; };
 		E3315EA02D19CDB400C635BF /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 				E302D4F32D1EF30C003C0D2E /* HistoryCell.swift */,
 			);
 			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		E314053A2D23274100AAA19C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E314053D2D2327F900AAA19C /* WarningViews.swift */,
+				E31405382D23214400AAA19C /* SubscriptionBenefitsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E3315E9B2D19CAEE00C635BF /* MainScreen */ = {
@@ -193,6 +206,7 @@
 			children = (
 				E38D37D42D196F8300A139D6 /* App */,
 				E38D37D52D196F8F00A139D6 /* Scenas */,
+				E314053A2D23274100AAA19C /* Views */,
 				E38471062D1C171000C92887 /* Models */,
 				E38D37D72D196FB700A139D6 /* NetworkManager */,
 				E38D37D92D196FCF00A139D6 /* Constraints */,
@@ -397,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E38D37F12D19739B00A139D6 /* UIColor+Extention.swift in Sources */,
+				E31405392D23214400AAA19C /* SubscriptionBenefitsView.swift in Sources */,
 				E38D37DD2D1970C000A139D6 /* Constraints.swift in Sources */,
 				E3D2370D2D1AACA500940F48 /* SportImagesCell.swift in Sources */,
 				E38471082D1C172100C92887 /* ViewInfo.swift in Sources */,
@@ -408,6 +423,7 @@
 				E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */,
 				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,
 				E3E87A6E2D1D9920009E9B8C /* WarningView.swift in Sources */,
+				E314053E2D2327F900AAA19C /* WarningViews.swift in Sources */,
 				E38D37F72D19747800A139D6 /* UIFont+Extention.swift in Sources */,
 				E3A8683C2D20505D00DC3560 /* YearlySubscriptionView.swift in Sources */,
 				E36878C92D209A1F00D5B8C3 /* SuccessOrWrongView.swift in Sources */,

@@ -55,7 +55,7 @@ class SignInController: UIViewController {
     private lazy var signInWithAppleButton: UIButton = {
         let view = UIButton(frame: .zero)
             view.setTitle("Sign In with Apple", for: .normal)
-            view.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+        view.setTitleColor(UIColor.mainBlack, for: .normal)
         view.backgroundColor = UIColor.whiteColor
             view.layer.cornerRadius = 16
         view.layer.borderColor = UIColor.whiteColor.cgColor
@@ -241,7 +241,6 @@ class SignInController: UIViewController {
         navigationController?.pushViewController(mainView, animated: true)
     }
 
-    //TODO: make view when signin with login guest button
     @objc private func clickLogInAsGuestButton() {
         UserDefaults.standard.setValue(true, forKey: "isGuestUser")
         let mainVC = MainDashboardScene()

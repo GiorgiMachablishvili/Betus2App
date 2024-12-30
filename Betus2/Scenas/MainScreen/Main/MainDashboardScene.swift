@@ -161,7 +161,8 @@ class MainDashboardScene: UIViewController {
 
     private func setupForGuestUser() {
         topView.historyButton.isHidden = true
-        topView.rectangleImage.image = UIImage(named: "guestRectangle")
+//        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
+        topView.numberOfWorkoutDays.isHidden = true
         warningView.isHidden = true
         bottomView.startButton.isHidden = true
     }

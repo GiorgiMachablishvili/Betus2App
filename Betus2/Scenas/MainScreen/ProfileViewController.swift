@@ -33,10 +33,17 @@ class ProfileViewController: UIViewController {
         return view
     }()
 
-    private lazy var warningImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "warningImage")
-        view.contentMode = .scaleAspectFit
+//    private lazy var warningImage: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//        view.image = UIImage(named: "warningImage")
+//        view.contentMode = .scaleAspectFit
+//        return view
+//    }()
+
+    private lazy var warningViewRed: WarningViews = {
+        let view = WarningViews()
+        view.makeRoundCorners(16)
+        view.backgroundColor = .redColor.withAlphaComponent(0.2)
         return view
     }()
 
@@ -78,7 +85,7 @@ class ProfileViewController: UIViewController {
     private func setup() {
         view.addSubview(staticView)
         view.addSubview(helperView)
-        view.addSubview(warningImage)
+        view.addSubview(warningViewRed)
         view.addSubview(deleteButton)
         view.addSubview(signInButton)
     }
@@ -96,14 +103,14 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(220 * Constraint.yCoeff)
         }
 
-        warningImage.snp.remakeConstraints { make in
+        warningViewRed.snp.remakeConstraints { make in
             make.top.equalTo(helperView.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(81 * Constraint.yCoeff)
         }
 
         deleteButton.snp.remakeConstraints { make in
-            make.top.equalTo(warningImage.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.top.equalTo(warningViewRed.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(44 * Constraint.yCoeff)
         }
@@ -125,14 +132,14 @@ class ProfileViewController: UIViewController {
             volleyballLabel.text = "?"
             tennisLabel.text = "?"
         }
-        warningImage.isHidden = true
+        warningViewRed.isHidden = true
         deleteButton.isHidden = true
         signInButton.isHidden = false
     }
 
     func hiddenOrUnhidden() {
         let isGuestUser = UserDefaults.standard.bool(forKey: "isGuestUser")
-        warningImage.isHidden = isGuestUser
+        warningViewRed.isHidden = isGuestUser
         deleteButton.isHidden = isGuestUser
         signInButton.isHidden = !isGuestUser
     }

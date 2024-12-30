@@ -19,10 +19,17 @@ class WarningView: UIView {
         return view
     }()
 
-    private lazy var warningImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "warningDarkView")
-        view.contentMode = .scaleAspectFit
+//    private lazy var warningImage: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//        view.image = UIImage(named: "warningDarkView")
+//        view.contentMode = .scaleAspectFit
+//        return view
+//    }()
+
+    private lazy var warningViewDark: WarningViews = {
+        let view = WarningViews()
+        view.makeRoundCorners(16)
+        view.backgroundColor = .topBottomViewColorGray
         return view
     }()
 
@@ -50,7 +57,7 @@ class WarningView: UIView {
 
     private func setup() {
         addSubview(blurBackground)
-        addSubview(warningImage)
+        addSubview(warningViewDark)
         addSubview(acceptButton)
 
     }
@@ -60,7 +67,7 @@ class WarningView: UIView {
             make.edges.equalToSuperview()
         }
 
-        warningImage.snp.remakeConstraints { make in
+        warningViewDark.snp.remakeConstraints { make in
             make.bottom.equalTo(acceptButton.snp.top).offset(-8 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
             make.height.equalTo(81 * Constraint.yCoeff)

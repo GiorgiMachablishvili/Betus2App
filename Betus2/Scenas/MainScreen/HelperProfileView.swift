@@ -36,7 +36,7 @@ class HelperProfileView: UIView {
 
     private lazy var rateUsButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Terms of use", for: .normal)
+        view.setTitle("Rate US", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
         view.makeRoundCorners(23 * Constraint.yCoeff)
@@ -47,7 +47,7 @@ class HelperProfileView: UIView {
 
     private lazy var supportButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Terms of use", for: .normal)
+        view.setTitle("Support", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
         view.makeRoundCorners(23 * Constraint.yCoeff)
@@ -108,7 +108,7 @@ class HelperProfileView: UIView {
     @objc func pressTermsOfUseButton() {
 
     }
-
+    //TODO: test rate us
     @objc func pressRateUsButton() {
         rateButton?()
     }

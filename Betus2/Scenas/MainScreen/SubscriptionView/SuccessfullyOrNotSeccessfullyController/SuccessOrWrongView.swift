@@ -30,10 +30,16 @@ class SuccessOrWrongView: UIView {
         return view
     }()
 
-    private lazy var subscriptionBenefits: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "subscrioptionBenefits")
-        view.contentMode = .scaleAspectFit
+//    private lazy var subscriptionBenefits: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//        view.image = UIImage(named: "subscrioptionBenefits")
+//        view.contentMode = .scaleAspectFit
+//        return view
+//    }()
+
+    private lazy var subscriptionBenefits: SubscriptionBenefitsView = {
+        let view = SubscriptionBenefitsView()
+        view.backgroundColor = .clear
         return view
     }()
 

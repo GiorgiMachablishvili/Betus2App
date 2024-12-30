@@ -31,10 +31,16 @@ class SubscriptionView: UIView {
     }()
 
 
-    private lazy var subscriptionBenefits: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "subscrioptionBenefits")
-        view.contentMode = .scaleAspectFit
+//    private lazy var subscriptionBenefits: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//        view.image = UIImage(named: "subscrioptionBenefits")
+//        view.contentMode = .scaleAspectFit
+//        return view
+//    }()
+
+    private lazy var subscriptionBenefits: SubscriptionBenefitsView = {
+        let view = SubscriptionBenefitsView()
+        view.backgroundColor = .clear
         return view
     }()
 
@@ -58,7 +64,19 @@ class SubscriptionView: UIView {
 
     private lazy var goToProButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setImage(UIImage(named: "goToProButton"), for: .normal)
+        view.setTitle(" Go to Pro", for: .normal)
+        view.setTitleColor(UIColor.whiteColor, for: .normal)
+        view.backgroundColor = UIColor.redColor
+        view.makeRoundCorners(16)
+        let image = UIImage(named: "crown")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        }
+        view.setImage(resizedImage, for: .normal)
+        view.imageView?.contentMode = .scaleAspectFit
+        view.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        view.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        view.contentHorizontalAlignment = .center
         view.addTarget(self, action: #selector(didPressGoToProButton), for: .touchUpInside)
         return view
     }()
