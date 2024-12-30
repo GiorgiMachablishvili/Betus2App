@@ -16,10 +16,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        let mainViewController = SignInController()
-        window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+//        let mainViewController = SubscriptionMainViewController()
+//        window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+        ifUserISCreatedOrNot()
         window?.makeKeyAndVisible()
     }
+
+        func ifUserISCreatedOrNot() {
+            if let userId = UserDefaults.standard.string(forKey: "userId"), !userId.isEmpty {
+                let mainViewController = MainDashboardScene()
+                UserDefaults.standard.setValue(false, forKey: "isGuestUser")
+                window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+            } else {
+                let signInViewController = SignInController()
+                window?.rootViewController = UINavigationController(rootViewController: signInViewController)
+            }
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

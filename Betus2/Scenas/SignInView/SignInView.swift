@@ -55,7 +55,7 @@ class SignInController: UIViewController {
     private lazy var signInWithAppleButton: UIButton = {
         let view = UIButton(frame: .zero)
             view.setTitle("Sign In with Apple", for: .normal)
-            view.setTitleColor(UIColor(hexString: "#000000"), for: .normal)
+        view.setTitleColor(UIColor.mainBlack, for: .normal)
         view.backgroundColor = UIColor.whiteColor
             view.layer.cornerRadius = 16
         view.layer.borderColor = UIColor.whiteColor.cgColor
@@ -85,9 +85,15 @@ class SignInController: UIViewController {
 
     private lazy var termsButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Terms of", for: .normal)
-        view.setTitleColor(UIColor.whiteColor, for: .normal)
-        view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
+        let attributedTitle = NSAttributedString(
+            string: "Terms of",
+            attributes: [
+                .font: UIFont.goldmanRegular(size: 12),
+                .foregroundColor: UIColor.whiteColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        view.setAttributedTitle(attributedTitle, for: .normal)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickTermsButton), for: .touchUpInside)
         return view
@@ -110,9 +116,15 @@ class SignInController: UIViewController {
 
     private lazy var privacyPolicyButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setTitle("Privacy Policy", for: .normal)
-        view.setTitleColor(UIColor.whiteColor, for: .normal)
-        view.titleLabel?.font = UIFont.goldmanRegular(size: 12)
+        let attributedTitle = NSAttributedString(
+            string: "Privacy Policy",
+            attributes: [
+                .font: UIFont.goldmanRegular(size: 12),
+                .foregroundColor: UIColor.whiteColor,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        view.setAttributedTitle(attributedTitle, for: .normal)
         view.backgroundColor = .clear
         view.addTarget(self, action: #selector(clickPrivacyPolicyButton), for: .touchUpInside)
         return view
@@ -152,66 +164,66 @@ class SignInController: UIViewController {
 
     private func setupConstraints() {
         quickSignLabel.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(222)
+            make.top.equalTo(view.snp.top).offset(222 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.height.equalTo(86)
-            make.width.equalTo(285)
+            make.height.equalTo(86 * Constraint.yCoeff)
+            make.width.equalTo(285 * Constraint.xCoeff)
         }
 
         mainImageViewFram.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(270)
+            make.top.equalTo(view.snp.top).offset(270 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.height.equalTo(260)
-            make.width.equalTo(260)
+            make.height.equalTo(260 * Constraint.yCoeff)
+            make.width.equalTo(260 * Constraint.xCoeff)
         }
 
         timerBackground.snp.remakeConstraints { make in
             make.center.equalTo(mainImageViewFram.snp.center)
-            make.height.width.equalTo(160)
+            make.height.width.equalTo(160 * Constraint.yCoeff)
         }
 
         mainImageView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(140)
-            make.width.equalTo(140)
+            make.height.equalTo(140 * Constraint.yCoeff)
+            make.width.equalTo(140 * Constraint.xCoeff)
         }
 
         signInInfoLabel.snp.remakeConstraints { make in
-            make.top.equalTo(mainImageViewFram.snp.bottom).offset(3)
-            make.leading.trailing.equalToSuperview().inset(44)
-            make.height.equalTo(51)
+            make.top.equalTo(mainImageViewFram.snp.bottom).offset(3 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(44 * Constraint.xCoeff)
+            make.height.equalTo(51 * Constraint.yCoeff)
         }
 
         termsButton.snp.remakeConstraints { make in
-            make.top.equalTo(signInInfoLabel.snp.bottom).offset(32)
-            make.leading.equalTo(view.snp.leading).offset(95)
-            make.height.equalTo(14)
+            make.top.equalTo(signInInfoLabel.snp.bottom).offset(32 * Constraint.yCoeff)
+            make.leading.equalTo(view.snp.leading).offset(95 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
         andLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(termsButton.snp.centerY)
-            make.leading.equalTo(termsButton.snp.trailing).offset(2)
-            make.height.equalTo(14)
+            make.leading.equalTo(termsButton.snp.trailing).offset(2 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
         privacyPolicyButton.snp.remakeConstraints { make in
             make.centerY.equalTo(termsButton.snp.centerY)
-            make.leading.equalTo(andLabel.snp.trailing).offset(2)
-            make.height.equalTo(14)
+            make.leading.equalTo(andLabel.snp.trailing).offset(2 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
         signInWithAppleButton.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-100)
+            make.bottom.equalTo(view.snp.bottom).offset(-100 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.height.equalTo(48)
-            make.width.equalTo(326)
+            make.height.equalTo(48 * Constraint.yCoeff)
+            make.width.equalTo(326 * Constraint.xCoeff)
         }
 
         logInAsGuestButton.snp.remakeConstraints { make in
-            make.top.equalTo(signInWithAppleButton.snp.bottom).offset(8)
+            make.top.equalTo(signInWithAppleButton.snp.bottom).offset(8 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.height.equalTo(48)
-            make.width.equalTo(326)
+            make.height.equalTo(48 * Constraint.yCoeff)
+            make.width.equalTo(326 * Constraint.xCoeff)
         }
 
     }
@@ -230,7 +242,10 @@ class SignInController: UIViewController {
     }
 
     @objc private func clickLogInAsGuestButton() {
-
+        UserDefaults.standard.setValue(true, forKey: "isGuestUser")
+        let mainVC = MainDashboardScene()
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.pushViewController(mainVC, animated: true)
     }
 }
 

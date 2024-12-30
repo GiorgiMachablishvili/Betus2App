@@ -10,6 +10,9 @@ import SnapKit
 
 class TopView: UIView {
 
+    var onProfileButtonTap: (() -> Void)?
+    var onHistoryButtonTap: (() -> Void)?
+
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.numberOfLines = 0
@@ -24,14 +27,22 @@ class TopView: UIView {
         return view
     }()
 
-    private lazy var rectangleImage: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(named: "rectangle")
-        view.contentMode = .scaleAspectFit
+//    lazy var numberOfWorkoutDays: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//        view.image = UIImage(named: "rectangle")
+//        view.contentMode = .scaleAspectFit
+//        return view
+//    }()
+
+    lazy var numberOfWorkoutDays:UILabel = {
+        let view = UILabel(frame: .zero)
+        view.text = "0"
+        view.font = UIFont.goldmanBold(size: 32)
+        view.textColor = .whiteColor
         return view
     }()
 
-    private lazy var historyButton: UIButton = {
+    lazy var historyButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.setImage(UIImage(named: "history"), for: .normal)
         view.backgroundColor = .clear
@@ -62,7 +73,7 @@ class TopView: UIView {
     private func setup() {
         addSubview(titleLabel)
         addSubview(calendarView)
-        addSubview(rectangleImage)
+        addSubview(numberOfWorkoutDays)
         addSubview(historyButton)
         addSubview(profileButton)
     }
@@ -74,12 +85,12 @@ class TopView: UIView {
         }
 
         calendarView.snp.remakeConstraints { make in
-            make.bottom.equalTo(snp.bottom).offset(-16)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(40)
+            make.bottom.equalTo(snp.bottom).offset(-16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(40 * Constraint.yCoeff)
         }
 
-        rectangleImage.snp.remakeConstraints { make in
+        numberOfWorkoutDays.snp.remakeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(12 * Constraint.yCoeff)
             make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
             make.height.equalTo(25 * Constraint.yCoeff)
@@ -125,12 +136,13 @@ class TopView: UIView {
     }
 
 
+    //TOD: make history view
     @objc private func clickHistoryButton() {
-
+        onHistoryButtonTap?()
     }
 
     @objc private func clickProfileButton() {
-
+        onProfileButtonTap?()
     }
 
 }

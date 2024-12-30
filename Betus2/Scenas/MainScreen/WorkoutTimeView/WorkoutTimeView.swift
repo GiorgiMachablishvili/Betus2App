@@ -27,23 +27,23 @@ class WorkoutTimeView: UIViewController {
     private lazy var previousTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40)
+        view.makeRoundCorners(40 * Constraint.yCoeff)
         return view
     }()
 
     private lazy var previousTimeLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "00:00"
-        label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor.grayCalendarDayName
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "00:00"
+        view.font = UIFont.goldmanRegular(size: 14)
+        view.textColor = UIColor.grayCalendarDayName
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var timerBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .redColor.withAlphaComponent(0.2)
-        view.makeRoundCorners(80)
+        view.makeRoundCorners(80 * Constraint.yCoeff)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -51,40 +51,40 @@ class WorkoutTimeView: UIViewController {
     private lazy var timerBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.red
-        view.makeRoundCorners(70)
+        view.makeRoundCorners(70 * Constraint.yCoeff)
         return view
     }()
 
     private lazy var timerLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "03:00"
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = .white
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "03:00"
+        view.font = UIFont.boldSystemFont(ofSize: 32)
+        view.textColor = .white
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var nextWorkoutTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40)
+        view.makeRoundCorners(40 * Constraint.yCoeff)
         return view
     }()
 
     private lazy var nextWorkoutTimeLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "00:00"
-        label.font = UIFont.goldmanRegular(size: 14)
-        label.textColor = UIColor.grayCalendarDayName
-        label.textAlignment = .center
-        return label
+        let view = UILabel(frame: .zero)
+        view.text = "00:00"
+        view.font = UIFont.goldmanRegular(size: 14)
+        view.textColor = UIColor.grayCalendarDayName
+        view.textAlignment = .center
+        return view
     }()
 
     private lazy var toggleButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setImage(UIImage(named: "timersStart"), for: .normal)
-        button.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
-        return button
+        let view = UIButton(frame: .zero)
+        view.setImage(UIImage(named: "timersStart"), for: .normal)
+        view.addTarget(self, action: #selector(toggleTimer), for: .touchUpInside)
+        return view
     }()
 
     private lazy var completView: CompletView = {
@@ -126,24 +126,24 @@ class WorkoutTimeView: UIViewController {
 
         completView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.width.equalTo(260)
+            make.height.width.equalTo(260 * Constraint.yCoeff)
         }
 
         nextWorkoutTimeBackground.snp.remakeConstraints { make in
             make.centerY.equalTo(timerBackground.snp.centerY)
-            make.trailing.equalTo(view.snp.trailing).offset(-13)
-            make.height.width.equalTo(80)
+            make.trailing.equalTo(view.snp.trailing).offset(-13 * Constraint.xCoeff)
+            make.height.width.equalTo(80 * Constraint.yCoeff)
         }
 
         nextWorkoutTimeLabel.snp.remakeConstraints { make in
             make.center.equalTo(nextWorkoutTimeBackground.snp.center)
-            make.height.equalTo(17)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         previousTimeBackground.snp.remakeConstraints { make in
             make.centerY.equalTo(timerBackground.snp.centerY)
-            make.leading.equalTo(view.snp.leading).offset(13)
-            make.height.width.equalTo(80)
+            make.leading.equalTo(view.snp.leading).offset(13 * Constraint.xCoeff)
+            make.height.width.equalTo(80 * Constraint.yCoeff)
         }
 
         previousTimeLabel.snp.remakeConstraints { make in
@@ -153,12 +153,12 @@ class WorkoutTimeView: UIViewController {
 
         timerBackground.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.width.equalTo(160)
+            make.height.width.equalTo(160 * Constraint.yCoeff)
         }
 
         timerBackgroundView.snp.remakeConstraints { make in
             make.center.equalTo(timerBackground.snp.center)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(140 * Constraint.yCoeff)
         }
 
         timerLabel.snp.makeConstraints { make in
@@ -166,9 +166,9 @@ class WorkoutTimeView: UIViewController {
         }
 
         toggleButton.snp.makeConstraints { make in
-            make.top.equalTo(timerBackgroundView.snp.bottom).offset(24)
+            make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
             make.centerX.equalToSuperview()
-            make.height.width.equalTo(44)
+            make.height.width.equalTo(44 * Constraint.yCoeff)
         }
     }
 
@@ -271,10 +271,10 @@ class WorkoutTimeView: UIViewController {
             completView.isHidden = false
             toggleButton.setImage(UIImage(named: "okeyButton"), for: .normal)
             toggleButton.snp.remakeConstraints { make in
-                make.top.equalTo(timerBackgroundView.snp.bottom).offset(24)
+                make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
                 make.centerX.equalToSuperview()
-                make.height.equalTo(44)
-                make.width.equalTo(69)
+                make.height.equalTo(44 * Constraint.yCoeff)
+                make.width.equalTo(69 * Constraint.xCoeff)
             }
             nextWorkoutTimeLabel.text = "00:00"
             nextWorkoutTimeBackground.isHidden = true
@@ -291,10 +291,8 @@ class WorkoutTimeView: UIViewController {
             currentTime = 0
         }
         timerLabel.text = formatTime(currentTime)
-
         nextWorkoutTime()
         previousWorkoutTime()
-
     }
 
     private func nextWorkoutTime() {
@@ -331,16 +329,26 @@ class WorkoutTimeView: UIViewController {
     @objc private func updateTimer() {
         guard currentTime > 0 else {
             stopTimer()
-            toggleButton.setImage(UIImage(named: "timersStart"), for: .normal)
+            if currentStepIndex == workoutSteps.count - 1 {
+                timerLabel.text = "00:00"
+                toggleButton.setImage(UIImage(named: "okeyButton"), for: .normal)
+//                if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
+                    toggleButton.snp.remakeConstraints { make in
+                        make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
+                        make.centerX.equalToSuperview()
+                        make.height.equalTo(44 * Constraint.yCoeff)
+                        make.width.equalTo(69 * Constraint.xCoeff)
+                    }
+//                }
+                completView.isHidden = false
+            } else {
+                currentStepIndex += 1
+                configureWorkoutStep()
+            }
             return
         }
-        if currentTime > 0 {
-            currentTime -= 1
-            timerLabel.text = formatTime(currentTime)
-        } else {
-            currentStepIndex += 1
-            configureWorkoutStep()
-        }
+        currentTime -= 1
+        timerLabel.text = formatTime(currentTime)
     }
 
     private func formatTime(_ totalSeconds: Int) -> String {
@@ -363,6 +371,8 @@ class WorkoutTimeView: UIViewController {
 
     func skipStep() {
         currentStepIndex += 1
+        stopTimer()
+        toggleButton.setImage(UIImage(named: "timersStart"), for: .normal)
         configureWorkoutStep()
     }
 }
