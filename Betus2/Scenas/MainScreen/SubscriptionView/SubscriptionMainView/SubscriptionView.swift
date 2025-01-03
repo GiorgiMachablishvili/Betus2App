@@ -11,6 +11,7 @@ import SnapKit
 class SubscriptionView: UIView {
 
     var onGoProButtonTap: (() -> Void)?
+    var onGoBackMainView: (() -> Void)?
 
     private lazy var subscriptionTitle: UILabel = {
         let view = UILabel(frame: .zero)
@@ -87,6 +88,7 @@ class SubscriptionView: UIView {
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.backgroundColor = .clear
+        view.addTarget(self, action: #selector(didPressCancelButton), for: .touchUpInside)
         return view
     }()
 
@@ -156,5 +158,9 @@ class SubscriptionView: UIView {
 
     @objc private func didPressGoToProButton() {
         onGoProButtonTap?()
+    }
+
+    @objc private func didPressCancelButton() {
+        onGoBackMainView?()
     }
 }

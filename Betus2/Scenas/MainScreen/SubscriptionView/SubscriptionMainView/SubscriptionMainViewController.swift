@@ -7,8 +7,13 @@
 
 import UIKit
 import SnapKit
+import Combine
 
+@available(iOS 15.0, *)
 class SubscriptionMainViewController: UIViewController {
+
+    private var storeVM = StoreVM()
+    private var cancellables = Set<AnyCancellable>()
 
     private lazy var tennisBackground: UIImageView = {
         let view = UIImageView(frame: .zero)
@@ -59,15 +64,20 @@ class SubscriptionMainViewController: UIViewController {
         view.onGoProButtonTap = { [weak self] in
             self?.moveSuccsOrNotView()
         }
+        view.onGoBackMainView = { [weak self] in
+            self?.moveToBackView()
+        }
         return view
     }()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .mainBlack
         setup()
         setupConstraints()
         addGestureRecognizers()
+        observeSubscriptionChanges()
     }
 
     private func setup() {
@@ -131,39 +141,138 @@ class SubscriptionMainViewController: UIViewController {
         subscriptionView.monthlySubscription.isUserInteractionEnabled = true
     }
 
+    private func observeSubscriptionChanges() {
+        storeVM.$purchasedSubscriptions
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] subscriptions in
+                guard let self = self else { return }
+
+                if self.navigationController?.topViewController is SubscriptionMainViewController {
+                    return
+                }
+
+                if subscriptions.isEmpty {
+                    self.updateMainDashboardForFreeUser()
+                } else {
+                    self.updateMainDashboardForSubscribedUser()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateMainDashboardForFreeUser() {
+        // Perform changes for free user (e.g., update background or restrict features)
+        let mainDashboardVC = MainDashboardScene()
+        mainDashboardVC.view.backgroundColor = .lightGray // Example: change to a "free" background
+        navigationController?.setViewControllers([mainDashboardVC], animated: true)
+    }
+
+    private func updateMainDashboardForSubscribedUser() {
+        // Perform changes for subscribed user
+        let mainDashboardVC = MainDashboardScene()
+        mainDashboardVC.view.backgroundColor = .green // Example: change to a "premium" background
+        navigationController?.setViewControllers([mainDashboardVC], animated: true)
+    }
+
     @objc private func didTapYearlySubscription() {
-        updateSubscriptionSelection(
-            selectedView: subscriptionView.yearlySubscription,
-            deselectedView: subscriptionView.monthlySubscription
-        )
+        Task {
+            if let yearlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.yearly" }) {
+                do {
+                    let transaction = try await storeVM.purchase(yearlyProduct)
+
+                    // Handle successful transaction
+                    if transaction != nil {
+                        updateSubscriptionSelection(
+                            selectedView: subscriptionView.yearlySubscription,
+                            deselectedView: subscriptionView.monthlySubscription
+                        )
+                    }
+                } catch {
+                    print("Failed to purchase yearly subscription: \(error)")
+                }
+            }
+        }
     }
 
     @objc private func didTapMonthlySubscription() {
-        updateSubscriptionSelection(
-            selectedView: subscriptionView.monthlySubscription,
-            deselectedView: subscriptionView.yearlySubscription
-        )
-    }
-    private func updateSubscriptionSelection(selectedView: UIView, deselectedView: UIView) {
-        if let yearlyView = selectedView as? YearlySubscriptionView {
-            yearlyView.backgroundColor = .grayCalendarDayName
-            yearlyView.fillCircleImage.isHidden = false
-        } else if let monthlyView = selectedView as? MonthlySubscriptionView {
-            monthlyView.backgroundColor = .grayCalendarDayName
-            monthlyView.fillCircleImage.isHidden = false
-        }
+        Task {
+            if let monthlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.monthly" }) {
+                do {
+                    let transaction = try await storeVM.purchase(monthlyProduct)
 
-        if let yearlyView = deselectedView as? YearlySubscriptionView {
-            yearlyView.backgroundColor = .topBottomViewColorGray
-            yearlyView.fillCircleImage.isHidden = true
-        } else if let monthlyView = deselectedView as? MonthlySubscriptionView {
-            monthlyView.backgroundColor = .topBottomViewColorGray
-            monthlyView.fillCircleImage.isHidden = true
+                    // Handle successful transaction
+                    if transaction != nil {
+                        updateSubscriptionSelection(
+                            selectedView: subscriptionView.monthlySubscription,
+                            deselectedView: subscriptionView.yearlySubscription
+                        )
+                    }
+                } catch {
+                    print("Failed to purchase monthly subscription: \(error)")
+                }
+            }
         }
     }
+
+
+//    @objc private func didTapYearlySubscription() {
+//        Task {
+//            if let yearlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.yearly" }) {
+//
+//                do {
+//                    try await storeVM.purchase(yearlyProduct)
+//                    updateSubscriptionSelection(
+//                        selectedView: subscriptionView.yearlySubscription,
+//                        deselectedView: subscriptionView.monthlySubscription
+//                    )
+//                } catch {
+//                    print("Failed to purchase yearly subscription: \(error)")
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    @objc private func didTapMonthlySubscription() {
+//        Task {
+//            if let monthlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.monthly" }) {
+//                do {
+//                    try await storeVM.purchase(monthlyProduct)
+//                    updateSubscriptionSelection(
+//                        selectedView: subscriptionView.monthlySubscription,
+//                        deselectedView: subscriptionView.yearlySubscription
+//                    )
+//                } catch {
+//                    print("Failed to purchase monthly subscription: \(error)")
+//                }
+//            }
+//        }
+//    }
+
+    private func updateSubscriptionSelection(selectedView: UIView, deselectedView: UIView) {
+           if let yearlyView = selectedView as? YearlySubscriptionView {
+               yearlyView.backgroundColor = .grayCalendarDayName
+               yearlyView.fillCircleImage.isHidden = false
+           } else if let monthlyView = selectedView as? MonthlySubscriptionView {
+               monthlyView.backgroundColor = .grayCalendarDayName
+               monthlyView.fillCircleImage.isHidden = false
+           }
+
+           if let yearlyView = deselectedView as? YearlySubscriptionView {
+               yearlyView.backgroundColor = .topBottomViewColorGray
+               yearlyView.fillCircleImage.isHidden = true
+           } else if let monthlyView = deselectedView as? MonthlySubscriptionView {
+               monthlyView.backgroundColor = .topBottomViewColorGray
+               monthlyView.fillCircleImage.isHidden = true
+           }
+       }
 
     private func moveSuccsOrNotView() {
         let succOrNotVC = SuccessfullyOrNotSuccessfullyController()
         navigationController?.pushViewController(succOrNotVC, animated: true)
+    }
+
+    private func moveToBackView() {
+        navigationController?.popViewController(animated: true)
     }
 }

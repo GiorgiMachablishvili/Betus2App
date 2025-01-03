@@ -9,9 +9,23 @@
 import UIKit
 import SnapKit
 
+//@available(iOS 15.0, *)
 class MainDashboardScene: UIViewController {
 
-    private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
+//    private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
+
+    private var images: [String] {
+        return isSubscribed
+        ? ["", "tennis", "basketball", "volleyball", "soccer", ""]
+        : ["", "locked", "locked", "locked", "soccer", ""]
+    }
+
+    var isSubscribed: Bool = false {
+        didSet {
+            collectionView.reloadData()
+//            updateBackground()
+        }
+    }
 
     private lazy var warningView: WarningView = {
         let view = WarningView()
@@ -81,6 +95,7 @@ class MainDashboardScene: UIViewController {
 
         setup()
         setupConstraints()
+//        updateBackground()
 
         if UserDefaults.standard.bool(forKey: "isGuestUser") {
             setupForGuestUser()
@@ -91,6 +106,8 @@ class MainDashboardScene: UIViewController {
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             self.updateViewForSport(at: indexPath)
         }
+
+        
     }
 
     private func setup() {
@@ -138,11 +155,30 @@ class MainDashboardScene: UIViewController {
     }
 
     private func updateViewForSport(at indexPath: IndexPath) {
-        guard !images[indexPath.item].isEmpty else { return }
-        let sportName = images[indexPath.item].uppercased()
-        sportLabel.text = sportName
-        topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
-        updateBottomView(for: images[indexPath.item])
+        guard indexPath.item < images.count else { return }
+
+            let sportName = images[indexPath.item]
+            if sportName.isEmpty { return }
+
+            // Update the sport label
+            sportLabel.text = sportName.uppercased()
+
+            // Update the bottom view based on the sport
+            updateBottomView(for: sportName)
+
+            // Update the button based on whether the sport is locked
+            if sportName.lowercased() == "locked" {
+                print("Sport is locked, updating button to 'Go to Pro'")
+                updateGoToProButton()
+            } else {
+                print("Sport is available, updating button to 'Start'")
+                updateStartButton()
+            }
+//        guard !images[indexPath.item].isEmpty else { return }
+//        let sportName = images[indexPath.item].uppercased()
+//        sportLabel.text = sportName
+//        topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
+//        updateBottomView(for: images[indexPath.item])
     }
 
     private func hideWarningView() {
@@ -159,12 +195,55 @@ class MainDashboardScene: UIViewController {
         navigationController?.pushViewController(historyVC, animated: true)
     }
 
+    //TODO: make button hidden if user is as guest update all
     private func setupForGuestUser() {
-        topView.historyButton.isHidden = true
+//        topView.historyButton.isHidden = true
 //        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
-        topView.numberOfWorkoutDays.isHidden = true
-        warningView.isHidden = true
-        bottomView.startButton.isHidden = true
+//        topView.numberOfWorkoutDays.isHidden = true
+//        warningView.isHidden = true
+//        bottomView.startButton.isHidden = true
+    }
+
+
+    private func updateGoToProButton() {
+        bottomView.startButton.setTitle("Go to pro ", for: .normal)
+        bottomView.startButton.setTitleColor(UIColor.whiteColor, for: .normal)
+        bottomView.startButton.titleLabel?.font = UIFont.goldmanRegular(size: 14)
+        bottomView.startButton.backgroundColor = UIColor.redColor
+        bottomView.startButton.makeRoundCorners(16)
+        let image = UIImage(named: "crown")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        }
+        bottomView.startButton.setImage(resizedImage, for: .normal)
+        bottomView.startButton.imageView?.contentMode = .scaleAspectFit
+        bottomView.startButton.semanticContentAttribute = .forceRightToLeft
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        bottomView.startButton.contentHorizontalAlignment = .center
+
+        bottomView.startButton.snp.updateConstraints { make in
+            make.width.equalTo(123)
+        }
+    }
+
+    private func updateStartButton() {
+        bottomView.startButton.setTitle("Start ", for: .normal)
+        bottomView.startButton.setTitleColor(UIColor.whiteColor, for: .normal)
+        bottomView.startButton.titleLabel?.font = UIFont.goldmanRegular(size: 14)
+        bottomView.startButton.backgroundColor = UIColor.redColor
+        bottomView.startButton.makeRoundCorners(16)
+        let image = UIImage(named: "play")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        }
+        bottomView.startButton.setImage(resizedImage, for: .normal)
+        bottomView.startButton.imageView?.contentMode = .scaleAspectFit
+        bottomView.startButton.semanticContentAttribute = .forceRightToLeft
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        bottomView.startButton.contentHorizontalAlignment = .center
+
     }
 
     private func updateBottomView(for sport: String) {
@@ -210,6 +289,7 @@ class MainDashboardScene: UIViewController {
     }
 }
 
+//@available(iOS 15.0, *)
 extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -220,6 +300,20 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         cell.configure(with: images[indexPath.item])
+
+//        let imageName = images[indexPath.item]
+//        cell.configure(with: imageName)
+//
+//        // Optionally, apply a "locked" style for locked items
+//        if imageName == "locked" {
+//            cell.contentView.alpha = 0.5 // Dim locked items
+//            cell.backgroundBackView.backgroundColor = .whiteColor.withAlphaComponent(0.1)
+//            cell.imageBackgroundColor.backgroundColor = .topBottomViewColorGray
+//
+//        } else {
+//            cell.contentView.alpha = 1.0 // Normal appearance
+//        }
+
         return cell
     }
 
@@ -276,10 +370,23 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
+//@available(iOS 15.0, *)
 extension MainDashboardScene: BottomViewDelegate {
+    @available(iOS 15.0, *)
     func didTapStartButton() {
-        let workoutTimeView = WorkoutTimeView()
-        workoutTimeView.selectedSport = sportLabel.text
-        navigationController?.pushViewController(workoutTimeView, animated: false)
+        if bottomView.startButton.title(for: .normal) == "Start " {
+            let workoutTimeView = WorkoutTimeView()
+            workoutTimeView.selectedSport = sportLabel.text
+            navigationController?.pushViewController(workoutTimeView, animated: false)
+        } else {
+            if let currentTopVC = navigationController?.topViewController,
+               currentTopVC is SubscriptionMainViewController {
+                // Prevent duplicate pushes to SubscriptionMainViewController
+                return
+            }
+
+            let subscriptionVC = SubscriptionMainViewController()
+            navigationController?.pushViewController(subscriptionVC, animated: true)
+        }
     }
 }

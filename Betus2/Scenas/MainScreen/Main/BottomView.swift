@@ -15,6 +15,7 @@ protocol BottomViewDelegate: AnyObject {
 class BottomView: UIView {
 
     weak var delegate: BottomViewDelegate?
+    
 
     private lazy var sportViewTitle: UILabel = {
         let view = UILabel(frame: .zero)
@@ -51,9 +52,23 @@ class BottomView: UIView {
 
     lazy var startButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.setImage(UIImage(named: "startButton"), for: .normal)
-        view.contentMode = .scaleAspectFit
+        view.setTitle("Start ", for: .normal)
+        view.setTitleColor(UIColor.whiteColor, for: .normal)
+        view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
+        view.backgroundColor = UIColor.redColor
+        view.makeRoundCorners(16)
+        let image = UIImage(named: "play")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        }
+        view.setImage(resizedImage, for: .normal)
+        view.imageView?.contentMode = .scaleAspectFit
+        view.semanticContentAttribute = .forceRightToLeft
+        view.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        view.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        view.contentHorizontalAlignment = .center
         view.addTarget(self, action: #selector(clickStartButton), for: .touchUpInside)
+
         return view
     }()
 
