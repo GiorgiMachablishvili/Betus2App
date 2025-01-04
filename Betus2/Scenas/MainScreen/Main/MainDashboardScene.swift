@@ -12,18 +12,18 @@ import SnapKit
 //@available(iOS 15.0, *)
 class MainDashboardScene: UIViewController {
 
-//    private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
+    private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
 
-    private var images: [String] {
-        return isSubscribed
-        ? ["", "tennis", "basketball", "volleyball", "soccer", ""]
-        : ["", "locked", "locked", "locked", "soccer", ""]
-    }
+    //    private var images: [String] {
+    //        return isSubscribed
+    //        ? ["", "soccer", "tennis", "basketball", "volleyball", ""]
+    //        : ["", "soccer", "locked", "locked", "locked", ""]
+    //    }
 
     var isSubscribed: Bool = false {
         didSet {
             collectionView.reloadData()
-//            updateBackground()
+            //            updateBackground()
         }
     }
 
@@ -95,19 +95,14 @@ class MainDashboardScene: UIViewController {
 
         setup()
         setupConstraints()
-//        updateBackground()
-
-        if UserDefaults.standard.bool(forKey: "isGuestUser") {
-            setupForGuestUser()
-        }
+        hiddenOrUnhidden()
+        //        updateBackground()
 
         DispatchQueue.main.async {
             let indexPath = IndexPath(item: 2, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             self.updateViewForSport(at: indexPath)
         }
-
-        
     }
 
     private func setup() {
@@ -155,30 +150,11 @@ class MainDashboardScene: UIViewController {
     }
 
     private func updateViewForSport(at indexPath: IndexPath) {
-        guard indexPath.item < images.count else { return }
-
-            let sportName = images[indexPath.item]
-            if sportName.isEmpty { return }
-
-            // Update the sport label
-            sportLabel.text = sportName.uppercased()
-
-            // Update the bottom view based on the sport
-            updateBottomView(for: sportName)
-
-            // Update the button based on whether the sport is locked
-            if sportName.lowercased() == "locked" {
-                print("Sport is locked, updating button to 'Go to Pro'")
-                updateGoToProButton()
-            } else {
-                print("Sport is available, updating button to 'Start'")
-                updateStartButton()
-            }
-//        guard !images[indexPath.item].isEmpty else { return }
-//        let sportName = images[indexPath.item].uppercased()
-//        sportLabel.text = sportName
-//        topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
-//        updateBottomView(for: images[indexPath.item])
+        guard !images[indexPath.item].isEmpty else { return }
+        let sportName = images[indexPath.item].uppercased()
+        sportLabel.text = sportName
+        topView.titleLabel.attributedText = topView.makeTopViewAttributedString(for: sportName)
+        updateBottomView(for: images[indexPath.item])
     }
 
     private func hideWarningView() {
@@ -196,12 +172,13 @@ class MainDashboardScene: UIViewController {
     }
 
     //TODO: make button hidden if user is as guest update all
-    private func setupForGuestUser() {
-//        topView.historyButton.isHidden = true
-//        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
-//        topView.numberOfWorkoutDays.isHidden = true
-//        warningView.isHidden = true
-//        bottomView.startButton.isHidden = true
+    private func hiddenOrUnhidden() {
+        let isGuestUser = UserDefaults.standard.bool(forKey: "isGuestUser")
+        topView.historyButton.isHidden = !isGuestUser
+        //        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
+        topView.numberOfWorkoutDays.isHidden = !isGuestUser
+        warningView.isHidden = !isGuestUser
+        bottomView.startButton.isHidden = !isGuestUser
     }
 
 
@@ -244,6 +221,9 @@ class MainDashboardScene: UIViewController {
         bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         bottomView.startButton.contentHorizontalAlignment = .center
 
+        bottomView.startButton.snp.updateConstraints { make in
+            make.width.equalTo(87)
+        }
     }
 
     private func updateBottomView(for sport: String) {
@@ -299,21 +279,10 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SportImagesCell", for: indexPath) as? SportImagesCell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: images[indexPath.item])
-
-//        let imageName = images[indexPath.item]
-//        cell.configure(with: imageName)
-//
-//        // Optionally, apply a "locked" style for locked items
-//        if imageName == "locked" {
-//            cell.contentView.alpha = 0.5 // Dim locked items
-//            cell.backgroundBackView.backgroundColor = .whiteColor.withAlphaComponent(0.1)
-//            cell.imageBackgroundColor.backgroundColor = .topBottomViewColorGray
-//
-//        } else {
-//            cell.contentView.alpha = 1.0 // Normal appearance
-//        }
-
+        //        cell.configure(with: images[indexPath.item])
+        let sportName = images[indexPath.item]
+        let isLocked = !isSubscribed && (sportName.lowercased() == "tennis" || sportName.lowercased() == "basketball" || sportName.lowercased() == "volleyball")
+        cell.configure(with: sportName, isLocked: isLocked)
         return cell
     }
 
@@ -324,19 +293,20 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
         let targetX = targetContentOffset.pointee.x
         let targetIndex = round(targetX / itemWidth)
 
-        // Ensure the index is within bounds
         let clampedIndex = max(0, min(CGFloat(images.count - 1), targetIndex))
-
         targetContentOffset.pointee = CGPoint(x: clampedIndex * itemWidth, y: 0)
 
         let indexPath = IndexPath(item: Int(clampedIndex), section: 0)
-        updateViewForSport(at: indexPath)
-
-
+        let sportName = images[indexPath.item]
+        sportLabel.text = sportName.uppercased()
+        updateBottomView(for: sportName)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
+        var closestIndexPath: IndexPath?
+        var minimumDistance: CGFloat = .greatestFiniteMagnitude
+
         for cell in collectionView.visibleCells {
             guard let indexPath = collectionView.indexPath(for: cell),
                   let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath),
@@ -344,13 +314,17 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
 
             let cellCenter = layoutAttributes.center.x
             let distance = abs(centerX - cellCenter)
+
+            if distance < minimumDistance {
+                closestIndexPath = indexPath
+                minimumDistance = distance
+            }
+
             let maxDistance = collectionView.bounds.width / 2
-
             let scale = max(1 - (distance / maxDistance), 0.5)
-            let transformScale = scale
+            sportCell.transform = CGAffineTransform(scaleX: scale, y: scale)
 
-            sportCell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
-
+            //MARK: Middle image
             if distance < 10 {
                 sportCell.backgroundBackView.backgroundColor = UIColor.redColor.withAlphaComponent(0.2)
                 sportCell.imageBackgroundColor.backgroundColor = UIColor.redColor
@@ -365,6 +339,26 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
                 sportCell.backgroundBackView.backgroundColor = .clear
                 sportCell.imageBackgroundColor.backgroundColor = .clear
                 //                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
+            }
+        }
+
+        //MARK: hide or unhide locked image
+        if let closestIndexPath = closestIndexPath {
+            let sportName = images[closestIndexPath.item].lowercased()
+            sportLabel.text = sportName.uppercased()
+            updateBottomView(for: sportName)
+
+            // Check for locked sports and update the UI
+            if !isSubscribed && (sportName == "tennis" || sportName == "basketball" || sportName == "volleyball") {
+                if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
+                    cell.lockedImage.isHidden = false
+                }
+                updateGoToProButton()
+            } else {
+                if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
+                    cell.lockedImage.isHidden = true
+                }
+                updateStartButton()
             }
         }
     }

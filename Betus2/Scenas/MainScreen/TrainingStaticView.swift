@@ -124,7 +124,8 @@ class TrainingStaticView: UIView {
         trainingScoreTitle.snp.remakeConstraints { make in
             make.top.equalTo(backButton.snp.bottom).offset(4 * Constraint.yCoeff)
             make.height.width.equalTo(19 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview().inset(78 * Constraint.xCoeff)
+//            make.centerX.equalTo(snp.centerX)
+            make.leading.trailing.equalToSuperview().inset(65 * Constraint.xCoeff)
         }
 
         soccerView.snp.remakeConstraints { make in

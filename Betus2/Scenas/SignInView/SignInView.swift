@@ -228,6 +228,7 @@ class SignInController: UIViewController {
 
     }
 
+    //TODO: add links
     @objc private func clickTermsButton() {
 
     }

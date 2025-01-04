@@ -37,6 +37,14 @@ class SportImagesCell: UICollectionViewCell {
         return view
     }()
 
+    lazy var lockedImage: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.contentMode = .scaleToFill
+        view.image = UIImage(named: "locked")
+        view.isHidden = true
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -52,6 +60,7 @@ class SportImagesCell: UICollectionViewCell {
         addSubview(backgroundBackView)
         backgroundBackView.addSubview(imageBackgroundColor)
         imageBackgroundColor.addSubview(sportImage)
+        sportImage.addSubview(lockedImage)
     }
 
     private func setupConstraints() {
@@ -74,9 +83,15 @@ class SportImagesCell: UICollectionViewCell {
             make.center.equalTo(imageBackgroundColor.snp.center)
             make.height.width.equalTo(60 * Constraint.yCoeff)
         }
+
+        lockedImage.snp.remakeConstraints { make in
+            make.center.equalTo(imageBackgroundColor.snp.center)
+            make.height.width.equalTo(60 * Constraint.yCoeff)
+        }
     }
 
-    func configure(with imageName: String) {
+    func configure(with imageName: String, isLocked: Bool) {
         sportImage.image = UIImage(named: imageName)
+        lockedImage.isHidden = !isLocked
     }
 }

@@ -76,6 +76,8 @@ class ProfileViewController: UIViewController {
         setupConstraints()
 
         if UserDefaults.standard.bool(forKey: "isGuestUser") {
+
+        } else {
             setupForGuestUser()
         }
 
