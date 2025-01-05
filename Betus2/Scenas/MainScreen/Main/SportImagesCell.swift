@@ -58,9 +58,9 @@ class SportImagesCell: UICollectionViewCell {
     private func setup() {
 //        addSubview(imageDarkBackgroundColor)
         addSubview(backgroundBackView)
-        backgroundBackView.addSubview(imageBackgroundColor)
-        imageBackgroundColor.addSubview(sportImage)
-        sportImage.addSubview(lockedImage)
+       /* backgroundBackView.*/addSubview(imageBackgroundColor)
+        /*imageBackgroundColor.*/addSubview(sportImage)
+        /*sportImage.*/addSubview(lockedImage)
     }
 
     private func setupConstraints() {
@@ -86,7 +86,7 @@ class SportImagesCell: UICollectionViewCell {
 
         lockedImage.snp.remakeConstraints { make in
             make.center.equalTo(imageBackgroundColor.snp.center)
-            make.height.width.equalTo(60 * Constraint.yCoeff)
+            make.height.width.equalTo(160 * Constraint.yCoeff)
         }
     }
 

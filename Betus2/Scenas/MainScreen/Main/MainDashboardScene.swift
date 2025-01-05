@@ -41,7 +41,7 @@ class MainDashboardScene: UIViewController {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 80 * Constraint.xCoeff, height: 80 * Constraint.yCoeff)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
-        layout.minimumLineSpacing = 32
+        layout.minimumLineSpacing = 35
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -99,7 +99,8 @@ class MainDashboardScene: UIViewController {
         //        updateBackground()
 
         DispatchQueue.main.async {
-            let indexPath = IndexPath(item: 2, section: 0)
+            let tennisIndex = 1
+            let indexPath = IndexPath(item: tennisIndex, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             self.updateViewForSport(at: indexPath)
         }
@@ -138,7 +139,7 @@ class MainDashboardScene: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(165 * Constraint.yCoeff)
+            make.height.equalTo(160 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(15 * Constraint.xCoeff)
         }
 
@@ -352,11 +353,13 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
             if !isSubscribed && (sportName == "tennis" || sportName == "basketball" || sportName == "volleyball") {
                 if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
                     cell.lockedImage.isHidden = false
+                    cell.backgroundBackView.isHidden = true
                 }
                 updateGoToProButton()
             } else {
                 if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
                     cell.lockedImage.isHidden = true
+                    cell.backgroundBackView.isHidden = false
                 }
                 updateStartButton()
             }
