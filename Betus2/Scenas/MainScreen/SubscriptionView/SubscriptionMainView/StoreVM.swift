@@ -24,7 +24,7 @@ class StoreVM: ObservableObject {
     var updateListenerTask : Task<Void, Error>? = nil
 
     init() {
-
+        
         updateListenerTask = listenForTransaction()
 
         Task {

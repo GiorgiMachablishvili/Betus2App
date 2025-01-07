@@ -130,12 +130,12 @@ class HistoryCell: UICollectionViewCell {
             pointLabel.text = text
         }
     }
-
-    func configure(with data: WorkoutScore) {
-        currentDay.text = data.workoutDate
-        updatePointLabel(in: soccerView, with: data.soccerWorkoutCount)
-        updatePointLabel(in: basketballView, with: data.basketballWorkoutCount)
-        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount)
-        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount)
-    }
+//
+//    func configure(with data: WorkoutScore) {
+//        currentDay.text = data.workoutDate
+//        updatePointLabel(in: soccerView, with: data.soccerWorkoutCount)
+//        updatePointLabel(in: basketballView, with: data.basketballWorkoutCount)
+//        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount)
+//        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount)
+//    }
 }

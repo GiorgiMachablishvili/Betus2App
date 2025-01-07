@@ -27,6 +27,9 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
         let view = SuccessOrWrongView()
         view.backgroundColor = .topBottomViewColorGray
         view.makeRoundCorners(24)
+        view.onOkeyButton = { [weak self] in
+            self?.moveToMainDashboard()
+        }
         return view
     }()
 
@@ -61,6 +64,15 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
             make.bottom.equalTo(view.snp.bottom).offset(-24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(295)
+        }
+    }
+
+    private func moveToMainDashboard() {
+        for controller in navigationController?.viewControllers ?? [] {
+            if let dashboard = controller as? MainDashboardScene {
+                navigationController?.popToViewController(dashboard, animated: true)
+                return
+            }
         }
     }
 }

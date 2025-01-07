@@ -10,6 +10,8 @@ import SnapKit
 
 class SuccessOrWrongView: UIView {
 
+    var onOkeyButton: (() -> Void)?
+
     private lazy var succseeTitle: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "Successfully"
@@ -220,7 +222,7 @@ class SuccessOrWrongView: UIView {
     }
 
     @objc private func didPressOkeyButtonButton() {
-
+        onOkeyButton?()
     }
 
     @objc private func didPressSupportButton() {

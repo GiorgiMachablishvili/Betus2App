@@ -175,13 +175,12 @@ class MainDashboardScene: UIViewController {
     //TODO: make button hidden if user is as guest update all
     private func hiddenOrUnhidden() {
         let isGuestUser = UserDefaults.standard.bool(forKey: "isGuestUser")
-        topView.historyButton.isHidden = !isGuestUser
+        topView.historyButton.isHidden = isGuestUser
         //        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
-        topView.numberOfWorkoutDays.isHidden = !isGuestUser
-        warningView.isHidden = !isGuestUser
-        bottomView.startButton.isHidden = !isGuestUser
+        topView.numberOfWorkoutDays.isHidden = isGuestUser
+        warningView.isHidden = isGuestUser
+        bottomView.startButton.isHidden = isGuestUser
     }
-
 
     private func updateGoToProButton() {
         bottomView.startButton.setTitle("Go to pro ", for: .normal)

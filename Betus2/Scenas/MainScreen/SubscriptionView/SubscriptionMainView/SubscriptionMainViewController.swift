@@ -175,6 +175,10 @@ class SubscriptionMainViewController: UIViewController {
     }
 
     @objc private func didTapYearlySubscription() {
+        updateSubscriptionSelection(
+            selectedView: subscriptionView.yearlySubscription,
+            deselectedView: subscriptionView.monthlySubscription
+        )
         Task {
             if let yearlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.yearly" }) {
                 do {
@@ -182,10 +186,7 @@ class SubscriptionMainViewController: UIViewController {
 
                     // Handle successful transaction
                     if transaction != nil {
-                        updateSubscriptionSelection(
-                            selectedView: subscriptionView.yearlySubscription,
-                            deselectedView: subscriptionView.monthlySubscription
-                        )
+
                     }
                 } catch {
                     print("Failed to purchase yearly subscription: \(error)")
@@ -195,6 +196,10 @@ class SubscriptionMainViewController: UIViewController {
     }
 
     @objc private func didTapMonthlySubscription() {
+        updateSubscriptionSelection(
+            selectedView: subscriptionView.monthlySubscription,
+            deselectedView: subscriptionView.yearlySubscription
+        )
         Task {
             if let monthlyProduct = storeVM.subscriptions.first(where: { $0.id == "subscription.monthly" }) {
                 do {
@@ -202,10 +207,6 @@ class SubscriptionMainViewController: UIViewController {
 
                     // Handle successful transaction
                     if transaction != nil {
-                        updateSubscriptionSelection(
-                            selectedView: subscriptionView.monthlySubscription,
-                            deselectedView: subscriptionView.yearlySubscription
-                        )
                     }
                 } catch {
                     print("Failed to purchase monthly subscription: \(error)")
