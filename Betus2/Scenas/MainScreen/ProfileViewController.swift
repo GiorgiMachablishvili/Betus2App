@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
 
     private lazy var staticView: TrainingStaticView = {
         let view = TrainingStaticView()
-        view.makeRoundCorners(32 * Constraint.yCoeff)
+        view.makeRoundCorners(32)
         view.backgroundColor = .topBottomViewColorGray
         view.onBackButtonTap = { [weak self] in
             self?.navigationMainDashboard()
@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
 
     private lazy var helperView: HelperProfileView = {
         let view = HelperProfileView()
-        view.makeRoundCorners(32 * Constraint.yCoeff)
+        view.makeRoundCorners(32)
         view.backgroundColor = .topBottomViewColorGray
         view.rateButton = { [weak self] in
             if let windowScene = view.window?.windowScene {
@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController {
         view.setTitle("Delete Account", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .topBottomViewColorGray
         view.addTarget(self, action: #selector(pressDeleteButton), for: .touchUpInside)
         return view
@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
         view.setTitle("Sing In", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .redColor
         view.isHidden = true
         view.addTarget(self, action: #selector(pressSignInButton), for: .touchUpInside)

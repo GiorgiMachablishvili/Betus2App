@@ -13,14 +13,14 @@ class SportImagesCell: UICollectionViewCell {
     lazy var backgroundBackView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(80 * Constraint.xCoeff)
+        view.makeRoundCorners(80)
         return view
     }()
 
     lazy var imageBackgroundColor: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(70 * Constraint.xCoeff)
+        view.makeRoundCorners(70)
         return view
     }()
 

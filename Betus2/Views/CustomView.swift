@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-extension UIView {
+class CustomWorkoutsView: UIView {
     static func createCustomView(
         imageName: String,
         titleText: String,
@@ -42,21 +42,21 @@ extension UIView {
 
         imageView.snp.remakeConstraints { make in
             make.centerY.equalTo(containerView.snp.centerY)
-            make.leading.equalTo(containerView.snp.leading).offset(1)
-            make.height.width.equalTo(16)
+            make.leading.equalTo(containerView.snp.leading).offset(1 * Constraint.xCoeff)
+            make.height.width.equalTo(16 * Constraint.yCoeff)
         }
 
         titleLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(imageView.snp.centerY)
-            make.leading.equalTo(imageView.snp.trailing).offset(4)
-            make.width.equalTo(100)
-            make.height.equalTo(17)
+            make.leading.equalTo(imageView.snp.trailing).offset(4 * Constraint.xCoeff)
+            make.width.equalTo(100 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         pointLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(imageView.snp.centerY)
-            make.trailing.equalTo(containerView.snp.trailing).offset(-1)
-            make.height.equalTo(17)
+            make.trailing.equalTo(containerView.snp.trailing).offset(-1 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         return containerView

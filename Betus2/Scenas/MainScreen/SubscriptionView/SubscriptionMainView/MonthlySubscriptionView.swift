@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MonthlySubscriptionView: UIView {
 
@@ -60,25 +61,25 @@ class MonthlySubscriptionView: UIView {
     private func setupConstraints() {
         circleImage.snp.remakeConstraints { make in
             make.centerY.equalTo(snp.centerY)
-            make.leading.equalTo(snp.leading).offset(14)
-            make.height.width.equalTo(16)
+            make.leading.equalTo(snp.leading).offset(14 * Constraint.xCoeff)
+            make.height.width.equalTo(16 * Constraint.yCoeff)
         }
 
         fillCircleImage.snp.remakeConstraints { make in
             make.center.equalTo(circleImage.snp.center)
-            make.height.width.equalTo(12)
+            make.height.width.equalTo(12 * Constraint.yCoeff)
         }
 
         subscriptionDurationTitle.snp.remakeConstraints { make in
             make.centerY.equalTo(circleImage.snp.centerY)
-            make.leading.equalTo(circleImage.snp.trailing).offset(8)
-            make.height.equalTo(17)
+            make.leading.equalTo(circleImage.snp.trailing).offset(8 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         discountedPriceLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(circleImage.snp.centerY)
-            make.trailing.equalTo(snp.trailing).offset(-12)
-            make.height.equalTo(17)
+            make.trailing.equalTo(snp.trailing).offset(-12 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
     }
 }

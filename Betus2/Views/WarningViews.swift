@@ -56,14 +56,14 @@ class WarningViews: UIView {
 
     private func setupConstraints() {
         warningTitle.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(14)
-            make.leading.equalTo(snp.leading).offset(16)
-            make.height.equalTo(17)
+            make.top.equalTo(snp.top).offset(14 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(16 * Constraint.xCoeff)
+            make.height.equalTo(17 * Constraint.yCoeff)
         }
 
         warningInfo.snp.remakeConstraints { make in
-            make.top.equalTo(warningTitle.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(warningTitle.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
         }
     }
 }

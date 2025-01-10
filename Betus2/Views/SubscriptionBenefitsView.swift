@@ -17,7 +17,7 @@ class SubscriptionBenefitsView: UIView {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = crownImage
         imageAttachment.image?.withTintColor(.whiteColor)
-        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19, height: 19)
+        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19 * Constraint.xCoeff, height: 19 * Constraint.yCoeff)
         let imageString = NSAttributedString(attachment: imageAttachment)
         attributedText.append(imageString)
         let textString = NSAttributedString(string: "   Full access to content", attributes: [
@@ -37,7 +37,7 @@ class SubscriptionBenefitsView: UIView {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = crownImage
         imageAttachment.image?.withTintColor(.whiteColor)
-        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19, height: 19)
+        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19 * Constraint.xCoeff, height: 19 * Constraint.yCoeff)
         let imageString = NSAttributedString(attachment: imageAttachment)
         attributedText.append(imageString)
         let textString = NSAttributedString(string: "   Be the first to know about new features ", attributes: [
@@ -57,7 +57,7 @@ class SubscriptionBenefitsView: UIView {
         let imageAttachment = NSTextAttachment()
         imageAttachment.image = crownImage
         imageAttachment.image?.withTintColor(.whiteColor)
-        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19, height: 19)
+        imageAttachment.bounds = CGRect(x: 0, y: -2, width: 19 * Constraint.xCoeff, height: 19 * Constraint.yCoeff)
         let imageString = NSAttributedString(attachment: imageAttachment)
         attributedText.append(imageString)
         let textString = NSAttributedString(string: "   Get new features first", attributes: [
@@ -91,19 +91,19 @@ class SubscriptionBenefitsView: UIView {
         fullAccessLabel.snp.remakeConstraints { make in
             make.top.equalTo(snp.top)
             make.leading.equalTo(snp.leading)
-            make.height.equalTo(16)
+            make.height.equalTo(16 * Constraint.yCoeff)
         }
 
         firstToKnowLabel.snp.remakeConstraints { make in
-            make.top.equalTo(fullAccessLabel.snp.bottom).offset(8)
+            make.top.equalTo(fullAccessLabel.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.equalTo(snp.leading)
-            make.height.equalTo(16)
+            make.height.equalTo(16 * Constraint.yCoeff)
         }
 
         getNewFeaturesFirstLabel.snp.remakeConstraints { make in
-            make.top.equalTo(firstToKnowLabel.snp.bottom).offset(8)
+            make.top.equalTo(firstToKnowLabel.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.equalTo(snp.leading)
-            make.height.equalTo(16)
+            make.height.equalTo(16 * Constraint.yCoeff)
         }
     }
 }

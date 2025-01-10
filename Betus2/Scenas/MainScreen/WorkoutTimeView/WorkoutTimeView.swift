@@ -29,7 +29,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var previousTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40 * Constraint.yCoeff)
+        view.makeRoundCorners(40)
         return view
     }()
 
@@ -45,7 +45,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var timerBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .redColor.withAlphaComponent(0.2)
-        view.makeRoundCorners(80 * Constraint.yCoeff)
+        view.makeRoundCorners(80)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -53,7 +53,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var timerBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.red
-        view.makeRoundCorners(70 * Constraint.yCoeff)
+        view.makeRoundCorners(70)
         return view
     }()
 
@@ -69,7 +69,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var nextWorkoutTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40 * Constraint.yCoeff)
+        view.makeRoundCorners(40)
         return view
     }()
 
@@ -432,13 +432,14 @@ class WorkoutTimeView: UIViewController {
             return
         }
         let parameters: [String: Any] = [
-            "workout_date": score.workoutDate,
-            "soccer_workout_count": score.soccerWorkoutCount,
-            "basketball_workout_count": score.basketballWorkoutCount,
-            "volleyball_workout_count": score.volleyballWorkoutCount,
-            "tennis_workout_count": score.tennisWorkoutCount,
+            "workoutDate": score.workoutDate,
+            "soccerWorkoutCount": score.soccerWorkoutCount,
+            "basketballWorkoutCount": score.basketballWorkoutCount,
+            "volleyballWorkoutCount": score.volleyballWorkoutCount,
+            "tennisWorkoutCount": score.tennisWorkoutCount,
             "workout_time": score.workoutTime
         ]
+
 
         //TODO: writes error: Error saving workout: Response could not be decoded because of error: The data couldn’t be read because it is missing.
         //MARK: url
@@ -451,6 +452,7 @@ class WorkoutTimeView: UIViewController {
                 print("Workout saved successfully: \(workout)")
             case .failure(let error):
                 print("Error saving workout: \(error.localizedDescription)")
+                print("Request Parameters: \(parameters)")
             }
         }
     }

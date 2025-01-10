@@ -29,7 +29,7 @@ class TrainingStaticView: UIView {
     }()
 
     lazy var soccerView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "soccer",
             titleText: "Soccer",
             pointText: "24",
@@ -46,7 +46,7 @@ class TrainingStaticView: UIView {
     }()
 
     lazy var volleyballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "volleyball",
             titleText: "Volleyball",
             pointText: "27",
@@ -63,7 +63,7 @@ class TrainingStaticView: UIView {
     }()
 
     lazy var basketballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "basketball",
             titleText: "Basketball",
             pointText: "32",
@@ -80,7 +80,7 @@ class TrainingStaticView: UIView {
     }()
 
     lazy var tennisView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "tennis",
             titleText: "Tennis",
             pointText: "20",

@@ -40,8 +40,8 @@ class MainDashboardScene: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 80 * Constraint.xCoeff, height: 80 * Constraint.yCoeff)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
-        layout.minimumLineSpacing = 35
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 32 * Constraint.xCoeff, bottom: 0, right: 32 * Constraint.xCoeff)
+        layout.minimumLineSpacing = 35  * Constraint.xCoeff
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -189,18 +189,18 @@ class MainDashboardScene: UIViewController {
         bottomView.startButton.backgroundColor = UIColor.redColor
         bottomView.startButton.makeRoundCorners(16)
         let image = UIImage(named: "crown")?.withRenderingMode(.alwaysOriginal)
-        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
-            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)))
         }
         bottomView.startButton.setImage(resizedImage, for: .normal)
         bottomView.startButton.imageView?.contentMode = .scaleAspectFit
         bottomView.startButton.semanticContentAttribute = .forceRightToLeft
-        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * Constraint.xCoeff)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8 * Constraint.xCoeff, bottom: 0, right: 0)
         bottomView.startButton.contentHorizontalAlignment = .center
 
         bottomView.startButton.snp.updateConstraints { make in
-            make.width.equalTo(123)
+            make.width.equalTo(123 * Constraint.xCoeff)
         }
     }
 
@@ -211,18 +211,18 @@ class MainDashboardScene: UIViewController {
         bottomView.startButton.backgroundColor = UIColor.redColor
         bottomView.startButton.makeRoundCorners(16)
         let image = UIImage(named: "play")?.withRenderingMode(.alwaysOriginal)
-        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19, height: 18)).image { _ in
-            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19, height: 18)))
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)))
         }
         bottomView.startButton.setImage(resizedImage, for: .normal)
         bottomView.startButton.imageView?.contentMode = .scaleAspectFit
         bottomView.startButton.semanticContentAttribute = .forceRightToLeft
-        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * Constraint.xCoeff)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8 * Constraint.xCoeff, bottom: 0, right: 0)
         bottomView.startButton.contentHorizontalAlignment = .center
 
         bottomView.startButton.snp.updateConstraints { make in
-            make.width.equalTo(87)
+            make.width.equalTo(87 * Constraint.xCoeff)
         }
     }
 

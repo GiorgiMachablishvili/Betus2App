@@ -92,42 +92,42 @@ class SubscriptionMainViewController: UIViewController {
 
     private func setupConstraints() {
         tennisBackground.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(-69)
-            make.leading.equalTo(view.snp.leading).offset(211)
-            make.height.width.equalTo(260)
+            make.top.equalTo(view.snp.top).offset(-69 * Constraint.yCoeff)
+            make.leading.equalTo(view.snp.leading).offset(211 * Constraint.xCoeff)
+            make.height.width.equalTo(260 * Constraint.yCoeff)
         }
 
         tennisBlurImage.snp.remakeConstraints { make in
             make.center.equalTo(tennisBackground.snp.center)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(140 * Constraint.yCoeff)
         }
 
         volleyballBackground.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(149)
-            make.leading.equalTo(view.snp.leading).offset(-103)
-            make.height.width.equalTo(260)
+            make.top.equalTo(view.snp.top).offset(149 * Constraint.yCoeff)
+            make.leading.equalTo(view.snp.leading).offset(-103 * Constraint.xCoeff)
+            make.height.width.equalTo(260 * Constraint.yCoeff)
         }
 
         volleyballBlurImage.snp.remakeConstraints { make in
             make.center.equalTo(volleyballBackground.snp.center)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(140 * Constraint.yCoeff)
         }
 
         basketballBackground.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(284)
-            make.trailing.equalTo(view.snp.trailing).offset(86)
-            make.height.width.equalTo(260)
+            make.top.equalTo(view.snp.top).offset(284 * Constraint.yCoeff)
+            make.trailing.equalTo(view.snp.trailing).offset(86 * Constraint.xCoeff)
+            make.height.width.equalTo(260 * Constraint.yCoeff)
         }
 
         basketballBlurImage.snp.remakeConstraints { make in
             make.center.equalTo(basketballBackground.snp.center)
-            make.height.width.equalTo(140)
+            make.height.width.equalTo(140 * Constraint.yCoeff)
         }
 
         subscriptionView.snp.remakeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(view.snp.bottom).offset(-24)
-            make.height.equalTo(518)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.bottom.equalTo(view.snp.bottom).offset(-24 * Constraint.yCoeff)
+            make.height.equalTo(518 * Constraint.yCoeff)
         }
     }
 

@@ -11,7 +11,7 @@ import SnapKit
 class HistoryCell: UICollectionViewCell {
     private lazy var backgroundHistoryView: UIView = {
         let view = UIView(frame: .zero)
-        view.makeRoundCorners(32 * Constraint.yCoeff)
+        view.makeRoundCorners(32)
         view.backgroundColor = .topBottomViewColorGray
         return view
     }()
@@ -25,7 +25,7 @@ class HistoryCell: UICollectionViewCell {
     }()
 
     private lazy var soccerView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "soccer",
             titleText: "Soccer",
             pointText: "",
@@ -36,7 +36,7 @@ class HistoryCell: UICollectionViewCell {
     }()
 
     private lazy var volleyballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "volleyball",
             titleText: "Volleyball",
             pointText: "",
@@ -47,7 +47,7 @@ class HistoryCell: UICollectionViewCell {
     }()
 
     private lazy var basketballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "basketball",
             titleText: "Basketball",
             pointText: "",
@@ -59,7 +59,7 @@ class HistoryCell: UICollectionViewCell {
 
 
     private lazy var tennisView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "tennis",
             titleText: "Tennis",
             pointText: "",

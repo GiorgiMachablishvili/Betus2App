@@ -17,7 +17,7 @@ class HelperProfileView: UIView {
         view.setTitle("Privacy policy", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressPrivacyPolicyButton), for: .touchUpInside)
         return view
@@ -28,7 +28,7 @@ class HelperProfileView: UIView {
         view.setTitle("Terms of use", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressTermsOfUseButton), for: .touchUpInside)
         return view
@@ -39,7 +39,7 @@ class HelperProfileView: UIView {
         view.setTitle("Rate US", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressRateUsButton), for: .touchUpInside)
         return view
@@ -50,7 +50,7 @@ class HelperProfileView: UIView {
         view.setTitle("Support", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .grayCalendarPoints
         view.addTarget(self, action: #selector(pressSupportButton), for: .touchUpInside)
         return view

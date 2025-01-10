@@ -154,69 +154,69 @@ class SuccessOrWrongView: UIView {
 
     private func setupConstraints() {
         succseeTitle.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.greaterThanOrEqualTo(43)
+            make.top.equalTo(snp.top).offset(24 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.greaterThanOrEqualTo(43 * Constraint.yCoeff)
         }
 
         wrongTitle.snp.remakeConstraints { make in
-            make.top.equalTo(snp.top).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.greaterThanOrEqualTo(43)
+            make.top.equalTo(snp.top).offset(24 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.greaterThanOrEqualTo(43 * Constraint.yCoeff)
         }
 
         welcomeLabel.snp.remakeConstraints { make in
-            make.top.equalTo(succseeTitle.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.lessThanOrEqualTo(32)
+            make.top.equalTo(succseeTitle.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.lessThanOrEqualTo(32 * Constraint.yCoeff)
         }
 
         wrongInfoLabel.snp.remakeConstraints { make in
-            make.top.equalTo(wrongTitle.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.lessThanOrEqualTo(32)
+            make.top.equalTo(wrongTitle.snp.bottom).offset(8 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.lessThanOrEqualTo(32 * Constraint.yCoeff)
         }
 
         okeyButton.snp.remakeConstraints { make in
-            make.bottom.equalTo(snp.bottom).offset(-16)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.bottom.equalTo(snp.bottom).offset(-16 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(48 * Constraint.yCoeff)
         }
 
         subscriptionBenefits.snp.remakeConstraints { make in
-            make.bottom.equalTo(okeyButton.snp.top).offset(-32)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(64)
+            make.bottom.equalTo(okeyButton.snp.top).offset(-32 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(64 * Constraint.yCoeff)
         }
 
         pointOne.snp.remakeConstraints { make in
-            make.bottom.equalTo(pointTwo.snp.top).offset(-15)
-            make.leading.equalTo(snp.leading).offset(20)
-            make.height.width.equalTo(4)
+            make.bottom.equalTo(pointTwo.snp.top).offset(-15 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(20 * Constraint.xCoeff)
+            make.height.width.equalTo(4 * Constraint.yCoeff)
         }
 
         featuresLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(pointOne.snp.centerY)
-            make.leading.equalTo(pointOne.snp.trailing).offset(10)
-            make.height.equalTo(14)
+            make.leading.equalTo(pointOne.snp.trailing).offset(10 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
         pointTwo.snp.remakeConstraints { make in
-            make.bottom.equalTo(okeyButton.snp.top).offset(-39)
-            make.leading.equalTo(snp.leading).offset(20)
-            make.height.width.equalTo(4)
+            make.bottom.equalTo(okeyButton.snp.top).offset(-39 * Constraint.yCoeff)
+            make.leading.equalTo(snp.leading).offset(20 * Constraint.xCoeff)
+            make.height.width.equalTo(4 * Constraint.yCoeff)
         }
 
         customLabel.snp.remakeConstraints { make in
             make.centerY.equalTo(pointTwo.snp.centerY)
-            make.leading.equalTo(pointOne.snp.trailing).offset(10)
-            make.height.equalTo(14)
+            make.leading.equalTo(pointOne.snp.trailing).offset(10 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
         supportButton.snp.remakeConstraints { make in
             make.centerY.equalTo(pointTwo.snp.centerY)
-            make.leading.equalTo(customLabel.snp.trailing).offset(3)
-            make.height.equalTo(14)
+            make.leading.equalTo(customLabel.snp.trailing).offset(3 * Constraint.xCoeff)
+            make.height.equalTo(14 * Constraint.yCoeff)
         }
 
     }
