@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class HistoryController: UIViewController {
+    private var workoutHistory: [WorkoutScore] = []
 
     private lazy var backButton: UIButton = {
         let view = UIButton(frame: .zero)
@@ -35,6 +36,8 @@ class HistoryController: UIViewController {
         super.viewDidLoad()
         setup()
         setupConstraints()
+
+        fetchWorkoutCurrentUserInfo()
     }
     
     private func setup() {
@@ -57,6 +60,24 @@ class HistoryController: UIViewController {
         }
     }
 
+    private func fetchWorkoutCurrentUserInfo() {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+        let url = String.getWorkoutCountsAndDate(userId: userId)
+        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
+            switch result {
+            case .success(let workouts):
+                self.workoutHistory = workouts
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
     @objc func pressBackButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -64,12 +85,14 @@ class HistoryController: UIViewController {
 
 extension HistoryController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return workoutHistory.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as? HistoryCell else { return UICollectionViewCell()
         }
+        let workoutData = workoutHistory[indexPath.item]
+        cell.configure(with: workoutData)
         return cell
     }
 }

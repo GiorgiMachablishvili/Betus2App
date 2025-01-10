@@ -9,10 +9,11 @@ import UIKit
 
 struct WorkoutScore: Codable {
     let workoutDate: String
-    var soccerWorkoutCount: Int
-    var basketballWorkoutCount: Int
-    var volleyballWorkoutCount: Int
-    var tennisWorkoutCount: Int
+    let soccerWorkoutCount: Int
+    let basketballWorkoutCount: Int
+    let volleyballWorkoutCount: Int
+    let tennisWorkoutCount: Int
+    let workoutTime: String
 
     enum CodingKeys: String, CodingKey {
         case workoutDate = "workout_date"
@@ -20,5 +21,6 @@ struct WorkoutScore: Codable {
         case basketballWorkoutCount = "basketball_workout_count"
         case volleyballWorkoutCount = "volleyball_workout_count"
         case tennisWorkoutCount = "tennis_workout_count"
+        case workoutTime = "workout_time"
     }
 }

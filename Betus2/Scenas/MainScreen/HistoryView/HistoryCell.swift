@@ -28,7 +28,7 @@ class HistoryCell: UICollectionViewCell {
         UIView.createCustomView(
             imageName: "soccer",
             titleText: "Soccer",
-            pointText: "24",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -39,7 +39,7 @@ class HistoryCell: UICollectionViewCell {
         UIView.createCustomView(
             imageName: "volleyball",
             titleText: "Volleyball",
-            pointText: "27",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -50,7 +50,7 @@ class HistoryCell: UICollectionViewCell {
         UIView.createCustomView(
             imageName: "basketball",
             titleText: "Basketball",
-            pointText: "32",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -62,7 +62,7 @@ class HistoryCell: UICollectionViewCell {
         UIView.createCustomView(
             imageName: "tennis",
             titleText: "Tennis",
-            pointText: "20",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -138,4 +138,12 @@ class HistoryCell: UICollectionViewCell {
 //        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount)
 //        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount)
 //    }
+
+    func configure(with data: WorkoutScore) {
+        currentDay.text = data.workoutDate
+        updatePointLabel(in: soccerView, with: data.workoutTime)
+        updatePointLabel(in: basketballView, with: data.workoutTime)
+        updatePointLabel(in: volleyballView, with: data.workoutTime)
+        updatePointLabel(in: tennisView, with: data.workoutTime)
+    }
 }

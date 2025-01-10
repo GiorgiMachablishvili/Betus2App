@@ -383,55 +383,47 @@ class WorkoutTimeView: UIViewController {
     }
 
     private func updateWorkoutScore(for sport: String) {
+        // Add day/month/year
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yy"
         let currentDate = dateFormatter.string(from: Date())
 
-        // Initialize the workout score with default values
-        var score = WorkoutScore(
-            workoutDate: currentDate,
-            soccerWorkoutCount: 0,
-            basketballWorkoutCount: 0,
-            volleyballWorkoutCount: 0,
-            tennisWorkoutCount: 0
-        )
+        // Add time in AM/PM format
+        dateFormatter.dateFormat = "hh:mm a"
+        let currentTimeString = dateFormatter.string(from: Date())
+
+        var soccerWorkoutCount = 0
+        var basketballWorkoutCount = 0
+        var volleyballWorkoutCount = 0
+        var tennisWorkoutCount = 0
 
         // Increment the count based on the sport
         switch sport {
         case "soccer":
-            //                if let count = Int(score.soccerWorkoutCount) {
-            score.soccerWorkoutCount += 1
-            score.basketballWorkoutCount += 0
-            score.volleyballWorkoutCount += 0
-            score.tennisWorkoutCount += 0
-            //                }
+            soccerWorkoutCount += 1
         case "basketball":
-            //                if let count = Int(score.basketballWorkoutCount) {
-            score.basketballWorkoutCount += 1
-            score.soccerWorkoutCount += 0
-            score.volleyballWorkoutCount += 0
-            score.tennisWorkoutCount += 0
-
-            //                }
+            basketballWorkoutCount += 1
         case "volleyball":
-            //                if let count = Int(score.volleyballWorkoutCount) {
-            score.volleyballWorkoutCount += 1
-            score.soccerWorkoutCount += 0
-            score.basketballWorkoutCount += 0
-            score.tennisWorkoutCount += 0
-            //                }
+            volleyballWorkoutCount += 1
         case "tennis":
-            //                if let count = Int(score.tennisWorkoutCount) {
-            score.tennisWorkoutCount += 1
-            score.soccerWorkoutCount += 0
-            score.basketballWorkoutCount += 0
-            score.volleyballWorkoutCount += 0
-            //                }
+            tennisWorkoutCount += 1
         default:
             break
         }
-        // Post the updated workout score
-        postWorkoutScore(score)
+
+        // Create a new WorkoutScore instance
+        let newScore = WorkoutScore(
+            workoutDate: currentDate,
+            soccerWorkoutCount: soccerWorkoutCount,
+            basketballWorkoutCount: basketballWorkoutCount,
+            volleyballWorkoutCount: volleyballWorkoutCount,
+            tennisWorkoutCount: tennisWorkoutCount,
+            workoutTime: currentTimeString
+        )
+
+        workoutScore.append(newScore)
+
+        postWorkoutScore(newScore)
     }
 
     //MARK: post workouts current time
@@ -444,7 +436,8 @@ class WorkoutTimeView: UIViewController {
             "soccer_workout_count": score.soccerWorkoutCount,
             "basketball_workout_count": score.basketballWorkoutCount,
             "volleyball_workout_count": score.volleyballWorkoutCount,
-            "tennis_workout_count": score.tennisWorkoutCount
+            "tennis_workout_count": score.tennisWorkoutCount,
+            "workout_time": score.workoutTime
         ]
 
         //TODO: writes error: Error saving workout: Response could not be decoded because of error: The data couldn’t be read because it is missing.
@@ -455,12 +448,6 @@ class WorkoutTimeView: UIViewController {
             NetworkManager.shared.showProgressHud(false, animated: false)
             switch result {
             case .success(let workout):
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(
-                        "workout.view.observer"
-                    ),
-                    object: nil
-                )
                 print("Workout saved successfully: \(workout)")
             case .failure(let error):
                 print("Error saving workout: \(error.localizedDescription)")
