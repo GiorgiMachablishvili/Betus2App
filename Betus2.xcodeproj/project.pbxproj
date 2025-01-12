@@ -15,6 +15,7 @@
 		E314053E2D2327F900AAA19C /* WarningViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314053D2D2327F900AAA19C /* WarningViews.swift */; };
 		E3315E9D2D19CD6400C635BF /* MainDashboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */; };
 		E3315EA12D19CDB400C635BF /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3315EA02D19CDB400C635BF /* TopView.swift */; };
+		E33BB2982D343DDD003F2795 /* WorkoutInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BB2972D343DDC003F2795 /* WorkoutInfo.swift */; };
 		E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */; };
 		E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */; };
 		E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4E02D1B329A008BBE5E /* BottomView.swift */; };
@@ -70,6 +71,7 @@
 		E314053D2D2327F900AAA19C /* WarningViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViews.swift; sourceTree = "<group>"; };
 		E3315E9C2D19CD6400C635BF /* MainDashboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDashboardScene.swift; sourceTree = "<group>"; };
 		E3315EA02D19CDB400C635BF /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		E33BB2972D343DDC003F2795 /* WorkoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfo.swift; sourceTree = "<group>"; };
 		E33FF4DC2D1B1ECE008BBE5E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICornerRadius.swift; sourceTree = "<group>"; };
 		E33FF4E02D1B329A008BBE5E /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				E347EC792D2BCABF0027A43B /* UserCreateInfo.swift */,
 				E38471072D1C172100C92887 /* ViewInfo.swift */,
 				E3E87A5E2D1D58C1009E9B8C /* CalendarInfo.swift */,
+				E33BB2972D343DDC003F2795 /* WorkoutInfo.swift */,
 				E302D4F72D1F1179003C0D2E /* WorkutScore.swift */,
 				E3CDDCAE2D2D76EF0014299F /* EmptyResponse.swift */,
 			);
@@ -433,6 +436,7 @@
 				E38D37C52D196F3800A139D6 /* SignInController.swift in Sources */,
 				E3A868382D2040A500DC3560 /* SubscriptionMainViewController.swift in Sources */,
 				E3E87A662D1D7341009E9B8C /* ProfileViewController.swift in Sources */,
+				E33BB2982D343DDD003F2795 /* WorkoutInfo.swift in Sources */,
 				E33FF4DD2D1B1ECE008BBE5E /* UIColor.swift in Sources */,
 				E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */,
 				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,

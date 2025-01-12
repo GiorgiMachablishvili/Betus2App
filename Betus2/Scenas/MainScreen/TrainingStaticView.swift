@@ -28,16 +28,14 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    lazy var soccerView: UIView = {
-        CustomWorkoutsView.createCustomView(
+    lazy var soccerView = CustomWorkoutsView.createCustomView(
             imageName: "soccer",
             titleText: "Soccer",
-            pointText: "24",
+            pointText: "0",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
         )
-    }()
 
     private lazy var soccerBottomLine: UIView = {
         let view = UIView(frame: .zero)
@@ -45,16 +43,14 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    lazy var volleyballView: UIView = {
-        CustomWorkoutsView.createCustomView(
+    lazy var volleyballView = CustomWorkoutsView.createCustomView(
             imageName: "volleyball",
             titleText: "Volleyball",
-            pointText: "27",
+            pointText: "0",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
         )
-    }()
 
     private lazy var volleyballBottomLine: UIView = {
         let view = UIView(frame: .zero)
@@ -62,16 +58,14 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    lazy var basketballView: UIView = {
-        CustomWorkoutsView.createCustomView(
+    lazy var basketballView = CustomWorkoutsView.createCustomView(
             imageName: "basketball",
             titleText: "Basketball",
-            pointText: "32",
+            pointText: "0",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
         )
-    }()
 
     private lazy var basketballBottomLine: UIView = {
         let view = UIView(frame: .zero)
@@ -79,16 +73,14 @@ class TrainingStaticView: UIView {
         return view
     }()
 
-    lazy var tennisView: UIView = {
-        CustomWorkoutsView.createCustomView(
+    lazy var tennisView = CustomWorkoutsView.createCustomView(
             imageName: "tennis",
             titleText: "Tennis",
-            pointText: "20",
+            pointText: "0",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
         )
-    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -174,4 +166,12 @@ class TrainingStaticView: UIView {
     @objc func pressBackButton() {
         onBackButtonTap?()
     }
+
+    func updateWorkoutPoints(soccer: Int, volleyball: Int, basketball: Int, tennis: Int) {
+        soccerView.updatePointText("\(soccer)")
+        volleyballView.updatePointText("\(volleyball)")
+        basketballView.updatePointText("\(basketball)")
+        tennisView.updatePointText("\(tennis)")
+    }
 }
+

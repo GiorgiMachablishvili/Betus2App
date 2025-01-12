@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         func ifUserISCreatedOrNot() {
             if let userId = UserDefaults.standard.string(forKey: "userId"), !userId.isEmpty {
+                print(userId)
                 let mainViewController = MainDashboardScene()
                 UserDefaults.standard.setValue(false, forKey: "isGuestUser")
                 window?.rootViewController = UINavigationController(rootViewController: mainViewController)

@@ -14,6 +14,8 @@ import StoreKit
 
 class ProfileViewController: UIViewController {
 
+    private var workoutHistory: [WorkoutInfo] = []
+
     private lazy var staticView: TrainingStaticView = {
         let view = TrainingStaticView()
         view.makeRoundCorners(32)
@@ -237,15 +239,15 @@ class ProfileViewController: UIViewController {
         // Call createUser to simulate user creation
         createUser()
 
-//        let authorizationProvider = ASAuthorizationAppleIDProvider()
-//        let request = authorizationProvider.createRequest()
-//        request.requestedScopes = [.email, .fullName]
-//
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.delegate = self
-//        authorizationController.performRequests()
-//        let mainView = MainDashboardScene()
-//        navigationController?.pushViewController(mainView, animated: true)
+        //        let authorizationProvider = ASAuthorizationAppleIDProvider()
+        //        let request = authorizationProvider.createRequest()
+        //        request.requestedScopes = [.email, .fullName]
+        //
+        //        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        //        authorizationController.delegate = self
+        //        authorizationController.performRequests()
+        //        let mainView = MainDashboardScene()
+        //        navigationController?.pushViewController(mainView, animated: true)
     }
 
     private func createUser() {
@@ -260,7 +262,7 @@ class ProfileViewController: UIViewController {
             "auth_token": appleToken
         ]
 
-//        url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/users/"
+        //        url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/users/"
         // Make the network request
         NetworkManager.shared.post(
             url: String.userCreate(),
@@ -305,7 +307,7 @@ extension ProfileViewController: ASAuthorizationControllerDelegate /*ASAuthoriza
         guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
 
         UserDefaults.standard.setValue(credential.user, forKey: "AccountCredential")
-//        createUser()
+        //        createUser()
     }
 
     //    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -347,7 +349,7 @@ extension ProfileViewController: ASAuthorizationControllerDelegate /*ASAuthoriza
 }
 
 
-//MARK fetch get workouts count 
+//MARK fetch get workouts count
 extension ProfileViewController {
     private func fetchWorkoutScore() {
         guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
@@ -355,11 +357,13 @@ extension ProfileViewController {
         }
 
         let url = String.getWorkoutCountsAndDate(userId: userId)
-        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
+        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutInfo]>) in
             switch result {
             case .success(let scores):
+                self.workoutHistory = scores
+
                 DispatchQueue.main.async {
-                    self.updateTrainingStaticView(with: scores.first)
+                    self.updateTrainingStaticView()
                 }
             case .failure(let error):
                 print(error)
@@ -367,23 +371,25 @@ extension ProfileViewController {
         }
     }
 
-    private func updateTrainingStaticView(with score: WorkoutScore?) {
-        guard let score = score else { return }
+    private func updateTrainingStaticView() {
+        //        guard let score = score else { return }
+        //        staticView.updateWorkoutPoints(
+        //            soccer: score.soccerWorkoutCount,
+        //            volleyball: score.volleyballWorkoutCount,
+        //            basketball: score.basketballWorkoutCount,
+        //            tennis: score.tennisWorkoutCount
+        //        )
+        let totalSoccerCount = workoutHistory.reduce(0) { $0 + $1.soccerWorkoutCount }
+        let totalVolleyballCount = workoutHistory.reduce(0) { $0 + $1.volleyballWorkoutCount }
+        let totalBasketballCount = workoutHistory.reduce(0) { $0 + $1.basketballWorkoutCount }
+        let totalTennisCount = workoutHistory.reduce(0) { $0 + $1.tennisWorkoutCount }
 
-        if let soccerLabel = staticView.soccerView as? UILabel {
-            soccerLabel.text = "\(score.soccerWorkoutCount)"
-        }
-
-        if let volleyballLabel = staticView.volleyballView as? UILabel {
-            volleyballLabel.text = "\(score.volleyballWorkoutCount)"
-        }
-
-        if let basketballLabel = staticView.basketballView as? UILabel {
-            basketballLabel.text = "\(score.basketballWorkoutCount)"
-        }
-
-        if let tennisLabel = staticView.tennisView as? UILabel {
-            tennisLabel.text = "\(score.tennisWorkoutCount)"
-        }
+        // Update the static view with aggregated totals
+        staticView.updateWorkoutPoints(
+            soccer: totalSoccerCount,
+            volleyball: totalVolleyballCount,
+            basketball: totalBasketballCount,
+            tennis: totalTennisCount
+        )
     }
 }

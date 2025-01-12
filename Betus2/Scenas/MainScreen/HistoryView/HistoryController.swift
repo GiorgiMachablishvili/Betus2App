@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class HistoryController: UIViewController {
     private var workoutHistory: [WorkoutScore] = []
@@ -64,7 +65,8 @@ class HistoryController: UIViewController {
         guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
             return
         }
-        let url = String.getWorkoutCountsAndDate(userId: userId)
+//        let url = String.getWorkoutCountsAndDate(userId: userId)
+        let url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/\(userId)"
         NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
             switch result {
             case .success(let workouts):
