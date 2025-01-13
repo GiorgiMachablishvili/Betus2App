@@ -14,7 +14,7 @@ import StoreKit
 
 class ProfileViewController: UIViewController {
 
-    private var workoutHistory: [WorkoutInfo] = []
+    private var workoutHistory: [WorkoutScore] = []
 
     private lazy var staticView: TrainingStaticView = {
         let view = TrainingStaticView()
@@ -357,11 +357,10 @@ extension ProfileViewController {
         }
 
         let url = String.getWorkoutCountsAndDate(userId: userId)
-        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutInfo]>) in
+        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
             switch result {
             case .success(let scores):
                 self.workoutHistory = scores
-
                 DispatchQueue.main.async {
                     self.updateTrainingStaticView()
                 }

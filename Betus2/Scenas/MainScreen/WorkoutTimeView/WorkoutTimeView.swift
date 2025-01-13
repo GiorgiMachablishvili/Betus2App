@@ -371,6 +371,7 @@ class WorkoutTimeView: UIViewController {
         if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
             if let sport = selectedSport?.lowercased() {
                 updateWorkoutScore(for: sport)
+                updateWorkoutDays()
             }
             navigationController?.popViewController(animated: true)
         } else if timer == nil {
@@ -440,9 +441,6 @@ class WorkoutTimeView: UIViewController {
             "workout_time": score.workoutTime
         ]
 
-
-        //TODO: writes error: Error saving workout: Response could not be decoded because of error: The data couldn’t be read because it is missing.
-        //MARK: url
         let url = String.createWorkoutCountsAndDate(userId: userId)
         NetworkManager.shared.showProgressHud(true, animated: true)
         NetworkManager.shared.post(url: url, parameters: parameters, headers: nil) { (result: Result<WorkoutScore>) in
@@ -453,6 +451,28 @@ class WorkoutTimeView: UIViewController {
             case .failure(let error):
                 print("Error saving workout: \(error.localizedDescription)")
                 print("Request Parameters: \(parameters)")
+            }
+        }
+    }
+
+    private func updateWorkoutDays() {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: Date())
+
+        let url = String.postWorkoutDaysInARow(userId: userId, date: date)
+        NetworkManager.shared.showProgressHud(true, animated: true)
+        NetworkManager.shared.post(url: url, parameters: nil, headers: nil) { (result: Result<NumberOfDays>) in
+            NetworkManager.shared.showProgressHud(false, animated: false)
+            switch result {
+            case .success(let workout):
+                print("Workout saved successfully: \(workout)")
+            case .failure(let error):
+                print("Error saving workout: \(error.localizedDescription)")
             }
         }
     }

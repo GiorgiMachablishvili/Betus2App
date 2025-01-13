@@ -26,4 +26,16 @@ extension String {
         let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/"
         return "\(baseURL)\(userId)"
     }
+
+    static func postWorkoutDaysInARow(userId: String, date: String) -> String {
+        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/"
+//        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/training_streaks/?user_id="
+        return "\(baseURL)\(userId)&training_date=\(date)"
+    }
+
+    static func getWorkoutDaysInARow(userId: String) -> String {
+        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/training_streaks/"
+        return "\(baseURL)\(userId)"
+    }
+
 }

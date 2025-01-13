@@ -21,7 +21,7 @@ class HistoryController: UIViewController {
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width, height: 211 * Constraint.yCoeff)
         layout.minimumLineSpacing = 4
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)

@@ -20,6 +20,8 @@
 		E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */; };
 		E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FF4E02D1B329A008BBE5E /* BottomView.swift */; };
 		E347EC7A2D2BCABF0027A43B /* UserCreateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347EC792D2BCABF0027A43B /* UserCreateInfo.swift */; };
+		E349F7422D352999006AFB0C /* NumberOfDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = E349F7412D352999006AFB0C /* NumberOfDays.swift */; };
+		E349F7442D356079006AFB0C /* WorkoutDayCountInRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E349F7432D356079006AFB0C /* WorkoutDayCountInRow.swift */; };
 		E3580EF62D287E7A007BF553 /* StoreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3580EF52D287E7A007BF553 /* StoreVM.swift */; };
 		E360C49A2D1C8EC40094977C /* CompletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360C4992D1C8EC40094977C /* CompletView.swift */; };
 		E36878C92D209A1F00D5B8C3 /* SuccessOrWrongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36878C82D209A1F00D5B8C3 /* SuccessOrWrongView.swift */; };
@@ -76,6 +78,8 @@
 		E33FF4DE2D1B3003008BBE5E /* UICornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICornerRadius.swift; sourceTree = "<group>"; };
 		E33FF4E02D1B329A008BBE5E /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		E347EC792D2BCABF0027A43B /* UserCreateInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreateInfo.swift; sourceTree = "<group>"; };
+		E349F7412D352999006AFB0C /* NumberOfDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfDays.swift; sourceTree = "<group>"; };
+		E349F7432D356079006AFB0C /* WorkoutDayCountInRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDayCountInRow.swift; sourceTree = "<group>"; };
 		E3580EF52D287E7A007BF553 /* StoreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreVM.swift; sourceTree = "<group>"; };
 		E3580EF72D2881C3007BF553 /* product.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = product.storekit; sourceTree = "<group>"; };
 		E360C4992D1C8EC40094977C /* CompletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletView.swift; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 				E33BB2972D343DDC003F2795 /* WorkoutInfo.swift */,
 				E302D4F72D1F1179003C0D2E /* WorkutScore.swift */,
 				E3CDDCAE2D2D76EF0014299F /* EmptyResponse.swift */,
+				E349F7412D352999006AFB0C /* NumberOfDays.swift */,
+				E349F7432D356079006AFB0C /* WorkoutDayCountInRow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -441,6 +447,7 @@
 				E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */,
 				E384710D2D1C174400C92887 /* WorkoutDescriptionTopView.swift in Sources */,
 				E3E87A6E2D1D9920009E9B8C /* WarningView.swift in Sources */,
+				E349F7442D356079006AFB0C /* WorkoutDayCountInRow.swift in Sources */,
 				E314053E2D2327F900AAA19C /* WarningViews.swift in Sources */,
 				E38D37F72D19747800A139D6 /* UIFont+Extension.swift in Sources */,
 				E3A8683C2D20505D00DC3560 /* YearlySubscriptionView.swift in Sources */,
@@ -456,6 +463,7 @@
 				E3315EA12D19CDB400C635BF /* TopView.swift in Sources */,
 				E3580EF62D287E7A007BF553 /* StoreVM.swift in Sources */,
 				E302D4F22D1EF2F6003C0D2E /* HistoryController.swift in Sources */,
+				E349F7422D352999006AFB0C /* NumberOfDays.swift in Sources */,
 				E38D37C32D196F3800A139D6 /* SceneDelegate.swift in Sources */,
 				E33FF4DF2D1B3003008BBE5E /* UICornerRadius.swift in Sources */,
 				E33FF4E12D1B329A008BBE5E /* BottomView.swift in Sources */,
