@@ -171,7 +171,6 @@ class ProfileViewController: UIViewController {
 
             let url = String.userDelete(userId: userId)
 
-            // TODO: I cant delete account
             NetworkManager.shared.delete(url: url, parameters: nil, headers: nil) { (result: Result<EmptyResponse>) in
                 switch result {
                 case .success:
@@ -226,7 +225,6 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    //TODO: signin
     @objc func pressSignInButton() {
         // Simulating tokens for testing
         let mockPushToken = "mockPushToken"
@@ -262,7 +260,6 @@ class ProfileViewController: UIViewController {
             "auth_token": appleToken
         ]
 
-        //        url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/users/"
         // Make the network request
         NetworkManager.shared.post(
             url: String.userCreate(),

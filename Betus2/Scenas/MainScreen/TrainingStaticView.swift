@@ -162,7 +162,6 @@ class TrainingStaticView: UIView {
         }
     }
 
-    //TODO: press back button
     @objc func pressBackButton() {
         onBackButtonTap?()
     }

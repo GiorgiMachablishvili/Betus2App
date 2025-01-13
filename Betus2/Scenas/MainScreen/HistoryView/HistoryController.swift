@@ -19,6 +19,7 @@ class HistoryController: UIViewController {
         return view
     }()
 
+    //TODO: make collectionView constraint in case not to use layout.itemSize
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
