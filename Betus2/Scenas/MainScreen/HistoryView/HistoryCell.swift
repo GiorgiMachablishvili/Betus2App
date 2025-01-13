@@ -126,7 +126,6 @@ class HistoryCell: UICollectionViewCell {
 
     func configure(with data: WorkoutScore) {
         currentDay.text = data.workoutDate
-
         updatePointLabel(in: soccerView, with: data.soccerWorkoutCount > 0 ? data.workoutTime : "")
         updatePointLabel(in: basketballView, with: data.basketballWorkoutCount > 0 ? data.workoutTime : "")
         updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount > 0 ? data.workoutTime : "")

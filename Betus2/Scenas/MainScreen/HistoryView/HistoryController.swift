@@ -23,7 +23,7 @@ class HistoryController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width, height: 211 * Constraint.yCoeff)
+        layout.itemSize = CGSize(width: view.frame.width, height: 84 * Constraint.yCoeff)
         layout.minimumLineSpacing = 16 * Constraint.xCoeff
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
@@ -41,7 +41,7 @@ class HistoryController: UIViewController {
 
         fetchWorkoutCurrentUserInfo()
     }
-    
+
     private func setup() {
         view.addSubview(backButton)
         view.addSubview(collectionView)
@@ -58,7 +58,6 @@ class HistoryController: UIViewController {
             make.top.equalTo(backButton.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview()/*.inset(16 * Constraint.xCoeff)*/
             make.bottom.equalTo(view.snp.bottom)
-//            make.height.lessThanOrEqualTo(211 * Constraint.yCoeff)
         }
     }
 
@@ -89,7 +88,7 @@ extension HistoryController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return workoutHistory.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as? HistoryCell else { return UICollectionViewCell()
         }
