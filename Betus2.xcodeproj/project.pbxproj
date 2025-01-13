@@ -34,7 +34,7 @@
 		E38D37C52D196F3800A139D6 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37C42D196F3800A139D6 /* SignInController.swift */; };
 		E38D37CA2D196F3B00A139D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38D37C92D196F3B00A139D6 /* Assets.xcassets */; };
 		E38D37CD2D196F3B00A139D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E38D37CB2D196F3B00A139D6 /* LaunchScreen.storyboard */; };
-		E38D37DD2D1970C000A139D6 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37DC2D1970C000A139D6 /* Constraints.swift */; };
+		E38D37DD2D1970C000A139D6 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37DC2D1970C000A139D6 /* Constraint.swift */; };
 		E38D37DF2D19732300A139D6 /* NetwokrManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D37DE2D19732300A139D6 /* NetwokrManager.swift */; };
 		E38D37E22D19735300A139D6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E38D37E12D19735300A139D6 /* SnapKit */; };
 		E38D37E42D19735300A139D6 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E38D37E32D19735300A139D6 /* SnapKit-Dynamic */; };
@@ -95,7 +95,7 @@
 		E38D37C92D196F3B00A139D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E38D37CC2D196F3B00A139D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E38D37CE2D196F3B00A139D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E38D37DC2D1970C000A139D6 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		E38D37DC2D1970C000A139D6 /* Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		E38D37DE2D19732300A139D6 /* NetwokrManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokrManager.swift; sourceTree = "<group>"; };
 		E38D37F02D19739B00A139D6 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		E38D37F22D19743E00A139D6 /* Goldman-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Goldman-Bold.ttf"; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 		E38D37D92D196FCF00A139D6 /* Constraints */ = {
 			isa = PBXGroup;
 			children = (
-				E38D37DC2D1970C000A139D6 /* Constraints.swift */,
+				E38D37DC2D1970C000A139D6 /* Constraint.swift */,
 			);
 			path = Constraints;
 			sourceTree = "<group>";
@@ -435,7 +435,7 @@
 			files = (
 				E38D37F12D19739B00A139D6 /* UIColor+Extension.swift in Sources */,
 				E31405392D23214400AAA19C /* SubscriptionBenefitsView.swift in Sources */,
-				E38D37DD2D1970C000A139D6 /* Constraints.swift in Sources */,
+				E38D37DD2D1970C000A139D6 /* Constraint.swift in Sources */,
 				E3D2370D2D1AACA500940F48 /* SportImagesCell.swift in Sources */,
 				E38471082D1C172100C92887 /* ViewInfo.swift in Sources */,
 				E384710F2D1C2D1900C92887 /* FindViewController.swift in Sources */,

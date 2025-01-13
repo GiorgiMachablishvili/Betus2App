@@ -23,7 +23,7 @@ class HistoryController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width, height: 211 * Constraint.yCoeff)
-        layout.minimumLineSpacing = 4
+        layout.minimumLineSpacing = 16 * Constraint.xCoeff
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -65,7 +65,6 @@ class HistoryController: UIViewController {
         guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
             return
         }
-//        let url = String.getWorkoutCountsAndDate(userId: userId)
         let url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/\(userId)"
         NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
             switch result {
