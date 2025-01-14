@@ -13,14 +13,14 @@ class SportImagesCell: UICollectionViewCell {
     lazy var backgroundBackView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(80 * Constraint.xCoeff)
+        view.makeRoundCorners(80)
         return view
     }()
 
     lazy var imageBackgroundColor: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        view.makeRoundCorners(70 * Constraint.xCoeff)
+        view.makeRoundCorners(70)
         return view
     }()
 
@@ -37,6 +37,14 @@ class SportImagesCell: UICollectionViewCell {
         return view
     }()
 
+    lazy var lockedImage: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.contentMode = .scaleToFill
+        view.image = UIImage(named: "locked")
+        view.isHidden = true
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -50,8 +58,9 @@ class SportImagesCell: UICollectionViewCell {
     private func setup() {
 //        addSubview(imageDarkBackgroundColor)
         addSubview(backgroundBackView)
-        backgroundBackView.addSubview(imageBackgroundColor)
-        imageBackgroundColor.addSubview(sportImage)
+        addSubview(imageBackgroundColor)
+        addSubview(sportImage)
+        addSubview(lockedImage)
     }
 
     private func setupConstraints() {
@@ -74,9 +83,15 @@ class SportImagesCell: UICollectionViewCell {
             make.center.equalTo(imageBackgroundColor.snp.center)
             make.height.width.equalTo(60 * Constraint.yCoeff)
         }
+
+        lockedImage.snp.remakeConstraints { make in
+            make.center.equalTo(imageBackgroundColor.snp.center)
+            make.height.width.equalTo(161 * Constraint.yCoeff)
+        }
     }
 
-    func configure(with imageName: String) {
+    func configure(with imageName: String, isLocked: Bool) {
         sportImage.image = UIImage(named: imageName)
+        lockedImage.isHidden = !isLocked
     }
 }

@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-//        let mainViewController = SubscriptionMainViewController()
+//        let mainViewController = SignInController()
 //        window?.rootViewController = UINavigationController(rootViewController: mainViewController)
         ifUserISCreatedOrNot()
         window?.makeKeyAndVisible()
@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         func ifUserISCreatedOrNot() {
             if let userId = UserDefaults.standard.string(forKey: "userId"), !userId.isEmpty {
+                print(userId)
                 let mainViewController = MainDashboardScene()
                 UserDefaults.standard.setValue(false, forKey: "isGuestUser")
                 window?.rootViewController = UINavigationController(rootViewController: mainViewController)

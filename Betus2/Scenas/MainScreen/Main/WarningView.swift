@@ -38,7 +38,7 @@ class WarningView: UIView {
         view.setTitle("Accept", for: .normal)
         view.setTitleColor(UIColor.whiteColor, for: .normal)
         view.titleLabel?.font = UIFont.goldmanRegular(size: 14)
-        view.makeRoundCorners(23 * Constraint.yCoeff)
+        view.makeRoundCorners(23)
         view.backgroundColor = .topBottomViewColorGray
         view.addTarget(self, action: #selector(pressAcceptButton), for: .touchUpInside)
         return view

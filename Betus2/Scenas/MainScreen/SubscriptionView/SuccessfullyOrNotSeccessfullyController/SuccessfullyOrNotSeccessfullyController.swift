@@ -27,6 +27,9 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
         let view = SuccessOrWrongView()
         view.backgroundColor = .topBottomViewColorGray
         view.makeRoundCorners(24)
+        view.onOkeyButton = { [weak self] in
+            self?.moveToMainDashboard()
+        }
         return view
     }()
 
@@ -45,22 +48,31 @@ class SuccessfullyOrNotSuccessfullyController: UIViewController {
 
     private func setupConstraints() {
         firstBubleBackground.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-116)
+            make.bottom.equalTo(view.snp.bottom).offset(-116 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(432)
+            make.height.equalTo(432 * Constraint.yCoeff)
         }
 
         secondBubleBackground.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-14)
-            make.leading.equalTo(view.snp.leading).offset(10)
-            make.trailing.equalTo(view.snp.trailing).offset(6)
-            make.height.equalTo(432)
+            make.bottom.equalTo(view.snp.bottom).offset(-14 * Constraint.yCoeff)
+            make.leading.equalTo(view.snp.leading).offset(10 * Constraint.xCoeff)
+            make.trailing.equalTo(view.snp.trailing).offset(6 * Constraint.xCoeff)
+            make.height.equalTo(432 * Constraint.yCoeff)
         }
 
         successOrWrongView.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(295)
+            make.bottom.equalTo(view.snp.bottom).offset(-24 * Constraint.yCoeff)
+            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
+            make.height.equalTo(295 * Constraint.yCoeff)
+        }
+    }
+
+    private func moveToMainDashboard() {
+        for controller in navigationController?.viewControllers ?? [] {
+            if let dashboard = controller as? MainDashboardScene {
+                navigationController?.popToViewController(dashboard, animated: true)
+                return
+            }
         }
     }
 }

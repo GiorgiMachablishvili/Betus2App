@@ -11,7 +11,7 @@ import SnapKit
 class HistoryCell: UICollectionViewCell {
     private lazy var backgroundHistoryView: UIView = {
         let view = UIView(frame: .zero)
-        view.makeRoundCorners(32 * Constraint.yCoeff)
+        view.makeRoundCorners(32)
         view.backgroundColor = .topBottomViewColorGray
         return view
     }()
@@ -24,11 +24,20 @@ class HistoryCell: UICollectionViewCell {
         return view
     }()
 
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [soccerView, volleyballView, basketballView, tennisView])
+        view.axis = .vertical
+        view.spacing = 22 * Constraint.yCoeff
+        view.alignment = .fill
+        view.distribution = .fill
+        return view
+    }()
+
     private lazy var soccerView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "soccer",
             titleText: "Soccer",
-            pointText: "24",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -36,10 +45,10 @@ class HistoryCell: UICollectionViewCell {
     }()
 
     private lazy var volleyballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "volleyball",
             titleText: "Volleyball",
-            pointText: "27",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -47,10 +56,10 @@ class HistoryCell: UICollectionViewCell {
     }()
 
     private lazy var basketballView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "basketball",
             titleText: "Basketball",
-            pointText: "32",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -59,10 +68,10 @@ class HistoryCell: UICollectionViewCell {
 
 
     private lazy var tennisView: UIView = {
-        UIView.createCustomView(
+        CustomWorkoutsView.createCustomView(
             imageName: "tennis",
             titleText: "Tennis",
-            pointText: "20",
+            pointText: "",
             titleFont: UIFont.goldmanRegular(size: 14),
             pointFont: UIFont.goldmanRegular(size: 14),
             textColor: .white
@@ -79,14 +88,15 @@ class HistoryCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setup() {
         addSubview(backgroundHistoryView)
         backgroundHistoryView.addSubview(currentDay)
-        backgroundHistoryView.addSubview(soccerView)
-        backgroundHistoryView.addSubview(volleyballView)
-        backgroundHistoryView.addSubview(basketballView)
-        backgroundHistoryView.addSubview(tennisView)
+        backgroundHistoryView.addSubview(stackView)
+        //        backgroundHistoryView.addSubview(soccerView)
+        //        backgroundHistoryView.addSubview(volleyballView)
+        //        backgroundHistoryView.addSubview(basketballView)
+        //        backgroundHistoryView.addSubview(tennisView)
     }
 
     private func setupConstraints() {
@@ -100,42 +110,25 @@ class HistoryCell: UICollectionViewCell {
             make.height.equalTo(19 * Constraint.yCoeff)
         }
 
-        soccerView.snp.remakeConstraints { make in
+        stackView.snp.remakeConstraints { make in
             make.top.equalTo(currentDay.snp.bottom).offset(16 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
-            make.height.equalTo(33 * Constraint.yCoeff)
-        }
-
-        volleyballView.snp.remakeConstraints { make in
-            make.top.equalTo(soccerView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
-            make.height.equalTo(33 * Constraint.yCoeff)
-        }
-
-        basketballView.snp.remakeConstraints { make in
-            make.top.equalTo(volleyballView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
-            make.height.equalTo(33 * Constraint.yCoeff)
-        }
-
-        tennisView.snp.remakeConstraints { make in
-            make.top.equalTo(basketballView.snp.bottom).offset(4 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview().inset(16 * Constraint.xCoeff)
-            make.height.equalTo(33 * Constraint.yCoeff)
+            make.bottom.lessThanOrEqualTo(backgroundHistoryView.snp.bottom).offset(-16 * Constraint.yCoeff)
         }
     }
 
     private func updatePointLabel(in containerView: UIView, with text: String) {
         if let pointLabel = containerView.viewWithTag(1001) as? UILabel {
             pointLabel.text = text
+            containerView.isHidden = text.isEmpty
         }
     }
 
     func configure(with data: WorkoutScore) {
         currentDay.text = data.workoutDate
-        updatePointLabel(in: soccerView, with: data.soccerWorkoutCount)
-        updatePointLabel(in: basketballView, with: data.basketballWorkoutCount)
-        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount)
-        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount)
+        updatePointLabel(in: soccerView, with: data.soccerWorkoutCount > 0 ? data.workoutTime : "")
+        updatePointLabel(in: basketballView, with: data.basketballWorkoutCount > 0 ? data.workoutTime : "")
+        updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount > 0 ? data.workoutTime : "")
+        updatePointLabel(in: tennisView, with: data.tennisWorkoutCount > 0 ? data.workoutTime : "")
     }
 }

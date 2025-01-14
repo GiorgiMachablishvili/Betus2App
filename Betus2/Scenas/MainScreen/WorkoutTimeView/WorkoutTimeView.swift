@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class WorkoutTimeView: UIViewController {
 
@@ -15,6 +16,7 @@ class WorkoutTimeView: UIViewController {
     private var workoutSteps: [ViewInfo] = []
     private var currentStepIndex = 0
     var selectedSport: String?
+    var workoutScore: [WorkoutScore] = []
 
 
     private lazy var workoutDescriptionTopView: WorkoutDescriptionTopView = {
@@ -27,7 +29,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var previousTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40 * Constraint.yCoeff)
+        view.makeRoundCorners(40)
         return view
     }()
 
@@ -43,7 +45,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var timerBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .redColor.withAlphaComponent(0.2)
-        view.makeRoundCorners(80 * Constraint.yCoeff)
+        view.makeRoundCorners(80)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -51,7 +53,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var timerBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.red
-        view.makeRoundCorners(70 * Constraint.yCoeff)
+        view.makeRoundCorners(70)
         return view
     }()
 
@@ -67,7 +69,7 @@ class WorkoutTimeView: UIViewController {
     private lazy var nextWorkoutTimeBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor(hexString: "#151414")
-        view.makeRoundCorners(40 * Constraint.yCoeff)
+        view.makeRoundCorners(40)
         return view
     }()
 
@@ -270,6 +272,7 @@ class WorkoutTimeView: UIViewController {
             stopTimer()
             completView.isHidden = false
             toggleButton.setImage(UIImage(named: "okeyButton"), for: .normal)
+
             toggleButton.snp.remakeConstraints { make in
                 make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
                 make.centerX.equalToSuperview()
@@ -295,6 +298,14 @@ class WorkoutTimeView: UIViewController {
         previousWorkoutTime()
     }
 
+    // Helper: Show an alert to the user
+    private func showAlert(title: String, description: String) {
+        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+
     private func nextWorkoutTime() {
         if currentStepIndex + 1 < workoutSteps.count {
             let nextStep = workoutSteps[currentStepIndex + 1]
@@ -316,7 +327,6 @@ class WorkoutTimeView: UIViewController {
         }
     }
 
-
     private func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
@@ -332,14 +342,14 @@ class WorkoutTimeView: UIViewController {
             if currentStepIndex == workoutSteps.count - 1 {
                 timerLabel.text = "00:00"
                 toggleButton.setImage(UIImage(named: "okeyButton"), for: .normal)
-//                if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
-                    toggleButton.snp.remakeConstraints { make in
-                        make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
-                        make.centerX.equalToSuperview()
-                        make.height.equalTo(44 * Constraint.yCoeff)
-                        make.width.equalTo(69 * Constraint.xCoeff)
-                    }
-//                }
+                //                if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
+                toggleButton.snp.remakeConstraints { make in
+                    make.top.equalTo(timerBackgroundView.snp.bottom).offset(24 * Constraint.yCoeff)
+                    make.centerX.equalToSuperview()
+                    make.height.equalTo(44 * Constraint.yCoeff)
+                    make.width.equalTo(69 * Constraint.xCoeff)
+                }
+                //                }
                 completView.isHidden = false
             } else {
                 currentStepIndex += 1
@@ -359,6 +369,10 @@ class WorkoutTimeView: UIViewController {
 
     @objc private func toggleTimer() {
         if toggleButton.image(for: .normal) == UIImage(named: "okeyButton") {
+            if let sport = selectedSport?.lowercased() {
+                updateWorkoutScore(for: sport)
+                updateWorkoutDays()
+            }
             navigationController?.popViewController(animated: true)
         } else if timer == nil {
             startTimer()
@@ -366,6 +380,100 @@ class WorkoutTimeView: UIViewController {
         } else {
             stopTimer()
             toggleButton.setImage(UIImage(named: "timersStart"), for: .normal)
+        }
+    }
+
+    private func updateWorkoutScore(for sport: String) {
+        // Add day/month/year
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let currentDate = dateFormatter.string(from: Date())
+
+        // Add time in AM/PM format
+        dateFormatter.dateFormat = "hh:mm a"
+        let currentTimeString = dateFormatter.string(from: Date())
+
+        var soccerWorkoutCount = 0
+        var basketballWorkoutCount = 0
+        var volleyballWorkoutCount = 0
+        var tennisWorkoutCount = 0
+
+        // Increment the count based on the sport
+        switch sport {
+        case "soccer":
+            soccerWorkoutCount += 1
+        case "basketball":
+            basketballWorkoutCount += 1
+        case "volleyball":
+            volleyballWorkoutCount += 1
+        case "tennis":
+            tennisWorkoutCount += 1
+        default:
+            break
+        }
+
+        // Create a new WorkoutScore instance
+        let newScore = WorkoutScore(
+            workoutDate: currentDate,
+            soccerWorkoutCount: soccerWorkoutCount,
+            basketballWorkoutCount: basketballWorkoutCount,
+            volleyballWorkoutCount: volleyballWorkoutCount,
+            tennisWorkoutCount: tennisWorkoutCount,
+            workoutTime: currentTimeString
+        )
+
+        workoutScore.append(newScore)
+
+        postWorkoutScore(newScore)
+    }
+
+    //MARK: post workouts current time
+    private func postWorkoutScore(_ score: WorkoutScore) {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+        let parameters: [String: Any] = [
+            "workoutDate": score.workoutDate,
+            "soccerWorkoutCount": score.soccerWorkoutCount,
+            "basketballWorkoutCount": score.basketballWorkoutCount,
+            "volleyballWorkoutCount": score.volleyballWorkoutCount,
+            "tennisWorkoutCount": score.tennisWorkoutCount,
+            "workout_time": score.workoutTime
+        ]
+
+        let url = String.createWorkoutCountsAndDate(userId: userId)
+        NetworkManager.shared.showProgressHud(true, animated: true)
+        NetworkManager.shared.post(url: url, parameters: parameters, headers: nil) { (result: Result<WorkoutScore>) in
+            NetworkManager.shared.showProgressHud(false, animated: false)
+            switch result {
+            case .success(let workout):
+                print("Workout saved successfully: \(workout)")
+            case .failure(let error):
+                print("Error saving workout: \(error.localizedDescription)")
+                print("Request Parameters: \(parameters)")
+            }
+        }
+    }
+
+    private func updateWorkoutDays() {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: Date())
+
+        let url = String.postWorkoutDaysInARow(userId: userId, date: date)
+        NetworkManager.shared.showProgressHud(true, animated: true)
+        NetworkManager.shared.post(url: url, parameters: nil, headers: nil) { (result: Result<NumberOfDays>) in
+            NetworkManager.shared.showProgressHud(false, animated: false)
+            switch result {
+            case .success(let workout):
+                print("Workout saved successfully: \(workout)")
+            case .failure(let error):
+                print("Error saving workout: \(error.localizedDescription)")
+            }
         }
     }
 

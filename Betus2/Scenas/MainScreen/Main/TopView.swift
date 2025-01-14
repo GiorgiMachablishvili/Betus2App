@@ -64,6 +64,8 @@ class TopView: UIView {
 
         setup()
         setupConstraints()
+
+        fetchWorkoutScore()
     }
 
     required init?(coder: NSCoder) {
@@ -135,6 +137,27 @@ class TopView: UIView {
         return attributedString
     }
 
+    private func fetchWorkoutScore() {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+
+        let url = String.getWorkoutDaysInARow(userId: userId)
+        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<WorkoutDayCountInRow>) in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.updateNumberOfWorkoutDays(streakCount: response.streak_count)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func updateNumberOfWorkoutDays(streakCount: Int) {
+        numberOfWorkoutDays.text = "\(streakCount)"
+    }
 
     //TOD: make history view
     @objc private func clickHistoryButton() {
@@ -144,5 +167,4 @@ class TopView: UIView {
     @objc private func clickProfileButton() {
         onProfileButtonTap?()
     }
-
 }

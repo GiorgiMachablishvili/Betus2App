@@ -9,9 +9,23 @@
 import UIKit
 import SnapKit
 
+//@available(iOS 15.0, *)
 class MainDashboardScene: UIViewController {
 
     private let images = ["", "tennis", "basketball", "volleyball", "soccer", ""]
+
+    //    private var images: [String] {
+    //        return isSubscribed
+    //        ? ["", "soccer", "tennis", "basketball", "volleyball", ""]
+    //        : ["", "soccer", "locked", "locked", "locked", ""]
+    //    }
+
+    var isSubscribed: Bool = false {
+        didSet {
+            collectionView.reloadData()
+            //            updateBackground()
+        }
+    }
 
     private lazy var warningView: WarningView = {
         let view = WarningView()
@@ -26,8 +40,8 @@ class MainDashboardScene: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 80 * Constraint.xCoeff, height: 80 * Constraint.yCoeff)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
-        layout.minimumLineSpacing = 32
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 32 * Constraint.xCoeff, bottom: 0, right: 32 * Constraint.xCoeff)
+        layout.minimumLineSpacing = 35  * Constraint.xCoeff
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -81,13 +95,12 @@ class MainDashboardScene: UIViewController {
 
         setup()
         setupConstraints()
-
-        if UserDefaults.standard.bool(forKey: "isGuestUser") {
-            setupForGuestUser()
-        }
+        hiddenOrUnhidden()
+        //        updateBackground()
 
         DispatchQueue.main.async {
-            let indexPath = IndexPath(item: 2, section: 0)
+            let tennisIndex = 1
+            let indexPath = IndexPath(item: tennisIndex, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             self.updateViewForSport(at: indexPath)
         }
@@ -126,7 +139,7 @@ class MainDashboardScene: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(165 * Constraint.yCoeff)
+            make.height.equalTo(160 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview().inset(15 * Constraint.xCoeff)
         }
 
@@ -159,12 +172,58 @@ class MainDashboardScene: UIViewController {
         navigationController?.pushViewController(historyVC, animated: true)
     }
 
-    private func setupForGuestUser() {
-        topView.historyButton.isHidden = true
-//        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
-        topView.numberOfWorkoutDays.isHidden = true
-        warningView.isHidden = true
-        bottomView.startButton.isHidden = true
+    //TODO: make button hidden if user is as guest update all
+    private func hiddenOrUnhidden() {
+        let isGuestUser = UserDefaults.standard.bool(forKey: "isGuestUser")
+        topView.historyButton.isHidden = isGuestUser
+        //        topView.numberOfWorkoutDays.image = UIImage(named: "guestRectangle")
+        topView.numberOfWorkoutDays.isHidden = isGuestUser
+        warningView.isHidden = isGuestUser
+        bottomView.startButton.isHidden = isGuestUser
+    }
+
+    private func updateGoToProButton() {
+        bottomView.startButton.setTitle("Go to pro ", for: .normal)
+        bottomView.startButton.setTitleColor(UIColor.whiteColor, for: .normal)
+        bottomView.startButton.titleLabel?.font = UIFont.goldmanRegular(size: 14)
+        bottomView.startButton.backgroundColor = UIColor.redColor
+        bottomView.startButton.makeRoundCorners(16)
+        let image = UIImage(named: "crown")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)))
+        }
+        bottomView.startButton.setImage(resizedImage, for: .normal)
+        bottomView.startButton.imageView?.contentMode = .scaleAspectFit
+        bottomView.startButton.semanticContentAttribute = .forceRightToLeft
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * Constraint.xCoeff)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8 * Constraint.xCoeff, bottom: 0, right: 0)
+        bottomView.startButton.contentHorizontalAlignment = .center
+
+        bottomView.startButton.snp.updateConstraints { make in
+            make.width.equalTo(123 * Constraint.xCoeff)
+        }
+    }
+
+    private func updateStartButton() {
+        bottomView.startButton.setTitle("Start ", for: .normal)
+        bottomView.startButton.setTitleColor(UIColor.whiteColor, for: .normal)
+        bottomView.startButton.titleLabel?.font = UIFont.goldmanRegular(size: 14)
+        bottomView.startButton.backgroundColor = UIColor.redColor
+        bottomView.startButton.makeRoundCorners(16)
+        let image = UIImage(named: "play")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)).image { _ in
+            image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 19 * Constraint.xCoeff, height: 18 * Constraint.yCoeff)))
+        }
+        bottomView.startButton.setImage(resizedImage, for: .normal)
+        bottomView.startButton.imageView?.contentMode = .scaleAspectFit
+        bottomView.startButton.semanticContentAttribute = .forceRightToLeft
+        bottomView.startButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8 * Constraint.xCoeff)
+        bottomView.startButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8 * Constraint.xCoeff, bottom: 0, right: 0)
+        bottomView.startButton.contentHorizontalAlignment = .center
+
+        bottomView.startButton.snp.updateConstraints { make in
+            make.width.equalTo(87 * Constraint.xCoeff)
+        }
     }
 
     private func updateBottomView(for sport: String) {
@@ -210,6 +269,7 @@ class MainDashboardScene: UIViewController {
     }
 }
 
+//@available(iOS 15.0, *)
 extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -219,7 +279,10 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SportImagesCell", for: indexPath) as? SportImagesCell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: images[indexPath.item])
+        //        cell.configure(with: images[indexPath.item])
+        let sportName = images[indexPath.item]
+        let isLocked = !isSubscribed && (sportName.lowercased() == "tennis" || sportName.lowercased() == "basketball" || sportName.lowercased() == "volleyball")
+        cell.configure(with: sportName, isLocked: isLocked)
         return cell
     }
 
@@ -230,19 +293,20 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
         let targetX = targetContentOffset.pointee.x
         let targetIndex = round(targetX / itemWidth)
 
-        // Ensure the index is within bounds
         let clampedIndex = max(0, min(CGFloat(images.count - 1), targetIndex))
-
         targetContentOffset.pointee = CGPoint(x: clampedIndex * itemWidth, y: 0)
 
         let indexPath = IndexPath(item: Int(clampedIndex), section: 0)
-        updateViewForSport(at: indexPath)
-
-
+        let sportName = images[indexPath.item]
+        sportLabel.text = sportName.uppercased()
+        updateBottomView(for: sportName)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let centerX = collectionView.bounds.width / 2 + collectionView.contentOffset.x
+        var closestIndexPath: IndexPath?
+        var minimumDistance: CGFloat = .greatestFiniteMagnitude
+
         for cell in collectionView.visibleCells {
             guard let indexPath = collectionView.indexPath(for: cell),
                   let layoutAttributes = collectionView.layoutAttributesForItem(at: indexPath),
@@ -250,13 +314,17 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
 
             let cellCenter = layoutAttributes.center.x
             let distance = abs(centerX - cellCenter)
+
+            if distance < minimumDistance {
+                closestIndexPath = indexPath
+                minimumDistance = distance
+            }
+
             let maxDistance = collectionView.bounds.width / 2
-
             let scale = max(1 - (distance / maxDistance), 0.5)
-            let transformScale = scale
+            sportCell.transform = CGAffineTransform(scaleX: scale, y: scale)
 
-            sportCell.transform = CGAffineTransform(scaleX: transformScale, y: transformScale)
-
+            //MARK: Middle image
             if distance < 10 {
                 sportCell.backgroundBackView.backgroundColor = UIColor.redColor.withAlphaComponent(0.2)
                 sportCell.imageBackgroundColor.backgroundColor = UIColor.redColor
@@ -273,13 +341,48 @@ extension MainDashboardScene: UICollectionViewDelegate, UICollectionViewDataSour
                 //                sportCell.imageDarkBackgroundColor.backgroundColor = UIColor(hexString: "#000000")
             }
         }
+
+        //MARK: hide or unhide locked image
+        if let closestIndexPath = closestIndexPath {
+            let sportName = images[closestIndexPath.item].lowercased()
+            sportLabel.text = sportName.uppercased()
+            updateBottomView(for: sportName)
+
+            // Check for locked sports and update the UI
+            if !isSubscribed && (sportName == "tennis" || sportName == "basketball" || sportName == "volleyball") {
+                if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
+                    cell.lockedImage.isHidden = false
+                    cell.backgroundBackView.isHidden = true
+                }
+                updateGoToProButton()
+            } else {
+                if let cell = collectionView.cellForItem(at: closestIndexPath) as? SportImagesCell {
+                    cell.lockedImage.isHidden = true
+                    cell.backgroundBackView.isHidden = false
+                }
+                updateStartButton()
+            }
+        }
     }
 }
 
+//@available(iOS 15.0, *)
 extension MainDashboardScene: BottomViewDelegate {
+    @available(iOS 15.0, *)
     func didTapStartButton() {
-        let workoutTimeView = WorkoutTimeView()
-        workoutTimeView.selectedSport = sportLabel.text
-        navigationController?.pushViewController(workoutTimeView, animated: false)
+        if bottomView.startButton.title(for: .normal) == "Start " {
+            let workoutTimeView = WorkoutTimeView()
+            workoutTimeView.selectedSport = sportLabel.text
+            navigationController?.pushViewController(workoutTimeView, animated: false)
+        } else {
+            if let currentTopVC = navigationController?.topViewController,
+               currentTopVC is SubscriptionMainViewController {
+                // Prevent duplicate pushes to SubscriptionMainViewController
+                return
+            }
+
+            let subscriptionVC = SubscriptionMainViewController()
+            navigationController?.pushViewController(subscriptionVC, animated: true)
+        }
     }
 }

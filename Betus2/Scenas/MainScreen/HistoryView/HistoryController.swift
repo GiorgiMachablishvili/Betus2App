@@ -7,8 +7,10 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class HistoryController: UIViewController {
+    private var workoutHistory: [WorkoutScore] = []
 
     private lazy var backButton: UIButton = {
         let view = UIButton(frame: .zero)
@@ -17,11 +19,12 @@ class HistoryController: UIViewController {
         return view
     }()
 
+    //TODO: make collectionView constraint in case not to use layout.itemSize
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: view.frame.width, height: 360 * Constraint.yCoeff)
-        layout.minimumLineSpacing = 4
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: view.frame.width, height: 84 * Constraint.yCoeff)
+        layout.minimumLineSpacing = 16 * Constraint.xCoeff
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -35,8 +38,10 @@ class HistoryController: UIViewController {
         super.viewDidLoad()
         setup()
         setupConstraints()
+
+        fetchWorkoutCurrentUserInfo()
     }
-    
+
     private func setup() {
         view.addSubview(backButton)
         view.addSubview(collectionView)
@@ -53,7 +58,24 @@ class HistoryController: UIViewController {
             make.top.equalTo(backButton.snp.bottom).offset(8 * Constraint.yCoeff)
             make.leading.trailing.equalToSuperview()/*.inset(16 * Constraint.xCoeff)*/
             make.bottom.equalTo(view.snp.bottom)
-//            make.height.lessThanOrEqualTo(211 * Constraint.yCoeff)
+        }
+    }
+
+    private func fetchWorkoutCurrentUserInfo() {
+        guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
+            return
+        }
+        let url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/\(userId)"
+        NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
+            switch result {
+            case .success(let workouts):
+                self.workoutHistory = workouts
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 
@@ -64,12 +86,14 @@ class HistoryController: UIViewController {
 
 extension HistoryController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return workoutHistory.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as? HistoryCell else { return UICollectionViewCell()
         }
+        let workoutData = workoutHistory[indexPath.item]
+        cell.configure(with: workoutData)
         return cell
     }
 }

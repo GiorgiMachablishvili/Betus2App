@@ -1,19 +1,18 @@
 //
-//  WorkutScore.swift
+//  WorkoutInfo.swift
 //  Betus2
 //
-//  Created by Gio's Mac on 27.12.24.
+//  Created by Gio's Mac on 12.01.25.
 //
 
 import UIKit
 
-struct WorkoutScore: Codable {
+struct WorkoutInfo: Codable {
     let workoutDate: String
     let soccerWorkoutCount: Int
     let basketballWorkoutCount: Int
     let volleyballWorkoutCount: Int
     let tennisWorkoutCount: Int
-    let workoutTime: String
 
     enum CodingKeys: String, CodingKey {
         case workoutDate = "workout_date"
@@ -21,6 +20,5 @@ struct WorkoutScore: Codable {
         case basketballWorkoutCount = "basketball_workout_count"
         case volleyballWorkoutCount = "volleyball_workout_count"
         case tennisWorkoutCount = "tennis_workout_count"
-        case workoutTime = "workout_time"
     }
 }

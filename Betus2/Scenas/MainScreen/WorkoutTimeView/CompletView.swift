@@ -28,7 +28,7 @@ class CompletView: UIView {
     private lazy var timerBackground: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .redColor.withAlphaComponent(0.2)
-        view.makeRoundCorners(80 * Constraint.yCoeff)
+        view.makeRoundCorners(80)
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -36,7 +36,7 @@ class CompletView: UIView {
     private lazy var timerBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.red
-        view.makeRoundCorners(70 * Constraint.yCoeff)
+        view.makeRoundCorners(70)
         return view
     }()
 
