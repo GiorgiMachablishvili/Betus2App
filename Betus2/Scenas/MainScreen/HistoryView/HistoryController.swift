@@ -27,7 +27,8 @@ class HistoryController: UIViewController {
             return self.historyLayout()
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 8.0 // Space between sections (optional)
+        config.interSectionSpacing = 8
+        layout.configuration = config
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
@@ -60,7 +61,7 @@ class HistoryController: UIViewController {
 
         collectionView.snp.remakeConstraints { make in
             make.top.equalTo(backButton.snp.bottom).offset(8 * Constraint.yCoeff)
-            make.leading.trailing.equalToSuperview()/*.inset(16 * Constraint.xCoeff)*/
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(view.snp.bottom)
         }
     }
@@ -68,7 +69,7 @@ class HistoryController: UIViewController {
     private func historyLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(211)
+            heightDimension: .estimated(51 * Constraint.yCoeff)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -79,11 +80,12 @@ class HistoryController: UIViewController {
             count: 1
         )
         let section = NSCollectionLayoutSection(group: verticalGroup)
-        section.interGroupSpacing = 8.0
+        //TODO: instead of 40 should be 8 because should be space between sections
+        section.interGroupSpacing = 40
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
             leading: 0,
-            bottom: 0,
+            bottom: 8,
             trailing: 0
         )
         return section
@@ -93,7 +95,7 @@ class HistoryController: UIViewController {
         guard let userId = UserDefaults.standard.value(forKey: "userId") as? String else {
             return
         }
-        let url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/\(userId)"
+        let url = String.getWorkoutCountsAndDate(userId: userId)
         NetworkManager.shared.get(url: url, parameters: nil, headers: nil) { (result: Result<[WorkoutScore]>) in
             switch result {
             case .success(let workouts):

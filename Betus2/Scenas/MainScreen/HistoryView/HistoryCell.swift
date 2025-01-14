@@ -63,7 +63,7 @@ class HistoryCell: UICollectionViewCell {
 
     private func setupConstraints() {
         wrapperView.snp.remakeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(211 * Constraint.yCoeff)
         }
 
@@ -110,14 +110,18 @@ class HistoryCell: UICollectionViewCell {
         updatePointLabel(in: tennisView, with: data.tennisWorkoutCount > 0 ? data.workoutTime : "")
 
         // Adjust the height dynamically based on visibility
-        var heightAdjustment = 0
-        if soccerView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
-        if basketballView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
-        if volleyballView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
-        if tennisView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
+        var totalHeight = 51 * Constraint.yCoeff
+            if !soccerView.isHidden { totalHeight += 33 * Constraint.yCoeff }
+            if !basketballView.isHidden { totalHeight += 33 * Constraint.yCoeff }
+            if !volleyballView.isHidden { totalHeight += 33 * Constraint.yCoeff }
+            if !tennisView.isHidden { totalHeight += 33 * Constraint.yCoeff }
 
+            // Update wrapperView height
         wrapperView.snp.updateConstraints { make in
-            make.height.equalTo(211 * Int(Constraint.yCoeff) - heightAdjustment)
+            make.height.equalTo(totalHeight)
         }
+
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }

@@ -275,7 +275,6 @@ class SignInController: UIViewController {
             "auth_token": appleToken
         ]
 
-//        url = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/users/"
         // Make the network request
         NetworkManager.shared.post(
             url: String.userCreate(),

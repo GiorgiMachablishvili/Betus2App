@@ -16,7 +16,6 @@ extension String {
         return "\(baseURL)\(userId)"
     }
 
-
     static func createWorkoutCountsAndDate(userId: String) -> String {
         let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/?user_id="
         return "\(baseURL)\(userId)"
@@ -28,8 +27,7 @@ extension String {
     }
 
     static func postWorkoutDaysInARow(userId: String, date: String) -> String {
-        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/workout_scores/"
-//        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/training_streaks/?user_id="
+        let baseURL = "https://betus-workouts-98df47aa38c2.herokuapp.com/api/v1/training_streaks/?user_id="
         return "\(baseURL)\(userId)&training_date=\(date)"
     }
 
