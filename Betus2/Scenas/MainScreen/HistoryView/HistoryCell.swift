@@ -9,6 +9,12 @@ import UIKit
 import SnapKit
 
 class HistoryCell: UICollectionViewCell {
+    private lazy var wrapperView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        return view
+    }()
+
     private lazy var backgroundHistoryView: UIView = {
         let view = UIView(frame: .zero)
         view.makeRoundCorners(32)
@@ -33,51 +39,10 @@ class HistoryCell: UICollectionViewCell {
         return view
     }()
 
-    private lazy var soccerView: UIView = {
-        CustomWorkoutsView.createCustomView(
-            imageName: "soccer",
-            titleText: "Soccer",
-            pointText: "",
-            titleFont: UIFont.goldmanRegular(size: 14),
-            pointFont: UIFont.goldmanRegular(size: 14),
-            textColor: .white
-        )
-    }()
-
-    private lazy var volleyballView: UIView = {
-        CustomWorkoutsView.createCustomView(
-            imageName: "volleyball",
-            titleText: "Volleyball",
-            pointText: "",
-            titleFont: UIFont.goldmanRegular(size: 14),
-            pointFont: UIFont.goldmanRegular(size: 14),
-            textColor: .white
-        )
-    }()
-
-    private lazy var basketballView: UIView = {
-        CustomWorkoutsView.createCustomView(
-            imageName: "basketball",
-            titleText: "Basketball",
-            pointText: "",
-            titleFont: UIFont.goldmanRegular(size: 14),
-            pointFont: UIFont.goldmanRegular(size: 14),
-            textColor: .white
-        )
-    }()
-
-
-    private lazy var tennisView: UIView = {
-        CustomWorkoutsView.createCustomView(
-            imageName: "tennis",
-            titleText: "Tennis",
-            pointText: "",
-            titleFont: UIFont.goldmanRegular(size: 14),
-            pointFont: UIFont.goldmanRegular(size: 14),
-            textColor: .white
-        )
-    }()
-
+    private lazy var soccerView: UIView = createWorkoutView(imageName: "soccer", title: "Soccer")
+    private lazy var volleyballView: UIView = createWorkoutView(imageName: "volleyball", title: "Volleyball")
+    private lazy var basketballView: UIView = createWorkoutView(imageName: "basketball", title: "Basketball")
+    private lazy var tennisView: UIView = createWorkoutView(imageName: "tennis", title: "Tennis")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,16 +55,18 @@ class HistoryCell: UICollectionViewCell {
     }
 
     private func setup() {
-        addSubview(backgroundHistoryView)
+        addSubview(wrapperView)
+        wrapperView.addSubview(backgroundHistoryView)
         backgroundHistoryView.addSubview(currentDay)
         backgroundHistoryView.addSubview(stackView)
-        //        backgroundHistoryView.addSubview(soccerView)
-        //        backgroundHistoryView.addSubview(volleyballView)
-        //        backgroundHistoryView.addSubview(basketballView)
-        //        backgroundHistoryView.addSubview(tennisView)
     }
 
     private func setupConstraints() {
+        wrapperView.snp.remakeConstraints { make in
+            make.edges.equalToSuperview()
+            make.height.equalTo(211 * Constraint.yCoeff)
+        }
+
         backgroundHistoryView.snp.remakeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -117,6 +84,17 @@ class HistoryCell: UICollectionViewCell {
         }
     }
 
+    private func createWorkoutView(imageName: String, title: String) -> UIView {
+        return CustomWorkoutsView.createCustomView(
+            imageName: imageName,
+            titleText: title,
+            pointText: "",
+            titleFont: UIFont.goldmanRegular(size: 14),
+            pointFont: UIFont.goldmanRegular(size: 14),
+            textColor: .white
+        )
+    }
+
     private func updatePointLabel(in containerView: UIView, with text: String) {
         if let pointLabel = containerView.viewWithTag(1001) as? UILabel {
             pointLabel.text = text
@@ -130,5 +108,16 @@ class HistoryCell: UICollectionViewCell {
         updatePointLabel(in: basketballView, with: data.basketballWorkoutCount > 0 ? data.workoutTime : "")
         updatePointLabel(in: volleyballView, with: data.volleyballWorkoutCount > 0 ? data.workoutTime : "")
         updatePointLabel(in: tennisView, with: data.tennisWorkoutCount > 0 ? data.workoutTime : "")
+
+        // Adjust the height dynamically based on visibility
+        var heightAdjustment = 0
+        if soccerView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
+        if basketballView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
+        if volleyballView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
+        if tennisView.isHidden { heightAdjustment += 33 * Int(Constraint.yCoeff)}
+
+        wrapperView.snp.updateConstraints { make in
+            make.height.equalTo(211 * Int(Constraint.yCoeff) - heightAdjustment)
+        }
     }
 }

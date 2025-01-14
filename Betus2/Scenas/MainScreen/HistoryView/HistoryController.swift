@@ -19,12 +19,16 @@ class HistoryController: UIViewController {
         return view
     }()
 
-    //TODO: make collectionView constraint in case not to use layout.itemSize
     private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.width, height: 84 * Constraint.yCoeff)
-        layout.minimumLineSpacing = 16 * Constraint.xCoeff
+        let layout = UICollectionViewCompositionalLayout { [weak self] index, _ -> NSCollectionLayoutSection? in
+            guard let self else {
+                return nil
+            }
+            return self.historyLayout()
+        }
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 8.0 // Space between sections (optional)
+
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsHorizontalScrollIndicator = false
@@ -59,6 +63,30 @@ class HistoryController: UIViewController {
             make.leading.trailing.equalToSuperview()/*.inset(16 * Constraint.xCoeff)*/
             make.bottom.equalTo(view.snp.bottom)
         }
+    }
+
+    private func historyLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(211)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let verticalGroup = NSCollectionLayoutGroup.vertical(
+            layoutSize: itemSize,
+            subitem: item,
+            count: 1
+        )
+        let section = NSCollectionLayoutSection(group: verticalGroup)
+        section.interGroupSpacing = 8.0
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 0,
+            bottom: 0,
+            trailing: 0
+        )
+        return section
     }
 
     private func fetchWorkoutCurrentUserInfo() {
